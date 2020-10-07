@@ -1,0 +1,10 @@
+{
+    "name": "rpage/teaching-online",
+    "authors": [
+        {
+            "name": "Roderic Page",
+            "email": "rdmpage@gmail.com"
+        }
+    ],
+    "require": {}
+}
