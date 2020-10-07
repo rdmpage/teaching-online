@@ -1,0 +1,313 @@
+<?php
+
+$bases = array('A', 'C', 'G', 'T');
+$bases2num = array(
+	'A' => 0, 
+	'C' => 1,
+	'G' => 2,
+	'T' => 3
+	);
+
+
+//--------------------------------------------------------------------------------------------------
+function draw($counts, $max_count)
+{
+	global $bases;
+	global $bases2num;
+	
+	$colours = array(
+		'A' => array ('white', 'green', 'red', 'green'),
+		'C' => array ('green', 'white', 'green', 'red'),
+		'G' => array ('red', 'green', 'white', 'green'),
+		'T' => array ('green', 'red', 'green', 'white')
+	);	
+	
+	
+	echo '<?xml version="1.0"?>';
+	echo '
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="400" height="400">';
+	
+	echo '<rect x="0" y="0" width="400" height="400" stroke="black" />';
+
+
+	$row_count = 0;
+	foreach ($bases as $from)
+	{
+		$col_count = 0;
+		for ($i = 0; $i < 4; $i++)
+		{
+			$x = $col_count * 100 + 50;
+			$y = $row_count * 100 + 50;
+			
+			$radius = ($counts[$from][$i]/2)/$max_count * 100;
+			
+			echo '<circle cx="' . $x . '" cy="' . $y . '" r="' . $radius . '" ';
+			
+			
+			if ($i == $bases2num[$from])
+			{
+				echo ' stroke="black"';
+			}
+			echo ' fill="' . $colours[$from][$i] . '"';
+			
+			echo '/>'; 
+			
+			$col_count++;
+		}
+		$row_count++;
+	}
+	//echo '</g>';
+	
+	echo '</svg>';
+
+}
+
+
+//--------------------------------------------------------------------------------------------------
+function show_seqs($seqs)
+{
+	$n = count($seqs[0]);
+	
+	echo join('', $seqs[0]) . "\n";
+		
+	for ($j = 0; $j < $n; $j++)
+	{
+		if ($seqs[0][$j] == $seqs[1][$j])
+		{
+			echo "|";
+		}
+		else
+		{
+			echo " ";
+		}
+	}
+	echo "\n";
+		
+	echo join('', $seqs[1]) . "\n";
+		
+}
+
+//--------------------------------------------------------------------------------------------------
+function compare($seqs, &$counts, &$max_count)
+{	
+	global $bases2num;
+	
+	$max_count = 0;
+	
+	$counts = array(
+		'A' => array (0, 0, 0, 0),
+		'C' => array (0, 0, 0, 0),
+		'G' => array (0, 0, 0, 0),
+		'T' => array (0, 0, 0, 0)
+	);
+	$n = count($seqs[0]);
+		
+	for ($j = 0; $j < $n; $j++)
+	{
+		$from = $seqs[0][$j];
+		$to = $seqs[1][$j];
+		
+		$to = $bases2num[$to];
+		
+		
+		$counts[$from][$to]++;
+		
+		$max_count = max($max_count, $counts[$from][$to]);
+	}
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+$seq_length = 1000;
+$num_seqs = 2;
+
+$freq_a = 0.25;
+$freq_c = 0.25;
+$freq_g = 0.25;
+
+
+$freq_a = 0.15;
+$freq_c = 0.35;
+$freq_g = 0.15;
+
+
+$freg_t = 1 - $freq_a - $freq_c - $freq_g;
+
+// generate sequences
+for ($i = 0; $i < $seq_length; $i++)
+{
+	// base composition
+	
+	$x = rand(1, 100);
+	
+	$base = 'A';
+	if ($x > 100 * $freq_a)
+	{
+		$base = 'C';
+	}
+	if ($x > 100 * ($freq_a + $freq_c))
+	{
+		$base = 'G';
+	}
+	if ($x > 100 * ($freq_a + $freq_c + $freq_g))
+	{
+		$base = 'T';
+	}
+	
+	for ($j = 0; $j < $num_seqs; $j++)
+	{
+		$seqs[$j][$i] = $base;
+	}
+	
+	//echo "$x $base\n";
+}
+	
+//show_seqs($seqs);
+
+
+
+// mutate, random pos, model
+
+$num_mutations =  1000;
+
+$bases = array('A', 'C', 'G', 'T');
+$bases2num = array(
+	'A' => 0, 
+	'C' => 1,
+	'G' => 2,
+	'T' => 3
+	);
+
+$jc = array(
+	'A' => array (0, 1, 1, 1),
+	'C' => array (1, 0, 1, 1),
+	'G' => array (1, 1, 0, 1),
+	'T' => array (1, 1, 1, 0)
+);
+
+$kp = array(
+	'A' => array (0, 1, 10, 1),
+	'C' => array (1, 0, 1, 10),
+	'G' => array (10, 1, 0, 1),
+	'T' => array (1, 10, 1, 0)
+);
+
+
+$kp5 = array(
+	'A' => array (0, 1, 5, 1),
+	'C' => array (1, 0, 1, 5),
+	'G' => array (5, 1, 0, 1),
+	'T' => array (1, 5, 1, 0)
+);
+
+$kp15 = array(
+	'A' => array (0, 1, 15, 1),
+	'C' => array (1, 0, 1, 15),
+	'G' => array (15, 1, 0, 1),
+	'T' => array (1, 15, 1, 0)
+);
+
+$model = $kp;
+
+//print_r($model);
+//exit();
+
+for ($k = 0; $k < $num_mutations; $k++)
+{
+	// random site
+	$pos = rand(0, $seq_length - 1);
+	
+	// random seq
+	$seq = rand(0,1);
+	
+	$from = $seqs[$seq][$pos];
+	
+	//echo "from=$from\n";
+	
+	$possible = array();
+	
+	for ($j = 0; $j < 4; $j++)
+	{
+		for ($m = 1; $m <= $model[$from][$j]; $m++)
+		{
+			$possible[] = $bases[$j];
+		}
+	}
+	
+	//print_r($possible);
+	
+	$x = rand(0, count($possible)-1);
+	$to = $possible[$x];
+	
+	//echo "$seq $pos $from -> $to\n";
+	$seqs[$seq][$pos] = $to;
+	
+}
+
+//show_seqs($seqs);
+
+// visualise
+
+$counts = array();
+$max_count = 0;
+
+compare($seqs, $counts, $max_count);
+
+
+//print_r($counts);
+
+echo '<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="refresh" content="1" > 
+</head>
+<body>
+<a href="index.html">Home</a>
+<h1>HKY85 model</h1>';
+
+echo '<p>Like the K2P model, the Hasegawa, Kishino and Yano (1985) model assumes that <span style="color:black;background:red;"> transitions </span> and <span style="color:black;background:lightgreen;">transversions </span> can happen at different
+rates. But the HKY85 model also allows the four bases (A, C, G, T) to occur with difefrent frequencies. </p>
+<p><b>Question</b>: what is the probability that the observed pattern on the right could be generated by the HKY85 model on the left?</p>';
+
+
+
+draw($counts, $max_count);
+
+
+// "model"
+
+$s1 = 'GGAAAGATAGAGACTGGCAGTCTCCTCTCTTATCAATTCCGTTGCTTGAGGAGACCAGACCTAGTTGAGAAATACATATGGCGAACGCTCATGGTGTCGTATACCCATCCCTTACTGACTTTTCTCGGTTATACAAGGTGGCCTGCGACGTGCGGGAGCTGCTATGCACGGTGAATAACACCGGGTAAGCGATCTATGAAATCCGAAAAAGGTAACAGATGATTGCAGTCAAAGCGAGATACTGGGAGTACTTCTAGCGCATCCGTATGTTCACTGCATACTCAACTTCTAGCTTCAAATCTACGAACGCTCGTACCCGGCCAAGAGAGGCTATCCGGTACTAGCGAAAAAAAGCTCTCTGATGACCTCACTCTAGGGCTGCTCCACTTAACCGCGTTCCCAAGGAGGGCTTATATTGGGTTTCTTTCCACTAATCATCAAAATAACTCTGGCCTACTGGTAGGCATCGTCTACAAGTTCCCAGGATATTACGCTTCGGGAATATTATAATCACGACAACTTGCGCGGACAGCTCGGGCAGTTTTGATTAAATAGAGGATGTGTTACCACGGCCAGTCCTAGACTGCTAATAAACGAGAGAAGCGACGGCGTTAGGTGATTCGTAAAAAGGCCTCCCCCTTGTGCCCCGTGCTTTCTTTTAGGATATACGGGACCTGGATCTGTAATAACGTTACTACTTTAGATACGCGATTAACCGTCCCTGTAAGCGGCAGCTCTCTGCACCTAAGTATGCATGGTACCGAACCATTCAGGTAGTAGCCCCTAACTAATCCATTGTCCACCCCATCCTCCTAATATACTCCTGGTCCACAAACGACCGGTGATGGACGTCGAGGGGCCACTGTCCAGGATCAGCTGCCCAAGCTCATGCCTTAAACGTACGCTGCTTGCCTCGATTTGTTGCATGCACGAGCGAGCGTCCGCTCCATCTGGCCGGTACATGTCAATTGTCGTGGAGTCCATCAGAACCGGTGGCAGC';
+
+$s2='ACGGGGACGAACACCAACCGTCTCCGGCACAATCGATCTTAATATCAGGCAAGAGGATGCCAAGCTAGGGTGCATACACGACGGACGTTGATGGGATCATACACTTATCACGTACTGAGTCGCCCCGATCGCGTAGAACATTCCGTGACACGCGGGAGACGTTGTGGTCGATAAATGACTCTGAGCAGGCGAATCACGGGCTCCAGAAAAAGTGACGAGTAGTTAACACCAAACTCCTGCGCCGAAAGCATCGTTCGGGTCTCTCTGTGTCTCGTATATGCTCAGCTTTCCGTTTTGTGTAAGTGTGAGAGTACTACCTGCAAAAAATGACTGCCTGACATCGGTAAAGGGAGATTCTTCGGTAACCGCGTTTTGGGATTGCTTGACATAACCCTCTCTCCAGCGAGAGGCTACTCTGGATTTTTCTTTAACCAACTCCGATTCAACTTTCACTTATAAATGGGCGTCGCCTGTAGACTTCTGGGATGCCCCACTGCAAATATGGAATGGCTCCAACCACCTACGTGGGTGACCCAGGGAATCTCGATTAAACAAATCCCGCAGTTCTGTGATCAGTATCTGATTGCTTATGGATGAGAGAGGTGCTGACACTGCGTAGTCCGTAAGAAGGAACTCCTGCGGGGTATGACGGTTTCTGGTAAAATGCATGAGGCGTGGGCCCCCGACCTCCTCGCTGCCTTCGGCTTGCATTTGGCTGTTTTAGCACAGGATAATTCCTCCCGGTTGAGCGTCCACGGCGGCGAATGGCTCAAATAATCGTTCTTAGCGCCCTTACCACCCACGTCACCTTTTTATAGTGGCTCCGAGGGATGGACGAGTACTCACCAGCGTTAGGGCACCACTGCCAGAAGCCAGTCACCTAGACTTACACTCCGAACAGACGCCGATCACGTCGTCCCGGTGTATGTGCGAACGAGTACGCATTCCATATCAGCGGTACATGTCGATTGTTGTAGAATCTGCCAGAGTTGCTGGCAGT';
+
+
+$s1='TCCCGGGTGACACACCTCACAGATTCAAGACCTTGCGACCCGCTCAATGAGGCTCTATTTTCTTTATCGTGTCCAGCGCCATCCTTCTTATTTCAATCCGTTGTACCCTCTTCTAGGTAGCATCAGGATTTCTCGCACTTGTGTCGGTGTGCCCGTTCCTCCCCCCTCGCGGTTTTCCCACTGGAATCCCGTGGTGCCGACTTCGCAGTGTTTCCCGTTCTATAAGGAGACACTTGGTACCCTGGCTTATCTCGTTGGCGTTAGGTTTTTCCCCCTCTTGTCTATCCATCATAACTAGAACTCATTCCACCCTTTAACTAGGTTCATCGTCCATGAGCCCAATTTGGTGACTACTCCTGTTTTCTCCCCTTCTCCCGTTCCCTCCCTTCCGCCCCTCGCTGGAGCTCTCGCTTGAAGATGCCCGTTACACCCGCCTTGCCTCGCATCGCTACCTCTAATCTTCGCACGCAATTCCCCTTGCCTTTCTTTTACTTCCCCACTAGACCCCTGTGTCACTTCCTCGACTACCCCTCGTCATACTCTCTTTTCTTATTTGCTTAGTCAGCGGTCCTTTCATCGGCTAGTCCCGCGCTCCTCATGCTGGTTCCCCTTTACTCTAATTCCCTTGCCTCCCTTTTCCTCCCACCGAACTCCCCTTCCGCGTACCTTTATCCAGTAATTCTTGGCCCTACCTACCACCACTTTCAACCCAGCTTTAGGTTTACATCGCCCGATCCGGCACCATAAACGTGTAGTCCGTCCTGCGTCCTCTTGTGCTTTCCCTCTCGTGACCCCTACACCGTGCTGTATGTGCTACGCCACCCCGCTACTTAGTGTGTCTTCCCCTTACAACGGTTCGCCCCCTGCTGTTCTTATCGCCTTAGACCCAACCCGTTTTGTCGGTACTCTTTTCACGATTTCGTTTCTTCCCATTCTATCGTCCCCCTTACTGGCGTTTCCTTGCCTCCTGTCTCGACCAACCACACGCTCGTCACACCTA';
+// |||| |    ||||||  ||| ||||  |||| |   ||     |    || |   |      || ||  ||   |  | | ||| |||||||||||| || || | |  |  |  ||        | ||  |||| ||    |||| |    | | ||||| || |   ||| | ||||  |     || | |      ||     ||  |  || ||  |  ||  ||| |      ||| |||  |||  || ||| || ||||||| || ||||    |     | ||||  | ||||   || |   |  | |   | ||||||| ||||  |   |       |     ||| || |||  | || | ||||| |  | |||| |||| |   |||||| | |||| ||| |  ||||||||    |      | || |       ||| |    ||   | | |  |  ||| |   |  |   | |    |   ||||   ||||   | ||   ||   ||  |  |   || | || | | ||  |  | | | |     ||| |  ||  |||| |  || || ||||  || | || | | | | | |   | |||| | |  |  | ||   |       ||||  |||||     | |   |||  |  | |||      |    || |||  |||  |||||||| ||  || ||  |||   |  | | ||||| |    |  |     ||   |  || ||     |||  | || ||| ||   |  |  | | |  |   |||| ||||| |  ||     ||||| || || |||   || ||||||  |||  | ||||  |||| | | |   ||| | |||  || | | || ||||   | | |||  | ||||| | | |||   ||| || | ||||| |||| ||||||||  | ||||||      || ||
+$s2='CCCCGTGCAGTACACCTTGCAGGTTCAGAACCTAGGACCCTAACTATCTGGGTTTCGTCGCTACTACCGCATCTCACCTCGTTCTTTTTATTTCAATCCATTATATCTTTCTTCACTTACTGCGGCAAGTTTCCGCATTTACCCCGGTCTAATTGCTGCTCCCTCCACTTCGTTCTTCCACCTGCTCTGCGCGATATTATTTTGAACTTGCCTATCGCTCGGTGGGGGAACATTAAACCTCCTCGCTCGTCTTCTTTGCGCTAAGTTTTTCTCCTTCTTCAACACGTGCCGTAACCTGTACTCGCCCCGCTTCTCCATTGAATCCATCGTCTATGAATCACGTCCCAATGCCGTCTCTGCTTACTCTTCCTCGCGCGTTCTCCACTTTCCACCCCGCTTCGGAGCTTTTGCTTTAAGCTATCCGTTACATTTTCTCCATTTTGCTTGATCGTTTCTCAGTCCCGGGTGTAGTCTCTTTTGGCCCGCCCTCGTTGCTTTGCCTAACCCTCCTGTCCTATTCTTACCTGTTCCATGCAACCTTCCCCTTGCCTGTTCCCCCAATAACCTACTTTTTGACTGGGCAGTCTCATGCCCCCCATGTCGGCTTCCTTCTTCCCCACTCGTCGTGCCCCTCCCTGGCCCCTGTCAGGTCTACCTTTTGCGTAGTCGCACCGTCTAACGCCCGACCCCGTTCTCTGTTACGTTCCGCCCCCCTTTAGGTCTATGTCCCCTCATCTAACCTCCTCAACGTATGTATCACCTGTTCTCTCTTCATGTTTCTTTCCTCTGGGCCTCTATACTCCGTCGCGTCTACCGCATAACCCTGCTACGTGTTGAAATCTCCCCCTATAATGGTCTACCTCCTGCTACTCTCTTTGCCTCTGACCTAGCTCACATTGCCCGTATCCTCTCCGCGTTTTCACCTTTCCCCGCTTTATCGCCACTCTTCTCGGCCTTCCTTTGCCGCCTGCCTCGACCAGTCGCACGCTTACTCTACTTA';
+$seqs =array();
+$seqs[0] =  str_split($s1);
+$seqs[1] =  str_split($s2);
+
+$counts = array();
+$max_count = 0;
+compare($seqs, $counts, $max_count);
+
+draw($counts, $max_count);
+
+
+echo '</body>';
+echo '</html>';
+		
+
+
+
+
+
+
+
+
+
+
+?>
