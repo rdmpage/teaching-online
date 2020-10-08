@@ -28,6 +28,7 @@
 	.G { background-color:#00c000;color:white;padding:2px; }
 	.T { background-color:#e6e600;color:black;padding:2px; }
 	.N { background-color:#3050F8;color:white;padding:2px; }
+	.gap { background-color:#3050F8;color:white;padding:2px; }
 	</style>
 	
 </head>
@@ -292,6 +293,7 @@ CCTTACCATACATTTGAACAACCANNNNNNGTTTTCATTAAAGCCNNNTAA
 		<div id="seq" style="position:absolute;overflow-x:auto;width:90%;border:1px solid rgb(244,244,244);left:100px;"></div>
 	</div>
 
+<div style="clear:both"></div>
 
  <div style="position:relative;">
     <form>
@@ -534,9 +536,14 @@ function make()
 		var html = '';
 		var k = sequences[0].seq.length;
 		for (var i = 0; i < sequences.length; i++) {
-			html += '<div style="margin:0px;padding:0px;line-height:1.4em;font-size:10px;font-family:monospace;">';
+			html += '<div style="margin:0px;padding:0px;line-height:1.4em;font-size:10px;font-family:monospace;white-space: nowrap;">';
 			for (var j = 0; j < k; j++) {
-				html += '<span class="' + sequences[i].seq.charAt(j) + '">' + sequences[i].seq.charAt(j) + '</span>';
+				var base_class = sequences[i].seq.charAt(j);
+				if (base_class == '-') {
+					base_class='gap';
+				}
+			
+				html += '<span class="' + base_class + '">' + sequences[i].seq.charAt(j) + '</span>';
 			}
 			html += '</div>';
 		}
