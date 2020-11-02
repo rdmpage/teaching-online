@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>Macroevolution</title>
+</head>
+<body style="padding:20px;">
+
+<h1>Macroevolution</h1>
+
+
+<a href="../">Level 4</a>
+
+
+<p>These exercises explore aspects of tree structure that we 
+can use to make inferences about evolutionary patterns.</p>
+
+<p>Some of these methods assume that we an <b>ultrametric</b> or clock-like tree, other don't, but all require trees to have <b>branch lengths</b> (which may rperesent either time or amounts of evolutionary change).</p>
+
+<div style="padding:30px;background:rgb(224,224,224);" ">
+<img src="41576_2016_Article_BFnrg20158_Figa_HTML.jpg">
+
+<p>Comparison of nearly perfect clock-like evolution of human, chimp, and gorilla mtDNA genome sequences compared to the non-clocklike evolution of cranium morphology in the same species (from <a href="https://doi.org/10.1038/nrg.2015.8">Bayesian molecular clock dating of species divergences in the genomics era</a>).
+</div>
+
+<p>A key challenge is separating rates and dates. There are sophisticated methods for doing this, as well as some simpler methods (which we will use). The diagram below sketches out the key features of Bayesian clock methods where we have prior estimates of ages (say, from the fossil record)  and rates of evolution (from previous studies), and combine those with new data to arrive at an estimate for the age of a node in a tree.</p>
+
+<div style="padding:30px;background:rgb(224,224,224);" >
+<img src="41576_2016_Article_BFnrg20158_Fig1_HTML.jpg" width="70%">
+
+<p>We estimate the posterior distribution of divergence time (t) and rate (r) in a two-species case to illustrate Bayesian molecular clock dating. The data are an alignment of the 12S RNA gene sequences from humans and orang-utans, with 90 differences at 948 nucleotides sites. The joint prior (part a) is composed of two gamma densities (reflecting our prior information on the molecular rate and on the geological divergence time of human–orang-utan), and the likelihood (part b) is calculated under the Jukes–Cantor model. The posterior surface (part c) is the result of multiplying the prior and the likelihood. The data are informative about the molecular distance, d = tr, but not about t and r separately. The posterior is thus very sensitive to the prior. The blue line indicates the maximum likelihood estimate of t and r, and the molecular distance d, with t̂r̂ = d̂. (from <a href="https://doi.org/10.1038/nrg.2015.8">Bayesian molecular clock dating of species divergences in the genomics era</a>).
+</div>
+
+
+<h2>Dating trees</h2>
+
+<p>Given a molecular tree that we want to convert to a "time tree" (a dated tree) we typically need to do two things:
+<ul>
+<li>Convert the tree to an ultrametric tree ("smooth out" the tree).</li>
+<li>Use external sources of evidence such as fossils to date some of the nodes in the tree.</li>
+</ul>
+
+The output of these methods is typically an ultrametric tree where the branch lengths are units of time (e.g., millions of years). 
+</p>
+
+<ul>
+<li><a href="pathd8.html">Pathd8</a></li>
+</ul>
+
+
+<h2>Lineages through time</h2>
+
+<p>By taking time slices through a tree and plotting how many lineages 
+are in the tree at that point we construct a <b>lineages through time plot</b>. The diagram below shows some of the different patterns we might see in such a plot. Note that to make these plots we need an <b>ultrametric tree</b>, that is, a tree where all the tips line up. Typically these trees are the result of a molecular clock analysis.
+
+<div style="padding:30px;background:rgb(224,224,224);" width="70%">
+<img src="1_2.png">
+
+<p>Phylogenies, lineage through time plots, and gamma values illustrating the three patterns of cladogenesis and accumulation of species numbers.
+(A) Even rates through time, the null hypothesis for patterns of diversification. (B) Early burst of cladogenesis and species accumulation. (C) Late burst of speciation or early extinction. (from <a href="https://www.nature.com/scitable/knowledge/library/ecological-opportunity-trigger-of-adaptive-radiation-84160951/">Ecological Opportunity: Trigger of Adaptive Radiation</a>).
+</div>
+
+
+<ul>
+<li><a href="lineages.html">Lineages through time</a></li>
+</ul>
+
+<h2>Pairwise distances</h2>
+
+<p>One method for building a tree is to compute pairwise distances between sequences. Typically we then discard the distances and focus on the tree. But there is information in the distances, which we explore in this exercise.</p>
+
+<div style="padding:30px;background:rgb(224,224,224);">
+<img src="journal.pbio.0030422.g002.png" width="70%">
+<p>Figure 2. Schematic of the Inferred Barcoding Gap
+The distribution of intraspecific variation is shown in red, and interspecific divergence in yellow. (A) Ideal world for barcoding, with discrete distributions and no overlap. (B) An alternative version of the world with significant overlap and no gap.
+(From <a href="https://doi.org/10.1371/journal.pbio.0030422">doi:10.1371/journal.pbio.0030422</a>).
+</p>
+</div>
+
+
+<ul>
+<li><a href="pairwise.html">Pairwise distances</a></li>
+</ul>
+
+
+
+
+<h2>External links</h2>
+<ul>
+<li><a href="http://www.timetree.org">Time Tree</a></li>
+</ul>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<html>
+<head>
+	<title>Lineages through time</title>
+	<script src="jquery.js"></script>
+ 	<script src="treelib.js"></script>	
+ 	
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart', 'line']});
+    </script>
+ 	
+
+</head>
+<body>
+
+<h2>Step 1: Enter tree</h2>
+
+	<div>
+	<textarea id="newick" rows="10" cols=60" style="font-size:14px;">
+((Ithaginis_cruentus:16.75534229,((((Meleagris_gallopavo:3.981315304,Meleagris_ocellata:3.981315304):9.350690334,((((Lagopus_leucura:4.647158541,(Lagopus_muta:2.781935985,Lagopus_lagopus:2.781935985):1.865222557)LAGOPUS:1.771650735,(((Centrocercus_urophasianus:0.6014303653,Centrocercus_minimus:0.6014303653)CENTROCERCUS:3.895016438,((Dendragapus_obscurus:1.426624713,Dendragapus_fuliginosus:1.426624713):1.812323361,(Tympanuchus_pallidicinctus:0.5060738531,(Tympanuchus_phasianellus:0.2845181569,Tympanuchus_cupido:0.2845181569):0.2215556962):2.732874221):1.257498729):1.432358551,((Dendragapus_canadensis:3.799170979,Dendragapus_falcipennis:3.799170979):1.230251783,((Tetrao_parvirostris:1.814297132,Tetrao_urogallus:1.814297132):1.827155594,(Tetrao_tetrix:1.479987977,Tetrao_mlokosiewiczi:1.479987977):2.161464749):1.387970035):0.8993825931):0.4900039212):0.1763919387,Lerwa_lerwa:6.595201215):3.521913602,(Bonasa_umbellus:9.488840514,(Bonasa_sewerzowi:3.130090664,Bonasa_bonasia:3.130090664):6.35874985):0.6282743028):3.214890821):1.28021525,((Rhizothera_longirostris:9.940454005,Pucrasia_macrolopha:9.940454005):3.943397888,(((Syrmaticus_reevesii:6.353124828,(Syrmaticus_soemmerringii:5.771592979,((Syrmaticus_humiae:0.1070754062,Syrmaticus_ellioti:0.1070754062):2.079863742,Syrmaticus_mikado:2.186939148):3.584653831):0.5815318493):2.499478573,((Phasianus_colchicus:1.577338871,Phasianus_versicolor:1.577338871):5.77205373,((((Crossoptilon_crossoptilon:1.461896268,(Crossoptilon_auritum:0.0857255868,Crossoptilon_mantchuricum:0.0857255868):1.376170681):1.034476802,Crossoptilon_harmani:2.49637307)CROSSOPTILON:3.562847746,(((((Lophura_inornata:2.495655464,(Lophura_ignita:1.617909682,Lophura_diardi:1.617909682):0.877745782):0.05905906671,Lophura_hoogerwerfi:2.554714531):0.374251337,Lophura_erythrophthalma:2.928965868):0.8613465815,(Lophura_bulweri:2.904991851,(((Lophura_hatinhensis:0.1533574876,Lophura_edwardsi:0.1533574876):0.9235037148,Lophura_swinhoii:1.076861202):1.536441701,(Lophura_leucomelanos:1.287856366,Lophura_nycthemera:1.287856366):1.325446537):0.291688948):0.8853205983)LOPHURA:1.607930323,Catreus_wallichi:5.398242772):0.6609780441):0.7696369198,(Chrysolophus_pictus:1.092129732,Chrysolophus_amherstiae:1.092129732):5.736728004):0.5205348651):1.5032108):4.18254507,((Perdix_perdix:1.658387328,Perdix_dauurica:1.658387328):0.9535722855,Perdix_hodgsoniae:2.611959614):10.42318886):0.848703422):0.7283689958):0.575498034,((((Tragopan_melanocephalus:1.640505154,Tragopan_satyra:1.640505154):1.72440746,Tragopan_blythii:3.364912614):1.719313177,(Tragopan_caboti:1.831251629,Tragopan_temminckii:1.831251629):3.252974162)TRAGOPAN:8.738418046,((Lophophorus_lhuysii:3.973837632,(Lophophorus_sclateri:2.859465458,Lophophorus_impejanus:2.859465458):1.114372174)LOPHORORUS:5.844803678,(Tetraophasis_obscurus:1.61799439,Tetraophasis_szechenyii:1.61799439):8.20064692):4.004002527):1.365075085):1.567623372):1.38560156,(((((((Bambusicola_thoracicus:5.275367946,Bambusicola_fytchii:5.275367946)BAMBUSICOLA:4.039691518,(Gallus_sonneratii:2.938988448,((Gallus_varius:1.21804324,Gallus_gallus:1.21804324):1.001695562,Gallus_lafayetii:2.219738801):0.7192496471)GALLUS:6.376071016):1.7243409,(Francolinus_streptophorus:5.280943715,((Francolinus_psilolaemus:1.717108581,Francolinus_finschi:1.717108581):2.745576405,((Francolinus_africanus:2.165953979,(Francolinus_levaillantii:0.2133206144,Francolinus_levaillantoides:0.2133206144):1.952633364):0.6039706093,Francolinus_shelleyi:2.769924588):1.692760399):0.8182587285):5.758456649):1.115991845,(Francolinus_sephaena:10.32842444,(Francolinus_pintadeanus:9.95648676,((Francolinus_pondicerianus:3.482677884,Francolinus_gularis:3.482677884):4.772818623,(Francolinus_francolinus:3.37962815,Francolinus_pictus:3.37962815):4.875868357):1.700990253):0.3719376774):1.826967772):0.594696811,((Francolinus_coqui:3.210816805,Francolinus_schlegelii:3.210816805):6.988115494,(Francolinus_albogularis:3.129722326,Francolinus_lathami:3.129722326):7.069209973):2.551156722):3.641586398,(((Galloperdix_lunulata:4.627049232,(Galloperdix_bicalcarata:2.063565113,Galloperdix_spadicea:2.063565113):2.563484119):3.332042648,(((Polyplectron_schleiermacheri:2.255964779,Polyplectron_malacense:2.255964779):1.968912155,((((Polyplectron_bicalcaratum:0.7296878848,Polyplectron_chalcurum:0.7296878848):0.5808022882,Polyplectron_inopinatum:1.310490173):0.4730092348,Polyplectron_germaini:1.783499408):0.4051123525,Polyplectron_katsumatae:2.18861176):2.036265174):1.117529359,Polyplectron_napoleonis:5.342406293)POLYPLECTRON:2.616685587):1.668330676,Haematortyx_sanguiniceps:9.627422556):6.764252862):0.5931222379,((Pavo_muticus:1.495493902,Pavo_cristatus:1.495493902):3.563385137,Afropavo_congensis:5.058879039):11.92591862):1.156146199);
+	</textarea>
+	<button onclick="showtree('newick')">Show</button>
+	<p><span id="message"></span></p>
+
+	</div>
+	
+	<h3>Your input tree</h3>
+
+	<div style="width:600px;height:600px;background-color:white;border:1px solid rgb(228,228,228);padding:20px;">
+	<svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" height="600" width="600">
+		<g id="viewport">
+		</g>
+	</svg>
+	</div>
+
+
+
+
+<h2>Step 2: Lineages through time plot</h2>
+
+<p></p>
+
+
+<div id="chart" ></div>
+
+
+
+<script>
+
+// http://stackoverflow.com/questions/498970/how-do-i-trim-a-string-in-javascript
+if (!String.prototype.trim)
+{
+	String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+}
+
+function showtree(element_id)
+{
+    var t = new Tree();
+    var element = document.getElementById(element_id);
+    var newick = element.value;
+    newick = newick.trim(newick);
+	t.Parse(newick);
+
+	if (t.error != 0)
+	{
+		document.getElementById('message').innerHTML='Error parsing tree';
+	}
+	else
+	{
+		document.getElementById('message').innerHTML='Parsed OK';
+				
+		t.ComputeWeights(t.root);
+		
+
+		var selectmenu = document.getElementById('style');
+		var td = new PhylogramTreeDrawer();
+
+		
+		// clear existing diagram, if any
+		var svg = document.getElementById('svg');
+		while (svg.hasChildNodes()) 
+		{
+			svg.removeChild(svg.lastChild);
+		}
+		
+		
+		var g = document.createElementNS('http://www.w3.org/2000/svg','g');
+		g.setAttribute('id','viewport');
+		svg.appendChild(g);
+		
+		
+		td.Init(t, {svg_id: 'viewport', width:500, height:500, fontHeight:10, root_length:0.1} );
+		
+		td.CalcCoordinates();
+		td.Draw();
+		
+		// font size
+		var cssStyle = document.createElementNS('http://www.w3.org/2000/svg','style');
+		cssStyle.setAttribute('type','text/css');
+		
+		var font_size = Math.floor(td.settings.height/t.num_leaves);
+		font_size = Math.max(font_size, 1);
+		
+		var style=document.createTextNode("text{font-size:" + font_size + "px;}");
+		cssStyle.appendChild(style);
+		
+		svg.appendChild(cssStyle);
+
+		// label leaves...
+		var n = new NodeIterator(t.root);
+		var q = n.Begin();
+		while (q != null)
+		{
+			if (q.IsLeaf())
+			{
+				drawText('viewport', q.xy, q.label);
+			}
+			q = n.Next();
+		}
+		
+		
+		// get slices
+		{
+			var max_path_length = 0;
+			
+			// build path lengths
+			var n = new PreorderIterator(t.root);
+			var q = n.Begin();
+			while (q != null)
+			{
+				var d = q.edge_length;
+				if (d < 0.00001)
+				{
+					d = 0.0;
+				}
+				if (q != t.root)
+				{
+					q.path_length = q.ancestor.path_length + d;
+				}
+		
+				//console.log(q.label + ' ' + q.path_length + ' ' + q.edge_length);
+		
+				max_path_length = Math.max(max_path_length, q.path_length);
+				q = n.Next();
+			}
+			
+			var slices = [];
+			var num = Math.round(max_path_length);
+			for (var i = 0; i < num + 1; i++) {
+				slices[i] = 0;
+			}
+			
+			
+			
+			q = n.Begin();
+			while (q != null)
+			{
+				var x = Math.round(q.path_length);
+				var y = Math.round(q.path_length - q.edge_length);
+				
+				console.log(q.label + ' ' + y + '-' + x);
+				
+				//slices[x]++;
+			
+				
+				for (var i = y; i <= x; i++) {
+					slices[i]++;
+				}
+				
+				
+				
+				
+				
+			
+				q = n.Next();
+			}
+			
+			console.log(JSON.stringify(slices,null,2));
+			
+			var data = new google.visualization.DataTable();
+      		data.addColumn('number', 'X');
+      		data.addColumn('number', 'Y');
+			
+			var x = [];
+			
+			
+			
+			for (var i in slices) {
+				x.push([parseInt(i), parseInt(slices[i])]);
+			}
+			
+			console.log(JSON.stringify(x));
+			
+			data.addRows(x);
+			
+         var options = {
+        hAxis: {
+          title: 'Time'
+        },
+        vAxis: {
+          title: 'Lineages',
+          scaleType: 'log'
+          
+        },
+        width: 600, height: 600
+      };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart'));
+
+        chart.draw(data, options);			
+			
+			
+			
+				
+		}		
+	
+		
+		
+		
+		
+
+	}
+	
+
+}
+
+</script>
+
+</body>
+</html>

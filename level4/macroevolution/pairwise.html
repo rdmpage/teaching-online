@@ -1,0 +1,515 @@
+<html>
+<head>
+	<title>Trees to distances</title>
+	<script src="jquery.js"></script>
+ 	<script src="treelib.js"></script>	
+ 	<script src="jquery-svgpan.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    
+    <script>
+    	var myBarChart = null;
+    </script>
+    
+</head>
+<body style="padding:20px;">
+<a href="index.html">Home</a>
+
+
+<h1>Trees to pairwise distances</h1>
+
+
+<p>In this example we will find all pairwise distances between pairs the leaves in a tree,
+and try and interpret the resulting pattern. In the box below paste a tree with branch lengths, then interpret the graph.</p>
+
+
+<h2>Step 1: Enter tree</h2>
+
+<!-- 	(((EELA:0.150276,CONGERA:0.213019):0.230956,(EELB:0.263487,CONGERB:0.202633):0.246917):0.094785,((CAVEFISH:0.451027,(GOLDFISH:0.340495,ZEBRAFISH:0.390163):0.220565):0.067778,((((((NSAM:0.008113,NARG:0.014065):0.052991,SPUN:0.061003,(SMIC:0.027806,SDIA:0.015298,SXAN:0.046873):0.046977):0.009822,(NAUR:0.081298,(SSPI:0.023876,STIE:0.013652):0.058179):0.091775):0.073346,(MVIO:0.012271,MBER:0.039798):0.178835):0.147992,((BFNKILLIFISH:0.317455,(ONIL:0.029217,XCAU:0.084388):0.201166):0.055908,THORNYHEAD:0.252481):0.061905):0.157214,LAMPFISH:0.717196,((SCABBARDA:0.189684,SCABBARDB:0.362015):0.282263,((VIPERFISH:0.318217,BLACKDRAGON:0.109912):0.123642,LOOSEJAW:0.3971):0.287152):0.140663):0.206729):0.222485,(COELACANTH:0.558103,((CLAWEDFROG:0.441842,SALAMANDER:0.299607):0.135307,((CHAMELEON:0.771665,((PIGEON:0.150909,CHICKEN:0.172733):0.082163,ZEBRAFINCH:0.099172):0.272338):0.014055,((BOVINE:0.167569,DOLPHIN:0.15745):0.104783,ELEPHANT:0.166557):0.367205):0.050892):0.114731):0.295021);
+
+((((1,2)x,3)c,((4,5)y,6)b)a,(7,(8,(9,(11,(12,13)g)f)e)d)z)root;
+
+(((AF286963.1:0.00142663,KF685902.1:0):4.98498e-05,MG008946.1:0):0.0272726,(KF685889.1:0.0517227,((KF685895.1:0.0101678,((GQ470100.1:0,GQ470101.1:0.00141627):0.00247628,(GQ470102.1:0,GQ470099.1:0.00282804):0.00169169):0.010212):0.0415722,((((KF685754.1:0.0159967,(((((((MH688717.1:0,MH688716.1:0):0,MH688715.1:0):0,MH688714.1:0):0,MH688712.1:0):0.00132518,(((MH688722.1:0,((MH688723.1:0,MH688711.1:0.00414292):2.43729e-06,MH688720.1:0.00137815):3.699e-06):5.60502e-06,MH688721.1:0):1.67163e-05,(MH688719.1:0,MH688718.1:0):0.00136086):5.28666e-05):0.0150977,((((KF685897.1:0,KT148971.1:0.00276933):1.32426e-05,KC543441.1:0):1.32426e-05,AF286958.1:0):0.00848785,AF382087.1:0.00680464):0.00892145):0.00487825,(KP249698.1:0,KP249697.1:0):0.0141611):0.00372357):0.00487396,MH688710.1:0.0263774):0.0110163,KU359310.1:0.0488995):0.0057151,(KT148974.1:0.0274362,((MN706183.1:0.00498967,MN706184.1:0.00609598):0.00330379,(((((KM272992.1:0,(((((MT584209.1:0,(AF382072.1:0,(AF382071.1:0,(AF382074.1:0,(AF382079.1:0,AF382081.1:8.50945e-08):2.10963e-07):2.42093e-07):3.68491e-07):6.70999e-06):6.70999e-06,MT584208.1:0):6.70999e-06,MT584207.1:0):6.70999e-06,MT584206.1:0):6.70999e-06,MT584205.1:0):5.18063e-05):5.18063e-05,JF436969.1:0):0.00116849,(((((((((LC195134.1:0,(MT772143.1:0,MT772145.1:0.00172339):1.26054e-06):1.26054e-06,LC195133.1:0):1.26054e-06,LC195132.1:0):1.26054e-06,LC195131.1:0):1.26054e-06,LC195130.1:0):1.26054e-06,KT148970.1:0):1.26054e-06,KM272991.1:0):1.26054e-06,EF095259.1:0):1.26054e-06,AF286957.1:0):0.00160798):0.000834853,((LC195128.1:0,LC195127.1:0):0,LC195126.1:0):0.00332271):0.0051941,(((DQ839576.1:0,(((DQ839578.1:0,(DQ839579.1:0.00014822,DQ839574.1:0):0.000165935):0.000269397,DQ839581.1:0):0.000166417,(DQ839572.1:0,(DQ839569.1:0,(DQ839575.1:1.01988e-06,DQ839580.1:0):2.04866e-06):8.75914e-06):4.23175e-05):0.000322354):0.000657828,DQ839568.1:0):0.00700812,((KU724058.2:0,((DQ839589.1:0,(DQ839592.1:0,((((AY741601.1:0,((((DQ839591.1:0,AY741605.1:1.08338e-06):1.94442e-06,AY741604.1:0):4.02504e-06,AY741606.1:0):5.95244e-06,AY741600.1:0):1.13996e-05):1.66352e-05,(AY741603.1:0.00160829,AY741602.1:0):5.96074e-06):9.59931e-06,DQ839590.1:0):8.4362e-06,(DQ839593.1:0.000770728,AY741599.1:0.000786097):0.000784586):2.14609e-05):9.55925e-05):0.00453882,(AY741597.1:0,(DQ839582.1:0,(DQ839585.1:0,(AY741591.1:0,(DQ839583.1:0,((AY741596.1:0,(AY741598.1:0,(DQ839586.1:0,(DQ839584.1:0,(AY741593.1:0,AY741595.1:1.43761e-08):4.01303e-08):9.63413e-08):2.27924e-07):2.32844e-07):1.09418e-06,AY741592.1:0):2.03479e-06):2.30791e-06):2.96207e-06):4.79633e-06):7.22136e-06):0.000135826):0.000365112):0.00148007,((HM856632.1:0,(DQ839588.1:0,DQ839587.1:3.04077e-05):0.000312331):0.000278254,(HM856633.1:0,HM856633.1:0):0.00120123):0.00149069):0.00153703):0.00123809):0.0072446):0.0072216):0.0017389):0.00188984):0.00306342):0.0272726)flatworms;
+
+('Dioxys cincta_KJ836409.1':0.0394167,(((('Heriades crenulatus_KJ837499.1':0.000790185,('Heriades crenulatus_HQ948094.1':0.005835,(('Heriades crenulatus_KJ836642.1':0.00223928,('Heriades crenulatus_KJ836862.1':1.48198e-07,'Heriades crenulatus_KJ836538.1':0.00237892):0.000143574):0.000696052,((('Heriades crenulatus_KJ838652.1':0,'Heriades crenulatus_KJ839820.1':7.36166e-05):7.36166e-05,'Heriades crenulatus_KJ836425.1':0):7.36166e-05,'Heriades crenulatus_HQ948093.1':0):0.00170478):0.00135383):0.000386304):0.0209252,((((('Heriades truncorum_KT074045.1':0,'Heriades truncorum_KJ836515.1':0):0,'Heriades truncorum_KJ838226.1':0):0,'Heriades truncorum_HM901923.1':0):0.000592874,'Heriades truncorum_KJ836448.1':0.00178619):0.000974122,'Heriades truncorum_KJ839494.1':0.00140873):0.0347398):0.0326188,('Heriades carinatus_KR786504.1':0.00510067,(('Heriades carinatus_FJ582232.1':0,('Heriades carinatus_KJ163559.1':0.00235992,'Heriades carinatus_FJ582230.1':0.00481717):8.77903e-05):0.000672437,'Heriades carinatus_FJ582231.1':0.00171802):0.00450818):0.0518167):0.0119368,(((((((('Osmia bicornis_KX957905.1':0,'Osmia bicornis_GU705980.1':0.00478067):1.49689e-05,'Osmia bicornis_KJ837790.1':0):1.49689e-05,'Osmia bicornis_KJ837713.1':0):0.000689581,((((((((((((((('Osmia bicornis_KX957869.1':0,'Osmia bicornis_KX374766.1':5.56418e-09):5.56418e-09,'Osmia bicornis_KX957868.1':0):5.56418e-09,'Osmia bicornis_KX957867.1':0):5.56418e-09,'Osmia bicornis_KX957865.1':0):5.56418e-09,'Osmia bicornis_KX957864.1':0):5.56418e-09,'Osmia bicornis_KX957863.1':0):5.56418e-09,'Osmia bicornis_KX957862.1':0):5.56418e-09,'Osmia bicornis_KX957861.1':0):5.56418e-09,'Osmia bicornis_KX957860.1':0):5.56418e-09,'Osmia bicornis_KX374767.1':0):5.56418e-09,'Osmia bicornis_GU705983.1':0):0.000600043,('Osmia bicornis_KX957904.1':0.00178088,(('Osmia bicornis_KX374770.1':0,'Osmia bicornis_KX957903.1':7.10403e-06):7.10403e-06,'Osmia bicornis_GU705978.1':0):0.000602462):0.00178281):0.00060507,'Apoidea sp. GE3_47w_KY121842.1':0.0011822):0.00115752,('Osmia bicornis_KX957866.1':0,((((('Osmia bicornis_JQ909849.1':0.00237954,'Osmia bicornis_GU705979.1':0):4.78638e-07,'Osmia bicornis_KT164634.1':0):4.78638e-07,'Osmia bicornis_KT074073.1':0):4.78638e-07,'Apoidea sp. GE2_33w_KY121818.1':0):4.78638e-07,'Apoidea sp. GE2_38w_KY121823.1':0):4.78638e-07):3.21721e-05):0.000188326,'Osmia bicornis globosa_KC709831.1':0):0.00171617):0.0110093,'Osmia pedicornis_AF250940.1':0.00779681):0.00451422,('Osmia opima_AF250941.1':0.0115977,((((('Osmia cornifrons_EU726628.1':0,'Osmia cornifrons_EU726627.1':0):0,'Osmia cornifrons_EU726626.1':0):0,'Osmia cornifrons_EU726621.1':0):0,'Osmia cornifrons_EU726549.1':0):0.00124566,('Osmia cornifrons_EU726624.1':0,'Osmia cornifrons_EU726601.1':0):0.00113908):0.0213067):0.00363395):0.0511406,((('Hoplitis claviventris_KJ838228.1':0.00238854,'Hoplitis claviventris_HM901915.1':0.00238854):0.000383077,'Hoplitis claviventris_KJ837591.1':0.00200547):0.0398015,(('Hoplitis sp. bc4_KM568799.1':0,'Hoplitis sp. bc4_KM562022.1':0):0.0367986,'Hoplitis tuberculata_HQ948088.1':0.038264):0.0135556):0.0220487):0.0134001,('Apoidea sp. DAB151_KC560283.1':0.00647048,('Apoidea sp. 0709A106_KY072536.1':0.00206123,(((((((((((((((((('Apoidea sp. 0416D109_KY072692.1':3.09203e-09,'Apoidea sp. 0606C208_KY072384.1':0.00237906):0,'Apoidea sp. 0617A117_KY072512.1':3.09203e-09):0,'Apoidea sp. 0424D223_KY072457.1':3.09203e-09):0,'Apoidea sp. 0703C203_KY072408.1':3.09203e-09):0,'Apoidea sp. 0527C204_KY072378.1':3.09203e-09):0,'Apoidea sp. 0618D101_KY072344.1':3.09203e-09):0,'Apoidea sp. 0611D203_KY072316.1':3.09203e-09):0,'Apoidea sp. 0604D212_KY072314.1':3.09203e-09):0,'Apoidea sp. 0428C215_KY072271.1':3.09203e-09):0,'Apoidea sp. 0422C213_KY072263.1':3.09203e-09):0,'Apoidea sp. 0422C212_KY072262.1':3.09203e-09):0,'Apoidea sp. 0422C211_KY072261.1':3.09203e-09):0,'Apoidea sp. 0623A201_KY072174.1':3.09203e-09):0,'Apoidea sp. 0423A205_KY072146.1':3.09203e-09):0,'Apidae sp. 0529-A1-03_KP259020.1':3.09203e-09):0,'Apidae sp. 0514-A1-01_KP259004.1':3.09203e-09):0.00234357,(('Apoidea sp. 0424D224_KY072458.1':0,(('Apoidea sp. 0427A103_KY072490.1':0,'Apoidea sp. 0608A103_KY072495.1':0):0,('Apoidea sp. 0623A118_KY072601.1':0,'Apoidea sp. 0409D105_KY072662.1':0):0):0):0,(('Apoidea sp. 0606C206_KY072382.1':0,'Apidae sp. 0505-A1-12_KP259033.1':0):0,'Apoidea sp. 0606C207_KY072383.1':0):0):3.54967e-05):0.000187633,('Apoidea sp. 0623A117_KY072600.1':0.00236741,(('Heriades sauteri_KY072422.1':0,('Apoidea sp. 0612C204_KY072388.1':0,'Apoidea sp. 0612C205_KY072389.1':0):0):0,(('Apoidea sp. 0520C211_KY072370.1':0,'Apoidea sp. 0527C203_KY072377.1':0):0,('unknown_Query_99925':0,('Apidae sp. 0515-A2-10_KP259058.1':0,'Apoidea sp. 0428C212_KY072268.1':0):0):0):0):1.16517e-05):0.00220091):0.000322574):0.000708561):0.0266027):0.0069557):0.0394167);
+
+-->
+
+	<div>
+	<textarea id="newick" rows="10" cols=60" style="font-size:14px;">
+('Dioxys cincta_KJ836409.1':0.0394167,(((('Heriades crenulatus_KJ837499.1':0.000790185,('Heriades crenulatus_HQ948094.1':0.005835,(('Heriades crenulatus_KJ836642.1':0.00223928,('Heriades crenulatus_KJ836862.1':1.48198e-07,'Heriades crenulatus_KJ836538.1':0.00237892):0.000143574):0.000696052,((('Heriades crenulatus_KJ838652.1':0,'Heriades crenulatus_KJ839820.1':7.36166e-05):7.36166e-05,'Heriades crenulatus_KJ836425.1':0):7.36166e-05,'Heriades crenulatus_HQ948093.1':0):0.00170478):0.00135383):0.000386304):0.0209252,((((('Heriades truncorum_KT074045.1':0,'Heriades truncorum_KJ836515.1':0):0,'Heriades truncorum_KJ838226.1':0):0,'Heriades truncorum_HM901923.1':0):0.000592874,'Heriades truncorum_KJ836448.1':0.00178619):0.000974122,'Heriades truncorum_KJ839494.1':0.00140873):0.0347398):0.0326188,('Heriades carinatus_KR786504.1':0.00510067,(('Heriades carinatus_FJ582232.1':0,('Heriades carinatus_KJ163559.1':0.00235992,'Heriades carinatus_FJ582230.1':0.00481717):8.77903e-05):0.000672437,'Heriades carinatus_FJ582231.1':0.00171802):0.00450818):0.0518167):0.0119368,(((((((('Osmia bicornis_KX957905.1':0,'Osmia bicornis_GU705980.1':0.00478067):1.49689e-05,'Osmia bicornis_KJ837790.1':0):1.49689e-05,'Osmia bicornis_KJ837713.1':0):0.000689581,((((((((((((((('Osmia bicornis_KX957869.1':0,'Osmia bicornis_KX374766.1':5.56418e-09):5.56418e-09,'Osmia bicornis_KX957868.1':0):5.56418e-09,'Osmia bicornis_KX957867.1':0):5.56418e-09,'Osmia bicornis_KX957865.1':0):5.56418e-09,'Osmia bicornis_KX957864.1':0):5.56418e-09,'Osmia bicornis_KX957863.1':0):5.56418e-09,'Osmia bicornis_KX957862.1':0):5.56418e-09,'Osmia bicornis_KX957861.1':0):5.56418e-09,'Osmia bicornis_KX957860.1':0):5.56418e-09,'Osmia bicornis_KX374767.1':0):5.56418e-09,'Osmia bicornis_GU705983.1':0):0.000600043,('Osmia bicornis_KX957904.1':0.00178088,(('Osmia bicornis_KX374770.1':0,'Osmia bicornis_KX957903.1':7.10403e-06):7.10403e-06,'Osmia bicornis_GU705978.1':0):0.000602462):0.00178281):0.00060507,'Apoidea sp. GE3_47w_KY121842.1':0.0011822):0.00115752,('Osmia bicornis_KX957866.1':0,((((('Osmia bicornis_JQ909849.1':0.00237954,'Osmia bicornis_GU705979.1':0):4.78638e-07,'Osmia bicornis_KT164634.1':0):4.78638e-07,'Osmia bicornis_KT074073.1':0):4.78638e-07,'Apoidea sp. GE2_33w_KY121818.1':0):4.78638e-07,'Apoidea sp. GE2_38w_KY121823.1':0):4.78638e-07):3.21721e-05):0.000188326,'Osmia bicornis globosa_KC709831.1':0):0.00171617):0.0110093,'Osmia pedicornis_AF250940.1':0.00779681):0.00451422,('Osmia opima_AF250941.1':0.0115977,((((('Osmia cornifrons_EU726628.1':0,'Osmia cornifrons_EU726627.1':0):0,'Osmia cornifrons_EU726626.1':0):0,'Osmia cornifrons_EU726621.1':0):0,'Osmia cornifrons_EU726549.1':0):0.00124566,('Osmia cornifrons_EU726624.1':0,'Osmia cornifrons_EU726601.1':0):0.00113908):0.0213067):0.00363395):0.0511406,((('Hoplitis claviventris_KJ838228.1':0.00238854,'Hoplitis claviventris_HM901915.1':0.00238854):0.000383077,'Hoplitis claviventris_KJ837591.1':0.00200547):0.0398015,(('Hoplitis sp. bc4_KM568799.1':0,'Hoplitis sp. bc4_KM562022.1':0):0.0367986,'Hoplitis tuberculata_HQ948088.1':0.038264):0.0135556):0.0220487):0.0134001,('Apoidea sp. DAB151_KC560283.1':0.00647048,('Apoidea sp. 0709A106_KY072536.1':0.00206123,(((((((((((((((((('Apoidea sp. 0416D109_KY072692.1':3.09203e-09,'Apoidea sp. 0606C208_KY072384.1':0.00237906):0,'Apoidea sp. 0617A117_KY072512.1':3.09203e-09):0,'Apoidea sp. 0424D223_KY072457.1':3.09203e-09):0,'Apoidea sp. 0703C203_KY072408.1':3.09203e-09):0,'Apoidea sp. 0527C204_KY072378.1':3.09203e-09):0,'Apoidea sp. 0618D101_KY072344.1':3.09203e-09):0,'Apoidea sp. 0611D203_KY072316.1':3.09203e-09):0,'Apoidea sp. 0604D212_KY072314.1':3.09203e-09):0,'Apoidea sp. 0428C215_KY072271.1':3.09203e-09):0,'Apoidea sp. 0422C213_KY072263.1':3.09203e-09):0,'Apoidea sp. 0422C212_KY072262.1':3.09203e-09):0,'Apoidea sp. 0422C211_KY072261.1':3.09203e-09):0,'Apoidea sp. 0623A201_KY072174.1':3.09203e-09):0,'Apoidea sp. 0423A205_KY072146.1':3.09203e-09):0,'Apidae sp. 0529-A1-03_KP259020.1':3.09203e-09):0,'Apidae sp. 0514-A1-01_KP259004.1':3.09203e-09):0.00234357,(('Apoidea sp. 0424D224_KY072458.1':0,(('Apoidea sp. 0427A103_KY072490.1':0,'Apoidea sp. 0608A103_KY072495.1':0):0,('Apoidea sp. 0623A118_KY072601.1':0,'Apoidea sp. 0409D105_KY072662.1':0):0):0):0,(('Apoidea sp. 0606C206_KY072382.1':0,'Apidae sp. 0505-A1-12_KP259033.1':0):0,'Apoidea sp. 0606C207_KY072383.1':0):0):3.54967e-05):0.000187633,('Apoidea sp. 0623A117_KY072600.1':0.00236741,(('Heriades sauteri_KY072422.1':0,('Apoidea sp. 0612C204_KY072388.1':0,'Apoidea sp. 0612C205_KY072389.1':0):0):0,(('Apoidea sp. 0520C211_KY072370.1':0,'Apoidea sp. 0527C203_KY072377.1':0):0,('unknown_Query_99925':0,('Apidae sp. 0515-A2-10_KP259058.1':0,'Apoidea sp. 0428C212_KY072268.1':0):0):0):0):1.16517e-05):0.00220091):0.000322574):0.000708561):0.0266027):0.0069557):0.0394167);
+	</textarea>
+	<button onclick="showtree('newick')">Show</button>
+	<p><span id="message"></span></p>
+
+	</div>
+	
+	<h3>Your input tree</h3>
+
+	<div style="width:600px;height:600px;background-color:white;border:1px solid rgb(228,228,228);padding:20px;">
+	<svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" height="600" width="600">
+		<g id="viewport">
+		</g>
+	</svg>
+	</div>
+
+
+
+
+<h2>Step 2: Pairwise distances</h2>
+
+<p>This diagram shows the distribution of pairwise distances between every taxon in the tree. Is there are clear pattern?</p>
+
+<canvas id="chart" width="600" height="400"></canvas>
+
+
+	
+	<h3>Some examples to try</h3>
+	<div>
+		<h4>Vertebrates</h4>
+		<p>(((EELA:0.150276,CONGERA:0.213019):0.230956,(EELB:0.263487,CONGERB:0.202633):0.246917):0.094785,((CAVEFISH:0.451027,(GOLDFISH:0.340495,ZEBRAFISH:0.390163):0.220565):0.067778,((((((NSAM:0.008113,NARG:0.014065):0.052991,SPUN:0.061003,(SMIC:0.027806,SDIA:0.015298,SXAN:0.046873):0.046977):0.009822,(NAUR:0.081298,(SSPI:0.023876,STIE:0.013652):0.058179):0.091775):0.073346,(MVIO:0.012271,MBER:0.039798):0.178835):0.147992,((BFNKILLIFISH:0.317455,(ONIL:0.029217,XCAU:0.084388):0.201166):0.055908,THORNYHEAD:0.252481):0.061905):0.157214,LAMPFISH:0.717196,((SCABBARDA:0.189684,SCABBARDB:0.362015):0.282263,((VIPERFISH:0.318217,BLACKDRAGON:0.109912):0.123642,LOOSEJAW:0.3971):0.287152):0.140663):0.206729):0.222485,(COELACANTH:0.558103,((CLAWEDFROG:0.441842,SALAMANDER:0.299607):0.135307,((CHAMELEON:0.771665,((PIGEON:0.150909,CHICKEN:0.172733):0.082163,ZEBRAFINCH:0.099172):0.272338):0.014055,((BOVINE:0.167569,DOLPHIN:0.15745):0.104783,ELEPHANT:0.166557):0.367205):0.050892):0.114731):0.295021);</p>
+		
+		<h4>Flytrap</h4>
+		<p>(((Strepsipte:0.188059,(Meloe:0.018443,Tenebrio:0.012183):0.006383):0.005577,((((Aedes:0.185008,Drosophila:0.006029):0.148335,Polistes:0.006348):0.006919,((Flea:0.008124,Scorpionfl:0.011345):0.008618,Sawfly:0.007643):0.000352):0.000381,(Lacewing:0.002145,Antlion:0.007330):0.011423):-1.840e-05):0.031824,(OUU06478:0.015625,PSU06480:0.008172):0);</p>
+		
+		<h4>DNA barcoding</h4>
+		<p>('Dioxys cincta_KJ836409.1':0.0394167,(((('Heriades crenulatus_KJ837499.1':0.000790185,('Heriades crenulatus_HQ948094.1':0.005835,(('Heriades crenulatus_KJ836642.1':0.00223928,('Heriades crenulatus_KJ836862.1':1.48198e-07,'Heriades crenulatus_KJ836538.1':0.00237892):0.000143574):0.000696052,((('Heriades crenulatus_KJ838652.1':0,'Heriades crenulatus_KJ839820.1':7.36166e-05):7.36166e-05,'Heriades crenulatus_KJ836425.1':0):7.36166e-05,'Heriades crenulatus_HQ948093.1':0):0.00170478):0.00135383):0.000386304):0.0209252,((((('Heriades truncorum_KT074045.1':0,'Heriades truncorum_KJ836515.1':0):0,'Heriades truncorum_KJ838226.1':0):0,'Heriades truncorum_HM901923.1':0):0.000592874,'Heriades truncorum_KJ836448.1':0.00178619):0.000974122,'Heriades truncorum_KJ839494.1':0.00140873):0.0347398):0.0326188,('Heriades carinatus_KR786504.1':0.00510067,(('Heriades carinatus_FJ582232.1':0,('Heriades carinatus_KJ163559.1':0.00235992,'Heriades carinatus_FJ582230.1':0.00481717):8.77903e-05):0.000672437,'Heriades carinatus_FJ582231.1':0.00171802):0.00450818):0.0518167):0.0119368,(((((((('Osmia bicornis_KX957905.1':0,'Osmia bicornis_GU705980.1':0.00478067):1.49689e-05,'Osmia bicornis_KJ837790.1':0):1.49689e-05,'Osmia bicornis_KJ837713.1':0):0.000689581,((((((((((((((('Osmia bicornis_KX957869.1':0,'Osmia bicornis_KX374766.1':5.56418e-09):5.56418e-09,'Osmia bicornis_KX957868.1':0):5.56418e-09,'Osmia bicornis_KX957867.1':0):5.56418e-09,'Osmia bicornis_KX957865.1':0):5.56418e-09,'Osmia bicornis_KX957864.1':0):5.56418e-09,'Osmia bicornis_KX957863.1':0):5.56418e-09,'Osmia bicornis_KX957862.1':0):5.56418e-09,'Osmia bicornis_KX957861.1':0):5.56418e-09,'Osmia bicornis_KX957860.1':0):5.56418e-09,'Osmia bicornis_KX374767.1':0):5.56418e-09,'Osmia bicornis_GU705983.1':0):0.000600043,('Osmia bicornis_KX957904.1':0.00178088,(('Osmia bicornis_KX374770.1':0,'Osmia bicornis_KX957903.1':7.10403e-06):7.10403e-06,'Osmia bicornis_GU705978.1':0):0.000602462):0.00178281):0.00060507,'Apoidea sp. GE3_47w_KY121842.1':0.0011822):0.00115752,('Osmia bicornis_KX957866.1':0,((((('Osmia bicornis_JQ909849.1':0.00237954,'Osmia bicornis_GU705979.1':0):4.78638e-07,'Osmia bicornis_KT164634.1':0):4.78638e-07,'Osmia bicornis_KT074073.1':0):4.78638e-07,'Apoidea sp. GE2_33w_KY121818.1':0):4.78638e-07,'Apoidea sp. GE2_38w_KY121823.1':0):4.78638e-07):3.21721e-05):0.000188326,'Osmia bicornis globosa_KC709831.1':0):0.00171617):0.0110093,'Osmia pedicornis_AF250940.1':0.00779681):0.00451422,('Osmia opima_AF250941.1':0.0115977,((((('Osmia cornifrons_EU726628.1':0,'Osmia cornifrons_EU726627.1':0):0,'Osmia cornifrons_EU726626.1':0):0,'Osmia cornifrons_EU726621.1':0):0,'Osmia cornifrons_EU726549.1':0):0.00124566,('Osmia cornifrons_EU726624.1':0,'Osmia cornifrons_EU726601.1':0):0.00113908):0.0213067):0.00363395):0.0511406,((('Hoplitis claviventris_KJ838228.1':0.00238854,'Hoplitis claviventris_HM901915.1':0.00238854):0.000383077,'Hoplitis claviventris_KJ837591.1':0.00200547):0.0398015,(('Hoplitis sp. bc4_KM568799.1':0,'Hoplitis sp. bc4_KM562022.1':0):0.0367986,'Hoplitis tuberculata_HQ948088.1':0.038264):0.0135556):0.0220487):0.0134001,('Apoidea sp. DAB151_KC560283.1':0.00647048,('Apoidea sp. 0709A106_KY072536.1':0.00206123,(((((((((((((((((('Apoidea sp. 0416D109_KY072692.1':3.09203e-09,'Apoidea sp. 0606C208_KY072384.1':0.00237906):0,'Apoidea sp. 0617A117_KY072512.1':3.09203e-09):0,'Apoidea sp. 0424D223_KY072457.1':3.09203e-09):0,'Apoidea sp. 0703C203_KY072408.1':3.09203e-09):0,'Apoidea sp. 0527C204_KY072378.1':3.09203e-09):0,'Apoidea sp. 0618D101_KY072344.1':3.09203e-09):0,'Apoidea sp. 0611D203_KY072316.1':3.09203e-09):0,'Apoidea sp. 0604D212_KY072314.1':3.09203e-09):0,'Apoidea sp. 0428C215_KY072271.1':3.09203e-09):0,'Apoidea sp. 0422C213_KY072263.1':3.09203e-09):0,'Apoidea sp. 0422C212_KY072262.1':3.09203e-09):0,'Apoidea sp. 0422C211_KY072261.1':3.09203e-09):0,'Apoidea sp. 0623A201_KY072174.1':3.09203e-09):0,'Apoidea sp. 0423A205_KY072146.1':3.09203e-09):0,'Apidae sp. 0529-A1-03_KP259020.1':3.09203e-09):0,'Apidae sp. 0514-A1-01_KP259004.1':3.09203e-09):0.00234357,(('Apoidea sp. 0424D224_KY072458.1':0,(('Apoidea sp. 0427A103_KY072490.1':0,'Apoidea sp. 0608A103_KY072495.1':0):0,('Apoidea sp. 0623A118_KY072601.1':0,'Apoidea sp. 0409D105_KY072662.1':0):0):0):0,(('Apoidea sp. 0606C206_KY072382.1':0,'Apidae sp. 0505-A1-12_KP259033.1':0):0,'Apoidea sp. 0606C207_KY072383.1':0):0):3.54967e-05):0.000187633,('Apoidea sp. 0623A117_KY072600.1':0.00236741,(('Heriades sauteri_KY072422.1':0,('Apoidea sp. 0612C204_KY072388.1':0,'Apoidea sp. 0612C205_KY072389.1':0):0):0,(('Apoidea sp. 0520C211_KY072370.1':0,'Apoidea sp. 0527C203_KY072377.1':0):0,('unknown_Query_99925':0,('Apidae sp. 0515-A2-10_KP259058.1':0,'Apoidea sp. 0428C212_KY072268.1':0):0):0):0):1.16517e-05):0.00220091):0.000322574):0.000708561):0.0266027):0.0069557):0.0394167);
+		</p>
+		
+		<h4>Shrews</h4>
+		<p>
+		(((((((((((((((Crocidura_buettikoferi:5.63788527097675,Crocidura_theresae:5.63788527097675):0.66775613581132,Crocidura_grandiceps:6.30564140678807):0.46831076090069,Crocidura_batesi:6.77395216768876):0.58258777075285,Crocidura_hildegardeae:7.35653993844161):0.45461307181693,(Crocidura_mariquensis:6.71126050487791,Crocidura_silacea:6.71126050487791):1.09989250538063):0.42243351764696,Crocidura_cyanea:8.2335865279055):0.54596960821798,(((Crocidura_jouvenetae:3.87304459982769,Crocidura_crossei:3.87304459982769):3.55584199459153,Crocidura_fuscomurina:7.42888659441922):1.00554048815606,(Crocidura_crenata:7.90552647441024,Crocidura_grassei:7.90552647441024):0.52890060816504):0.3451290535482):0.18464947387392,(((((Crocidura_viaria:5.52881655566948,Crocidura_fulvastra:5.52881655566948):0.71576412983619,Crocidura_olivieri:6.24458068550567):1.11882721927543,(Crocidura_flavescens:6.86268397710734,Crocidura_hirta:6.86268397710734):0.50072392767376):0.54189798299936,Crocidura_lamottei:7.90530588778046):0.73735014275796,(((Crocidura_muricauda:6.85389003465001,Crocidura_douceti:6.85389003465001):0.8018091898855,(Crocidura_goliath:7.04059442409268,Crocidura_nimbae:7.04059442409268):0.61510480044283):0.55840253086569,Crocidura_nanilla:8.2141017554012):0.42855427513722):0.32154957945898):0.17876591158064,Crocidura_roosevelti:9.14297152157804):0.13030682937585,(((((((Crocidura_musseri:2.59172831035712,Crocidura_rhoditis:2.59172831035712):1.27205304103255,Crocidura_batakorum:3.86378135138967):1.49334755284415,Crocidura_levicula:5.35712890423382):2.24378970905296,Crocidura_sicula:7.60091861328678):0.58410955169475,(Crocidura_zimmermanni:7.45380650985112,Crocidura_luna:7.45380650985112):0.73122165513041):0.49189831708415,(Crocidura_leucodon:3.9505439347135,Crocidura_caspica:3.9505439347135):4.72638254735218):0.3774338528571,(Crocidura_russula:6.84796488565604,Crocidura_ichnusae:6.84796488565604):2.20639544926674):0.21891801603111):0.26829511083291,(((((((Crocidura_foetida:4.93243701091087,Crocidura_nigripes:4.93243701091087):0.63557616466652,(Crocidura_malayana:1.44925925977222,Crocidura_negligens:1.44925925977222):4.11875391580517):0.76413494484756,((Crocidura_brunnea:4.22336536718153,Crocidura_orientalis:4.22336536718153):1.18994757970183,(Crocidura_beccarii:4.32265978089482,Crocidura_lepidura:4.32265978089482):1.09065316598854):0.91883517354159):0.38402994941457,(Crocidura_mindorus:4.54960060740864,Crocidura_grayi:4.54960060740864):2.16657746243088):0.26874172588821,(Crocidura_paradoxura:5.96177834401726,Crocidura_dsinezumi:5.96177834401726):1.02314145171047):0.54933915397524,Crocidura_fuliginosa:7.53425894970297):1.05847330602812,(((Crocidura_suaveolens:3.29183588373233,Crocidura_shantungensis:3.29183588373233):2.84508904314095,Crocidura_zarudnyi:6.13692492687328):1.80570473363425,(Crocidura_sibirica:7.13916300493999,Crocidura_aleksandrisi:7.13916300493999):0.80346665556754):0.65010259522356):0.94884120605571):0.473948780103,(((((Crocidura_attenuata:5.9264194105924,Crocidura_tanakae:5.9264194105924):1.82500586422304,Crocidura_lasiura:7.75142527481544):0.59421483598327,Crocidura_maxi:8.34564011079871):0.60528379459654,(((Crocidura_watasei:4.40259122647122,Crocidura_horsfieldii:4.40259122647122):2.06133472992703,Crocidura_wuchihensis:6.46392595639825):1.23300569572691,Crocidura_indochinensis:7.69693165212516):1.25399225327009):0.69977323211993,(((Crocidura_negrina:0.673413017556926,Crocidura_panayensis:0.673413017556926):5.946255585515084,Crocidura_palawanensis:6.61966860307201):0.69004002468002,Crocidura_beatus:7.30970862775203):2.34098850976315):0.36482510437462):0.3763736503031,((Crocidura_elongata:7.55011214499482,Crocidura_lea:7.55011214499482):1.95135087117754,Crocidura_obscurior:9.50146301617236):0.89043287602054):1.5081041078071,(((((((((Crocidura_pullata:2.86374765389108,Crocidura_nicobarica:2.86374765389108):1.09565235979939,Crocidura_allex:3.95940001369047):0.17525039156847,(Crocidura_tenuis:1.09908120260027,Crocidura_polia:1.09908120260027):3.03556920265867):1.15929793470991,(Crocidura_susiana:2.54719099832044,Crocidura_jenkinsi:2.54719099832044):2.74675734164841):1.04339088674181,Crocidura_telfordi:6.33733922671066):1.54602155888357,Crocidura_phaeura:7.88336078559423):0.81234767129053,(((Crocidura_tansaniana:0.567027055605791,Crocidura_kivuana:0.567027055605791):1.610641388527329,Crocidura_arispa:2.17766844413312):3.03199769404719,(Crocidura_ultima:1.67290539755618,Crocidura_smithii:1.67290539755618):3.53676074062413):3.48604231870445):2.54040267766194,((((((Crocidura_greenwoodi:0.845522681271287,Crocidura_latona:0.845522681271287):0.579270893810343,Crocidura_picea:1.42479357508163):4.28282340937423,(Crocidura_jacksoni:0.398022056286135,Crocidura_usambarae:0.398022056286135):5.309594928169725):2.55032652684368,(Crocidura_lucina:3.22125132461701,Crocidura_monticola:3.22125132461701):5.03669218668253):1.77446998340106,((((Crocidura_longipes:0.936526562626094,Crocidura_harenna:0.936526562626094):4.268707433569796,Crocidura_pergrisea:5.20523399619589):3.05476600380411,Crocidura_virgata:8.26):0.0,Crocidura_macowi:8.26):1.7724134947006):0.2194190829275,(Crocidura_tarella:3.90404128929197,Crocidura_lanosa:3.90404128929197):6.34779128833613):0.9842785569186):0.6638888654533,(((((((((Crocidura_vorax:1.2038414311664,Crocidura_thomensis:1.2038414311664):2.31091758670363,(Crocidura_nana:2.19196144629665,Crocidura_montis:2.19196144629665):1.32279757157338):1.64173860520439,(Crocidura_nigricans:1.10743535581408,Crocidura_hispida:1.10743535581408):4.04906226726034):1.25682610946567,Crocidura_macarthuri:6.41332373254009):1.21440786990184,(Crocidura_maquassiensis:2.43628246596434,Crocidura_manengubae:2.43628246596434):5.19144913647759):3.37226839755807,(((Crocidura_rapax:2.61644371779263,Crocidura_denti:2.61644371779263):1.41048127851979,Crocidura_miya:4.02692499631242):6.07307500368758,((Crocidura_dolichura:1.48955636881779,Crocidura_tarfayensis:1.48955636881779):8.61044363118221,Crocidura_planiceps:10.1):0.0):0.9):0.0,((Crocidura_parvipes:3.42822614668542,Crocidura_macmillani:3.42822614668542):2.69767393562598,Crocidura_canariensis:6.1259000823114):4.8740999176886):0.0567836959544,(Crocidura_glassi:2.2506735833624,Crocidura_monax:2.2506735833624):8.806110112592):0.8432163040456,((((Crocidura_gracilipes:1.33,Crocidura_hilliana:1.33):0.0,Crocidura_hutanis:1.33):2.75437392702304,Crocidura_grandis:4.08437392702304):2.61118760348441,Crocidura_fischeri:6.69556153050745):5.20443846949255):0.0):0.0):0.7,((((((((((Crocidura_congobelgica:1.35,Crocidura_hikmiya:1.35):0.0,Crocidura_poensis:1.35):3.49551672617732,Crocidura_ansellorum:4.84551672617732):3.25448327382268,((Crocidura_turba:0.973486304097497,Crocidura_orii:0.973486304097497):7.126513695902503,(Crocidura_voi:0.714391651238369,Crocidura_xantippe:0.714391651238369):7.385608348761631):0.0):0.0,(((Crocidura_whitakeri:3.77,Crocidura_mutesae:3.77):0.0,Crocidura_lusitania:3.77):1.50590861590246,Crocidura_nigrofusca:5.27590861590246):2.82409138409754):0.7842053779881,(((Crocidura_nigeriae:2.64867169101644,Crocidura_armenica:2.64867169101644):2.79580672254972,Crocidura_religiosa:5.44447841356616):0.87355635073882,Crocidura_stenocephala:6.31803476430498):2.56617061368312):0.88473684045754,(((Crocidura_wimmeri:1.32050087916586,Crocidura_ramona:1.32050087916586):3.95923072339533,Crocidura_foxi:5.27973160256119):2.93343694843679,(Crocidura_pachyura:0.96108794373302,Crocidura_bottegi:0.96108794373302):7.25208060726496):1.55577366744766):0.50948256156246,(Crocidura_thalia:3.32149022377902,Crocidura_littoralis:3.32149022377902):6.95693455622908):2.3215752199919,(((Crocidura_pasha:4.74086510997995,Crocidura_caliginea:4.74086510997995):1.01364921211131,(Crocidura_baluensis:0.505526968337003,Crocidura_attila:0.505526968337003):5.248987353754257):1.11624718696623,Crocidura_floweri:6.87076150905749):5.72923849094251):0.0,(((((((Crocidura_niobe:2.95686710461643,Crocidura_ludia:2.95686710461643):2.46948901537107,Crocidura_zaphiri:5.4263561199875):2.03226833958788,((Crocidura_raineyi:2.08785687953886,Crocidura_serezkyensis:2.08785687953886):2.47861937793219,Crocidura_yankariensis:4.56647625747105):2.89214820210433):1.69300617861672,Crocidura_selina:9.1516306381921):0.23237606012504,((((Crocidura_somalica:1.39234251849752,Crocidura_fumosa:1.39234251849752):1.18765748150248,Crocidura_vosmaeri:2.58):0.0,(Crocidura_erica:0.389812416371997,Crocidura_gmelini:0.389812416371997):2.190187583628003):2.86918081675801,(Crocidura_katinka:1.40309216091775,Crocidura_maurisca:1.40309216091775):4.04608865584026):3.93482588155913):0.61380701721931,((((((Crocidura_arabica:0.958661722822437,Crocidura_eisentrauti:0.958661722822437):0.364101128366833,Crocidura_bottegoides:1.32276285118927):2.21055173682881,Crocidura_baileyi:3.53331458801808):0.82399143614705,Crocidura_desperata:4.35730602416513):1.88324083110693,(((Crocidura_andamanensis:1.49576074867096,Crocidura_trichura:1.49576074867096):1.62994213340489,Crocidura_cinderella:3.12570288207585):0.91566735348467,Crocidura_pitmani:4.04137023556052):2.19917661971154):2.69446785382065,Crocidura_elgonius:8.93501470909271):1.06279900644374):0.21777048583755,(Diplomesodon_pulchellum:3.59447625711281,Crocidura_zimmeri:3.59447625711281):6.62110794426119):2.384415798626):0.0);
+		</p>
+		
+	</div>
+
+
+<script>
+
+
+//--------------------------------------------------------------------------------------------------
+EulerTour.prototype = new NodeIterator;
+
+function EulerTour()
+{
+	NodeIterator.apply(this, arguments)
+	
+	this.tour 		= []; // list of node labels in order visited (debugging)
+	this.e 			= []; // tour where [i] is the index of the node encountered at step i
+	this.count 		= 0;  // counter
+	
+	this.f			= []; // position in tour of first encounter of a node 
+	
+	this.e_map		= [];
+	
+	
+};
+
+//----------------------------------------------------------------------------------------
+// First visit to a node, set node's euler_index to the current index,
+// set it's value of f to the current length of the tour (i.e., first occurrence of
+// this node in the tour)
+EulerTour.prototype.VisitFirstTime = function(p) {
+
+	// debug
+	if (p.label != '') {
+		this.tour.push(p.label);
+	} else {
+		this.tour.push(p.id);
+	}
+	
+	
+	p.euler_index = this.count;	
+	this.e.push(p.euler_index);
+	this.e_map[p.euler_index] = p;
+	
+	this.f[p.id] = this.e.length - 1;
+	
+	
+	this.count++;
+}
+
+
+//----------------------------------------------------------------------------------------
+// Record a subsequent visit to a node
+EulerTour.prototype.VisitAgain = function(p) {
+
+	// debug
+	if (p.label != '') {
+		this.tour.push(p.label);
+	} else {
+		this.tour.push(p.id);
+	}
+	
+	
+	this.e.push(p.euler_index);
+}
+
+//----------------------------------------------------------------------------------------
+EulerTour.prototype.Begin = function() {
+	this.cur = this.root;	
+	this.VisitFirstTime(this.cur);	
+	return this.cur;
+}
+
+//--------------------------------------------------------------------------------------------------
+EulerTour.prototype.Next = function() 
+{
+	if (this.cur.child)
+	{
+		
+		this.stack.push(this.cur);
+		this.cur = this.cur.child;
+		
+		this.VisitFirstTime(this.cur);
+	}
+	else
+	{
+		while (this.stack.length > 0 && this.cur.sibling == null)
+		{
+			this.cur = this.stack.pop();
+			
+			this.VisitAgain(this.cur);
+		}
+		if (this.stack.length == 0)
+		{
+			this.cur = null;
+		}
+		else
+		{
+			this.VisitAgain(this.cur.ancestor);
+
+			this.cur = this.cur.sibling;			
+			this.VisitFirstTime(this.cur);
+		}
+	}
+	return this.cur;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+// Class to compute LCA for pairs of nodes
+function LCA(t) {
+	this.tree = t;
+	this.tour = new EulerTour(this.tree.root);
+	var q = this.tour.Begin();
+	while (q != null)
+	{
+		q = this.tour.Next();
+	}	
+	
+	// debug
+	console.log("Euler Tour (labels)");
+	console.log(JSON.stringify(this.tour.tour));
+	
+	console.log("Euler Tour (node visit order)");
+	console.log(JSON.stringify(this.tour.e));
+
+	/*
+	console.log("Map");
+	for (var i in this.tour.f) {
+		console.log(i + ' ' + this.tour.f[i]);
+	}
+	console.log("Map done");
+	*/
+	
+	
+	
+};
+
+//----------------------------------------------------------------------------------------
+// find LCA for a pair of nodes
+LCA.prototype.find_for_nodes = function(u, v) {
+
+	var fu = this.tour.f[u.id];
+	var fv = this.tour.f[v.id];
+	
+	// fu must be less than fv
+	if (fv < fu) {
+		var ftmp = fv;
+		fv = fu;
+		fu = ftmp;
+	}
+	
+	var min_depth = this.tree.num_nodes;
+	var lca = null;
+		
+	for (var j = fu; j <= fv; j++) {
+		if (this.tour.e[j] < min_depth) {
+			min_depth = this.tour.e[j];
+			lca = this.tour.e_map[this.tour.e[j]];
+		}
+		// console.log(j + ' ' + this.tour.e[j]);
+	}		
+		
+	// console.log(min_depth);
+	// console.log(lca.label);
+		
+	return lca;
+}
+
+//----------------------------------------------------------------------------------------
+// find LCA for nodes with labels
+LCA.prototype.find_for_labels = function(u_label, v_label) {
+
+	// get nodes with these labels
+	var u = this.tree.label_to_node_map[u_label];
+	var v = this.tree.label_to_node_map[v_label];
+	
+	return this.find_for_nodes(u, v);
+}
+
+//----------------------------------------------------------------------------------------
+// find LCA for nodes with labels
+LCA.prototype.find_path_distance = function(u, v) {
+
+	var mrca = this.find_for_nodes(u, v);
+	
+	var path = 0.0;
+	
+	var p = u;
+	while (p != mrca) {
+		path += p.edge_length;
+		p = p.ancestor;		
+	}
+	
+	p = v;
+	while (p != mrca) {
+		path += p.edge_length;
+		p = p.ancestor;
+	}	
+
+	return path;
+}
+
+
+
+
+
+//----------------------------------------------------------------------------------------
+// http://stackoverflow.com/questions/498970/how-do-i-trim-a-string-in-javascript
+if (!String.prototype.trim)
+{
+	String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+}
+
+//----------------------------------------------------------------------------------------
+
+function showtree(element_id)
+{
+    var t = new Tree();
+    var element = document.getElementById(element_id);
+    var newick = element.value;
+    newick = newick.trim(newick);
+	t.Parse(newick);
+
+	if (t.error != 0)
+	{
+		document.getElementById('message').innerHTML='Error parsing tree';
+	}
+	else
+	{
+		document.getElementById('message').innerHTML='Parsed OK';
+				
+		t.ComputeWeights(t.root);
+		
+
+		var selectmenu = document.getElementById('style');
+		var td = new PhylogramTreeDrawer();
+		//var td = new TreeDrawer();
+
+		
+		// clear existing diagram, if any
+		var svg = document.getElementById('svg');
+		while (svg.hasChildNodes()) 
+		{
+			svg.removeChild(svg.lastChild);
+		}
+		
+		
+		var g = document.createElementNS('http://www.w3.org/2000/svg','g');
+		g.setAttribute('id','viewport');
+		svg.appendChild(g);
+		
+		
+		td.Init(t, {svg_id: 'viewport', width:500, height:500, fontHeight:10, root_length:0.1} );
+		
+		td.CalcCoordinates();
+		td.Draw();
+		
+		// font size
+		var cssStyle = document.createElementNS('http://www.w3.org/2000/svg','style');
+		cssStyle.setAttribute('type','text/css');
+		
+		var font_size = Math.floor(td.settings.height/t.num_leaves);
+		font_size = Math.max(font_size, 1);
+		
+		var style=document.createTextNode("text{font-size:" + font_size + "px;}");
+		cssStyle.appendChild(style);
+		
+		svg.appendChild(cssStyle);
+
+		// label leaves...
+		
+		
+		var n = new NodeIterator(t.root);
+		var q = n.Begin();
+		while (q != null)
+		{
+			if (q.IsLeaf())
+			{
+				drawText('viewport', q.xy, q.label);
+			}
+			q = n.Next();
+		}
+		
+				// pan
+		$('svg').svgPan('viewport');
+		
+		
+		// label tree for LCA 
+		// Euler tour
+		// https://www.hackerrank.com/topics/lowest-common-ancestor
+
+
+
+		var lca = new LCA(t);
+		
+		//lca.find_for_labels('Hoplitis tuberculata_HQ948088.1','Hoplitis claviventris_KJ838228.1');
+		
+		 
+		
+		// bin data
+		
+		
+		// get range of possible values
+		{
+			// distance matrix
+			var max_path = 0;
+			
+			var n = t.num_nodes;
+			
+			for (var i = 1; i < n; i++) {			
+				var u = t.nodes[i];
+				if (u.IsLeaf()) {
+					for (var j = 0; j < i; j++) {					
+						var v = t.nodes[j];						
+							if (v.IsLeaf()) {
+								var d = lca.find_path_distance(u, v);
+								
+								max_path = Math.max(max_path, d);
+						}
+				
+					}
+				}
+			}
+			
+		
+		}		
+		
+		
+		
+			
+		var num_bins = 20;
+		var bin_size = max_path/num_bins;
+		
+		console.log('max path=' + max_path);
+		console.log('bin_size=' + bin_size);
+		console.log('max=' + Math.floor(max_path/bin_size));
+		
+		
+		
+		
+		
+		var bins = [];
+		
+		
+		for (var i = 0; i <= num_bins; i++) {
+			bins[i] = 0;
+		}
+		
+		
+		{
+			// distance matrix
+		
+			var n = t.num_nodes;
+			
+			for (var i = 1; i < n; i++) {
+			
+				var u = t.nodes[i];
+				
+				
+				if (u.IsLeaf()) {
+					//console.log(u.label);
+					
+					for (var j = 0; j < i; j++) {
+					
+						var v = t.nodes[j];
+						
+							if (v.IsLeaf()) {
+								//var mrca = lca.find_for_nodes(u, v);
+								
+								var d = lca.find_path_distance(u, v);
+								//console.log(d);
+								
+								// compute bin for value
+								var b = Math.floor(d/bin_size);
+								//console.log(b);
+								
+								bins[b]++;
+								
+								
+	
+						}
+				
+					}
+				}
+			}
+			
+		
+		}	
+		
+		for (var i = 0; i <= num_bins; i++) {
+			console.log(i + ' ' + bins[i]);
+		}
+		
+		var d = {};
+			
+			d.labels = [];
+			d.datasets = [];	
+			d.datasets [0] = {};
+			d.datasets [0].data = [];
+			d.datasets [0].backgroundColor = [];
+	
+		for (var i = 0; i <= num_bins; i++) {
+			d.labels.push(Number((i * bin_size).toPrecision(2)));
+			d.datasets [0].data.push(parseInt(bins[i]));
+			d.datasets [0].backgroundColor.push("rgb(192,192,192)");
+		}		
+	
+		var ctx = document.getElementById('chart');
+        
+ 
+    	var default_options = { title: { display: false }, legend: { display: false }, responsive: false };
+    	
+        if (myBarChart) {
+        	myBarChart.destroy();
+        }
+        myBarChart = new Chart(ctx, {
+    		type: 'bar',
+    		data: d,
+    		options: default_options
+		});	
+		
+		
+		
+
+	}
+	
+
+}
+
+</script>
+
+</body>
+</html>

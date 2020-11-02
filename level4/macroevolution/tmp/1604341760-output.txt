@@ -1,0 +1,46 @@
+
+
+************************************************************************************************
+*  d 8   C A L C U L A T I O N                                                                 *
+************************************************************************************************
+
+Number of informative fixnodes:   1
+Number of informative minnodes:   2
+Number of informative maxnodes:   0
+
+d8 tree    : ((((Rat:37.142857,Human:37.142857):185.714286,Platypus:222.857143):37.142857,(Ostrich:150.000000,Alligator:150.000000):110.000000):173.333333,Frog:433.333333);
+
+Ancestor of          Ancestor of          Name                        Age  #Terminals              MPL         Rate *      minage      maxage
+Rat                  Frog                 -                       433.333           6           46.667       0.107692           -           - 
+Rat                  Alligator            -                       260.000           5           28.000       0.107692       260.0       260.0 
+Rat                  Platypus             -                       222.857           3           24.000       0.107692       125.0           - 
+Rat                  Human                -                        37.143           2            4.000       0.107692           -           - 
+Ostrich              Alligator            -                       150.000           2           12.000       0.080000       150.0           - 
+
+
+  *) Rate = MPL / Age
+
+
+************************************************************************************************
+*  M P L  C A L C U L A T I O N                                                                *
+************************************************************************************************
+
+Clock test confidence: 0.950000
+Clock tests          : 5   (one for each node)
+Accepted             : 2
+Rejected             : 3
+
+MPL tree   : ((((Rat:4.000000,Human:4.000000):20.000000,Platypus:24.000000):4.000000,(Ostrich:12.000000,Alligator:12.000000):16.000000):18.666667,Frog:46.666667);
+
+Ancestor of          Ancestor of          Name                            MPL             #Terminals      Clock test: Acc/Rej
+Rat                  Frog                 -                        46.667 +/- 10.156               6      Acc
+Rat                  Alligator            -                        28.000 +/- 6.413                5      Rej, prob=0.000766
+Rat                  Platypus             -                        24.000 +/- 7.152                3      Acc
+Rat                  Human                -                         4.000 +/- 2.770                2      Rej, prob=0.033895
+Ostrich              Alligator            -                        12.000 +/- 4.797                2      Rej, prob=0.014306
+
+
+************************************************************************************************
+*  E N D  C A L C U L A T I O N                                                                *
+************************************************************************************************
+

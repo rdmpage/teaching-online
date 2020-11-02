@@ -1,0 +1,363 @@
+<html>
+<head>
+	<title>Dating trees</title>
+	<script src="jquery.js"></script>
+ 	<script src="treelib.js"></script>	
+ 	<script src="jquery-svgpan.js"></script>
+
+</head>
+<body style="padding:20px;">
+<a href="index.html">Home</a>
+
+<h1>Molecular clocks and dating trees</h1>
+
+
+<p>In this example we will use the <a href="https://www2.math.su.se/PATHd8/">PATHd8</a> 
+program to put dates onto molecular trees. The method is described in the paper <b>Estimating Divergence Times in Phylogenetic Trees Without a Molecular Clock</b> (<a href="https://doi.org/10.1080/10635150590947311">doi:10.1080/10635150590947311</a>).
+Given a molecular tree we put dates on node using the concept of the "most recent common ancestor" or MRCA. We pick two leaves (terminal taxa)
+and add the date for their MRCA. 
+</p>
+
+<h2>Step 1: Enter tree</h2>
+
+
+<!-- pathd8 example -->
+
+	<div>
+	<textarea id="newick" rows="10" cols=60" style="font-size:14px;">
+((((Rat:0.007148,Human:0.001808):0.024345,Platypus:0.016588):0.012920,(Ostrich:0.018119,Alligator:0.006232):0.004708):0.028037,Frog:0);
+	</textarea>
+	<button onclick="showtree('newick')">Show</button>
+	<p><span id="message"></span></p>
+
+	</div>
+	
+	<h3>Your input tree</h3>
+
+	<div style="width:600px;height:600px;background-color:white;border:1px solid rgb(228,228,228);padding:20px;">
+	<svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" height="600" width="600">
+		<g id="viewport">
+		</g>
+	</svg>
+	</div>
+
+
+
+
+<h2>Step 2: Add dates</h2>
+
+<p>To add dates you can pick two pairs of taxa and add 
+the date they last had a common ancestor. The date for the first pair is taken as a fixed date, the rest are minimum dates.</p>
+
+<div id="dates">
+
+	<div id="mrca">
+	</div>
+
+
+	
+	<div>
+	<button onclick="date_tree()">Go</button>
+	
+	</div>
+
+
+</div>
+
+
+<h2>Step 3: Output</h2>
+
+	<p><span id="message_result"></span></p>
+	<div id="result"></div>
+
+	
+	<div style="width:600px;height:600px;background-color:white;border:1px solid rgb(228,228,228);padding:20px;">
+	<svg id="svg_result" xmlns="http://www.w3.org/2000/svg" version="1.1" height="600" width="600">
+		<g id="viewport_result">
+		</g>
+	</svg>
+	</div>
+
+
+
+<script>
+
+//----------------------------------------------------------------------------------------
+// http://stackoverflow.com/questions/498970/how-do-i-trim-a-string-in-javascript
+if (!String.prototype.trim)
+{
+	String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+}
+
+//----------------------------------------------------------------------------------------
+function showtree(element_id)
+{
+    var t = new Tree();
+    var element = document.getElementById(element_id);
+    var newick = element.value;
+    newick = newick.trim(newick);
+	t.Parse(newick);
+
+	if (t.error != 0)
+	{
+		document.getElementById('message').innerHTML='Error parsing tree';
+	}
+	else
+	{
+		document.getElementById('message').innerHTML='Parsed OK';
+				
+		t.ComputeWeights(t.root);
+		
+
+		var selectmenu = document.getElementById('style');
+		var td = new PhylogramTreeDrawer();
+
+		
+		// clear existing diagram, if any
+		var svg = document.getElementById('svg');
+		while (svg.hasChildNodes()) 
+		{
+			svg.removeChild(svg.lastChild);
+		}
+		
+		
+		var g = document.createElementNS('http://www.w3.org/2000/svg','g');
+		g.setAttribute('id','viewport');
+		svg.appendChild(g);
+		
+		
+		td.Init(t, {svg_id: 'viewport', width:500, height:500, fontHeight:10, root_length:0.1} );
+		
+		td.CalcCoordinates();
+		td.Draw();
+		
+		// font size
+		var cssStyle = document.createElementNS('http://www.w3.org/2000/svg','style');
+		cssStyle.setAttribute('type','text/css');
+		
+		var font_size = Math.floor(td.settings.height/t.num_leaves);
+		font_size = Math.max(font_size, 1);
+		font_size = Math.min(14, font_size);
+		
+		var style=document.createTextNode("text{font-size:" + font_size + "px;}");
+		cssStyle.appendChild(style);
+		
+		svg.appendChild(cssStyle);
+
+		// label leaves...
+		
+		
+		var n = new NodeIterator(t.root);
+		var q = n.Begin();
+		while (q != null)
+		{
+			if (q.IsLeaf())
+			{
+				drawText('viewport', q.xy, q.label);
+			}
+			q = n.Next();
+		}
+		
+		//$('svg').svgPan('viewport');
+		
+		
+		// set up form for MRCA (have up to five dates)
+		
+		var labels = [];
+		
+		q = n.Begin();
+		while (q != null)
+		{
+			if (q.IsLeaf())
+			{
+				labels.push(q.label);
+			}
+			q = n.Next();
+		}	
+		
+		var html = '';
+		
+		for (var i = 0; i < 5; i++)	{
+			html += '<div>';
+			
+			html += '<select id="mrca' + i + '_left">';
+			html += '<option>---</option>';
+			for (var j = 0; j < labels.length; j++) {
+				html += '<option>' + labels[j] + '</option>';
+			}
+			
+			html += '</select>';
+
+			html += '<select id="mrca' + i + '_right">';
+			
+			html += '<option>---</option>';
+			
+			for (var j = 0; j < labels.length; j++) {
+				html += '<option>' + labels[j] + '</option>';
+			}
+			
+			
+			html += '</select>';
+			
+			
+			html += '<input id="mrca' + i + '_mya" type="text" placeholder="age of common ancestor">';
+		
+			html += '</div>';
+		
+		}
+		
+		document.getElementById('mrca').innerHTML = html;
+
+	
+		
+		
+		
+		
+
+	}
+	
+
+}
+
+
+//----------------------------------------------------------------------------------------
+function show_result_tree(newick)
+{
+    var t = new Tree();
+ 	t.Parse(newick);
+
+	if (t.error != 0)
+	{
+		document.getElementById('message_result').innerHTML='Error parsing tree';
+	}
+	else
+	{
+		document.getElementById('message_result').innerHTML='Parsed OK';
+				
+		t.ComputeWeights(t.root);
+		
+
+		var selectmenu = document.getElementById('style');
+		var td = new PhylogramTreeDrawer();
+
+		
+		// clear existing diagram, if any
+		var svg = document.getElementById('svg_result');
+		while (svg.hasChildNodes()) 
+		{
+			svg.removeChild(svg.lastChild);
+		}
+		
+		
+		var g = document.createElementNS('http://www.w3.org/2000/svg','g');
+		g.setAttribute('id','viewport_result');
+		svg.appendChild(g);
+		
+		
+		td.Init(t, {svg_id: 'viewport_result', width:500, height:500, fontHeight:10, root_length:0.1} );
+		
+		td.CalcCoordinates();
+		td.Draw();
+		
+		// font size
+		var cssStyle = document.createElementNS('http://www.w3.org/2000/svg','style');
+		cssStyle.setAttribute('type','text/css');
+		
+		var font_size = Math.floor(td.settings.height/t.num_leaves);
+		font_size = Math.max(font_size, 1);
+		font_size = Math.min(14, font_size);
+		
+		var style=document.createTextNode("text{font-size:" + font_size + "px;}");
+		cssStyle.appendChild(style);
+		
+		svg.appendChild(cssStyle);
+
+		// label leaves...
+		
+		
+		var n = new NodeIterator(t.root);
+		var q = n.Begin();
+		while (q != null)
+		{
+			if (q.IsLeaf())
+			{
+				drawText('viewport_result', q.xy, q.label);
+			}
+			q = n.Next();
+		}
+		
+		$('svg_result').svgPan('viewport_result');
+	}
+}
+
+
+//----------------------------------------------------------------------------------------
+function date_tree() {
+	// get values...
+	
+	var input = {};
+	
+	input.tree = document.getElementById('newick').value;
+	input.dates = [];
+	
+	var n = 5;
+	for (var i = 0; i < n; i++)
+	{
+		var s = {};
+		
+		
+		var e = null;
+		
+		e = document.getElementById('mrca' + i + '_left');
+		
+		s.left = e.options[e.selectedIndex].text;
+		
+		e = document.getElementById('mrca' + i + '_right');
+		s.right = e.options[e.selectedIndex].text;
+		
+		s.mya = document.getElementById('mrca' + i + '_mya').value;
+		
+		if (
+			(s.left != '---')
+			&& (s.right != '---')
+			&& (s.mya != '')
+		
+		) {
+			input.dates.push(s);
+		}
+	
+		
+	
+	}
+	
+	//alert(JSON.stringify(input));
+	
+	if (input.dates.length == 0) {
+		alert("Please add some dates!")
+	} else {
+		$.getJSON('http://direct.bionames.org/~rpage/pathd8/pathd8.php?data=' + encodeURIComponent(JSON.stringify(input)) + "&callback=?",
+			function(data){
+			//alert('hi')
+				//var newick = JSON.stringify(data);
+				$('#result').html(data.tree);
+				
+				// show tree...
+				show_result_tree(data.tree);
+				
+			}
+			);	
+	
+	}
+	
+	
+	
+
+
+
+
+}
+
+</script>
+
+</body>
+</html>
