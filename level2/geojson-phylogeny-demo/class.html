@@ -124,7 +124,7 @@
 					
 					var tree = data.tree;
 					
-					$.post('geojson-phylogeny/service.php', 
+					$.post('gj-phylogeny/service.php', 
 						{ nexus: tree }, 
 						function(data) {
 							//alert(data);
@@ -142,7 +142,7 @@
     function nexus() {
     	var tree = $('#nexus').val();
     	
-    	$.post('geojson-phylogeny/service.php', 
+    	$.post('gj-phylogeny/service.php', 
     		{ nexus: tree }, 
     		function(data) {
     			//alert(data);
