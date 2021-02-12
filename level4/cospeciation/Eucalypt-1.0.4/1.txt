@@ -1,0 +1,16 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = ((human,chimp),gorilla);
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = ((human,chimp),gorilla);
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+human: human,
+chimp: chimp,
+gorilla: gorilla	
+;
+END;

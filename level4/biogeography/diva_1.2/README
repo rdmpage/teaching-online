@@ -1,0 +1,16 @@
+Structure of the DIVA project:
+=======================================
+Folder          	Contains
+---------------------------------------------------------------------------------
+documentation 		manual for the DIVA and printout of help. 
+Examples		example files that you may try to test your installation
+Src			source code of the project. 
+
+Compilation:
+=======================================
+To compile the project type the following in your terminal (you need a C compiler installed on your system):
+>cd ./src
+>make
+As the result of compilation you should obtain ‘diva’ executable  which you should be able to run by typing:
+>./diva
+

@@ -1,0 +1,183 @@
+/** This is the family-level data set from: Enghoff, H. 1996. Historical
+/** biogeography of the holarctic: Area relationships, ancestral areas, and 
+/** dispersal of non-marine animals. Cladistics 11:223-263.
+
+
+
+tree lumbriculidae1 (((((((((((((1,2),3),4),5),6),7),8),(9,10)),
+11),12),13),(((14,15),16),17)),18); 
+distribution a abcd a d a d d cd acd abc d d abcd d b a c c; 
+optimize weight=0.33;
+
+tree lumbriculidae2 ((((((((((((1,2),3),4),5),6),7),8),((9,10),
+11)),12),13),(((14,15),16),17)),18);
+distribution a abcd a d a d d cd acd abc d d abcd d b a c c;
+optimize weight=0.33;
+
+tree lumbriculidae3 (((((((((((((1,2),3),4),5),6),7),8),9),
+(10,11)),12),13),(((14,15),16),17)),18);
+distribution a abcd a d a d d cd d abd abc d abcd d b a c c;
+optimize weight=0.33;
+
+tree antrodiaetidae (1,((2,3),(4,((5,6),7))));
+distribution a a b abd b a b;
+optimize;
+
+tree hypochilidae (1,(2,(3,(4,5))));
+distribution d a a a b;
+optimize;
+
+tree nemastomatoid (1,(2,(3,(4,5))));
+distribution c c a a d;
+optimize;
+
+tree ischyropsalid ((1,(2,(3,4))),(5,6));
+distribution c a bd ab abcd ad;
+optimize;
+
+tree eremaeidae (1,((2,(3,4)),(5,(6,(7,8)))));
+distribution abd c abcd d d d abd abcd;
+optimize;
+
+tree astacoidea ((1,2),(3,(4,5)));
+distribution c a d ab ab;
+optimize;
+
+tree crangonyctidae (1,(2,((3,4),(5,(6,7)))));
+distribution d abcd abcd c b abcd b;
+optimize;
+
+tree tingupidae ((1,2),(3,4));
+distribution ab d b cd;
+optimize;
+
+tree trichopolydesm (1,(2,3));
+distribution c bc a;
+optimize;
+
+tree nemasomatoid1 (1,(2,(3,(4,(5,(6,(7,(8,(9,(10,11))))))))));
+distribution a d d d bc d c d d a b;
+optimize weight=0.33;
+
+tree nemasomatoid2 (1,(2,(3,(4,(5,(6,((7,8),(9,(10,11)))))))));
+distribution a d d d bc d c d d a b;
+optimize weight=0.33;
+
+tree nemasomatoid3 (1,(2,(3,(4,(5,(6,(7,(8,(9,(10,11))))))))));
+distribution a d d d bc d d c d a b;
+optimize weight=0.33;
+
+tree blaniuloid ((1,2),(3,(4,(5,(6,7)))));
+distribution b c bd c c b c;
+optimize;
+
+tree spirobolidae ((1,2),(3,(4,(5,6))));
+distribution ab a a b b d;
+optimize;
+
+tree potamanthidae (1,(2,(3,(4,5))));
+distribution d b d d cd;
+optimize;
+
+tree nemouridae (((1,2),(3,4)),(((5,6),(7,8)),(((9,10),
+(11,12)),(13,(14,15)))));
+distribution a abcd cd d ab d abcd ab b ab c ab a b ab;
+optimize;
+
+tree pteronarcyid ((1,2),(3,(4,(5,6))));
+distribution d abd a ab bd a;
+optimize;
+
+tree leuctridae (1,((2,3),((4,5),(6,(7,8)))));
+distribution d abc abcd e abcd abcd a abcd;
+optimize;
+
+tree kermesidae (1,(2,((3,4),(5,(6,7)))));
+distribution d ab d a c abcd ab;
+optimize;
+
+tree raphidiidae (1,(2,((3,(4,(5,((6,7),(8,(9,(10,11))))))),
+(12,(13,(14,15))))));
+distribution a d c c c c cd c c c cd c c a d;
+optimize;
+
+tree inocelliidae (1,(2,(3,(4,5))));
+distribution c a a cd cd;
+optimize;
+
+tree brachycentrid (1,(2,((3,4),((5,6),(7,(8,9))))));
+distribution ad b a abcd c bcd abd a abd;
+optimize;
+
+tree uenoidae ((1,(2,3)),(4,(5,6)));
+distribution a a d c a abd;
+optimize;
+
+tree boreidae1 (1,(2,(3,(4,(5,(6,7))))));
+distribution a a abd ab acd a c;
+optimize weight=0.50;
+
+tree boreidae2 (1,(2,(3,(4,(5,(6,7))))));
+distribution a a ab abd acd a c;
+optimize weight=0.50;
+
+tree pachyneuridae (1,(2,3));
+distribution cd d a;
+optimize;
+
+tree osmeridae (1,(2,((3,4),(5,(6,(7,8))))));
+distribution ad abcd a d a abcd a ad;
+optimize;
+
+tree umbridae (1,(2,(3,4)));
+distribution a ad c b;
+optimize;
+
+tree esocidae (1,(2,(3,4)));
+distribution b b d abcd;
+optimize;
+
+tree catostomidae (1,((2,(3,(4,(5,(6,(7,8)))))),((9,10),
+(11,(12,(13,(14,(15,(16,(17,(18,19)))))))))));
+distribution bd b b b b b b ab d b a b a a a a a a ad;
+optimize;
+
+tree gasterosteif ((1,2),(3,(4,((5,6),(7,8)))));
+distribution d a c b abcd ab b abcd;
+optimize;
+
+tree percidae (1,(2,(3,(4,(5,6)))));
+distribution bcd c bc c c b;
+optimize;
+
+tree plethodontidae (1,(2,((3,(4,5)),(6,(7,8)))));
+distribution b b e a ac a ab ab;
+optimize;
+
+tree salamandridae (1,(2,(3,((4,(5,6)),(7,(8,(9,(10,11))))))));
+distribution c d d d b a c c d d c;
+optimize;
+
+tree emydidae (((1,2),(3,(4,5))),(6,(7,(8,(9,(10,11))))));
+distribution b c b a b b ab b b ab e;
+optimize;
+
+tree tetraonidae ((1,2),(3,(4,((5,6),(7,((8,9),(10,
+(11,(12,13)))))))));
+distribution a b a a cd d cd a abcd abd d cd ab;
+optimize;
+
+tree talpidae1 (1,(2,((3,(4,5)),(6,((7,8),(9,(10,(11,12))))))));
+distribution d c d d cd b d a b b b a;
+optimize weight=0.33;
+
+tree talpidae2 (1,((2,(3,(4,5))),(6,((7,8),(9,(10,(11,12)))))));
+distribution d c d d cd b d a b b b a;
+optimize weight=0.33;
+
+tree talpidae3 (1,((2,(3,4)),(5,(6,((7,8),(9,(10,(11,12))))))));
+distribution d d d cd c b d a b b b a;
+optimize weight=0.33;
+
+return;
+

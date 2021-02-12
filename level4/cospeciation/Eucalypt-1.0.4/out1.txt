@@ -1,0 +1,19 @@
+#--------------------
+#Host tree          = ((human,chimp)!H1,gorilla)!H0
+#Parasite tree      = ((human,chimp)!P1,gorilla)!P0
+#Host tree size     = 5
+#Parasite tree size = 5
+#Leaf mapping       = {human=human, gorilla=gorilla, chimp=chimp}
+#--------------------
+#Co-speciation cost = -1.000
+#Duplication cost   = 1.000
+#Host-switch cost   = 1.000
+#Loss cost          = 1.000
+#Maximum jump       = No limit
+#Optimum cost       = -2.000
+#--------------------
+#Root mapping = !P0@!H0
+!P0@!H0, !P1@!H1, human@human, chimp@chimp, gorilla@gorilla
+#Number of solutions = 1
+#--------------------
+#Total number of solutions = 1

@@ -1,0 +1,71 @@
+/* Data from Backlund, Anders (1996). Phylogeny of the Dipsacales. Comprehensive
+/* Summary. Doctoral thesis from Department of Systematic Botany, Uppsala
+/* University.
+/* This data set contains 15 different areas, the maximum number allowed in DIVA
+
+
+tree DIPS (1,((2,3),(((((((((4,15),((6,8),10)),(((((16,(18,19)),17),20),(25,(((((((26,30),32),((33,35),34)),(27,(31,37))),36),28),29))),(21,(22,23)))),(5,14)),((7,(12,13)),(9,11))),(46,47)),((((((((39,40),(41,55)),54),((42,57),53)),58),56),(((48,50),(49,51)),52)),(43,(44,45)))),38),24))) ;
+
+distribution 
+
+1  efgjkl
+2  f
+3  f
+4  efglm
+5  l
+6  f
+7  ef
+8  f
+9  efg
+10  fgkl
+11  defgjklm
+12  fl
+13  efgl
+14  def
+15  efg
+16  efghjk
+17  gjk
+18  efghj
+19  fghj
+20  ghjk
+21  fg
+22  fg
+23  efgj
+24  bdefghjkl
+25  defg
+26  o
+27  jk
+28  fg
+29  efgj
+30  o
+31  lm
+32  o
+33  no
+34  jk
+35  no
+36  fgjk
+37  gjk
+38  defgjklmo
+39  hjkn
+40  h
+41  cdeflmno
+42  d
+43  h
+44  h
+45  h
+46  o
+47  o
+48  b
+49  ab
+50  no
+51  i
+52  abcde
+53  ao
+54  i
+55  abcdefgh
+56  bcdefg
+57  fg
+58  o;
+
+return;
+

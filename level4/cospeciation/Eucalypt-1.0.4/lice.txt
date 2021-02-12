@@ -1,0 +1,25 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = ((((grebes,flamingos),((((shearwater,penguins),loons),herons),comorants)),shorebirds),(ducks,gamefowl));
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = (((((Aquanirmus,Anaticola_flamingo),Anaticola_duck),(Halipeurus,(((Austrogonoides,Craspedonirmus),Acidoproctus),(Quadriceps,Oxylipeurus)))),Ardeicola),Pectinopygus);
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+Aquanirmus : grebes,
+Anaticola_flamingo : flamingos,
+Anaticola_duck : ducks,
+Halipeurus : shearwater,
+Austrogonoides : penguins,
+Craspedonirmus : loons,
+Acidoproctus : ducks,
+Quadriceps : shorebirds,
+Oxylipeurus : gamefowl,
+Ardeicola : herons,
+Pectinopygus : comorants
+	
+;
+END;

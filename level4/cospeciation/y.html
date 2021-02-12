@@ -1,0 +1,100 @@
+<!--PLACEHOLDER 1-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>CophyTrees - Cophylogeny Viewer</title>
+<meta charset="utf-8">
+<script>
+var error="";
+</script>
+
+<!--PLACEHOLDER 2-->
+<link rel="stylesheet" href="http://eucalypt.gforge.inria.fr/viewer.css" type="text/css">
+
+</head>
+
+<body> 
+    <!-- Page contents -->
+    <div id="titleBox">
+       <h2 style="text-align:center; font-family:sans"> <a href="http://eucalypt.gforge.inria.fr/index.html"><img style="vertical-align:-18px; margin-right:30px" src="images/logo_eucalypt.png" height="80px"></a> CophyTrees</h2>
+       <i>A cophylogeny viewer for Eucalypt</i>
+    </div>
+    <div id = "menubar">
+       <a href="viewer.html" id="back" title="CophyTrees home" ><img src="http://eucalypt.gforge.inria.fr/images/btn-back.svg" ></a>
+       <a href="#" id="reset" title="Reset the view" onclick="forest.reset()"><img src="http://eucalypt.gforge.inria.fr/images/btn-reload.svg" ></a>
+       <a href="#" id="save" title="Download this image as SVG" download="CophyTrees.svg" target="blank"><img src="http://eucalypt.gforge.inria.fr/images/btn-svg.svg" ></a>
+       <a href="#"  id="savePng" title="Download this image as PNG"  ><img src="http://eucalypt.gforge.inria.fr/images/btn-png.svg" ></a>
+    </div>
+    <span id="svgWindow"></span>
+    <div style=" overflow:auto;max-height:300px;"><div id="TreeSelector"></div></div>
+    <canvas width="2000" height="1200" scale="2" style="display:none"></canvas>
+     
+    
+    <!-- Scripts and Data  --> 
+ 
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://eucalypt.gforge.inria.fr/trees.js" ></script>
+<script> var InputData = [
+ '#--------------------',
+ '#Host tree          = ((((grebes,flamingos)!H3,((((shearwater,penguins)!H9,loons)!H8,herons)!H7,comorants)!H6)!H2,shorebirds)!H1,(ducks,gamefowl)!H16)!H0',
+ '#Parasite tree      = (((((Aquanirmus,Anaticolaflamingo)!P4,Anaticoladuck)!P3,(Halipeurus,(((Austrogonoides,Craspedonirmus)!P12,Acidoproctus)!P11,(Quadriceps,Oxylipeurus)!P16)!P10)!P8)!P2,Ardeicola)!P1,Pectinopygus)!P0',
+ '#Host tree size     = 19',
+ '#Parasite tree size = 21',
+ '#Leaf mapping       = {Aquanirmus=grebes, Oxylipeurus=gamefowl, Quadriceps=shorebirds, Craspedonirmus=loons, Austrogonoides=penguins, Acidoproctus=ducks, Ardeicola=herons, Anaticoladuck=ducks, Anaticolaflamingo=flamingos, Pectinopygus=comorants, Halipeurus=shearwater}',
+ '#--------------------',
+ '#Co-speciation cost = -1.000',
+ '#Duplication cost   = 1.000',
+ '#Host-switch cost   = 1.000',
+ '#Loss cost          = 1.000',
+ '#Maximum jump       = No limit',
+ '#Optimum cost       = 3.000',
+ '#--------------------',
+ '#Root mapping = !P0@!H6',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@!H8, Halipeurus@shearwater, !P10@loons, !P16@shorebirds, Oxylipeurus@gamefowl, Quadriceps@shorebirds, !P11@loons, Acidoproctus@ducks, !P12@loons, Austrogonoides@penguins, Craspedonirmus@loons, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@!H8, Halipeurus@shearwater, !P10@loons, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, !P11@loons, Acidoproctus@ducks, !P12@loons, Austrogonoides@penguins, Craspedonirmus@loons, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@!H8, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@!H9, Halipeurus@shearwater, !P10@penguins, !P16@shorebirds, Oxylipeurus@gamefowl, Quadriceps@shorebirds, !P11@penguins, Acidoproctus@ducks, !P12@penguins, Craspedonirmus@loons, Austrogonoides@penguins, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@!H9, Halipeurus@shearwater, !P10@penguins, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, !P11@penguins, Acidoproctus@ducks, !P12@penguins, Craspedonirmus@loons, Austrogonoides@penguins, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@!H9, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@shearwater, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@!H8, Halipeurus@shearwater, !P10@loons, !P16@shorebirds, Oxylipeurus@gamefowl, Quadriceps@shorebirds, !P11@loons, Acidoproctus@ducks, !P12@loons, Austrogonoides@penguins, Craspedonirmus@loons, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@!H8, Halipeurus@shearwater, !P10@loons, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, !P11@loons, Acidoproctus@ducks, !P12@loons, Austrogonoides@penguins, Craspedonirmus@loons, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@!H8, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@!H9, Halipeurus@shearwater, !P10@penguins, !P16@shorebirds, Oxylipeurus@gamefowl, Quadriceps@shorebirds, !P11@penguins, Acidoproctus@ducks, !P12@penguins, Craspedonirmus@loons, Austrogonoides@penguins, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@!H9, Halipeurus@shearwater, !P10@penguins, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, !P11@penguins, Acidoproctus@ducks, !P12@penguins, Craspedonirmus@loons, Austrogonoides@penguins, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@!H9, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H8, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@shearwater, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H9, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@!H9, Halipeurus@shearwater, !P10@penguins, !P16@shorebirds, Oxylipeurus@gamefowl, Quadriceps@shorebirds, !P11@penguins, Acidoproctus@ducks, !P12@penguins, Craspedonirmus@loons, Austrogonoides@penguins, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H9, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@!H9, Halipeurus@shearwater, !P10@penguins, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, !P11@penguins, Acidoproctus@ducks, !P12@penguins, Craspedonirmus@loons, Austrogonoides@penguins, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H9, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@!H9, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H9, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@shearwater, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H9, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@!H9, Halipeurus@shearwater, !P10@penguins, !P16@shorebirds, Oxylipeurus@gamefowl, Quadriceps@shorebirds, !P11@penguins, Acidoproctus@ducks, !P12@penguins, Craspedonirmus@loons, Austrogonoides@penguins, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H9, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@!H9, Halipeurus@shearwater, !P10@penguins, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, !P11@penguins, Acidoproctus@ducks, !P12@penguins, Craspedonirmus@loons, Austrogonoides@penguins, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H9, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@!H9, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@!H9, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@shearwater, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@shearwater, !P3@!H3, Anaticoladuck@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, !P8@shearwater, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '!P0@!H6, !P1@!H7, !P2@shearwater, !P3@ducks, !P4@!H3, Aquanirmus@grebes, Anaticolaflamingo@flamingos, Anaticoladuck@ducks, !P8@shearwater, !P10@!H16, !P11@ducks, !P12@!H8, Austrogonoides@penguins, Craspedonirmus@loons, Acidoproctus@ducks, !P16@gamefowl, Quadriceps@shorebirds, Oxylipeurus@gamefowl, Halipeurus@shearwater, Ardeicola@herons, Pectinopygus@comorants',
+ '#Number of solutions = 24',
+ '#--------------------',
+ '#Total number of solutions = 24',
+''].join('\n'); </script> 
+<script>
+
+var forest= cophyloForest();
+
+forest.svgWindow("#svgWindow").treeSelector("#TreeSelector").size([1000,600]);
+
+defineSaveButton(d3.select("#save"));
+defineSavePngButton(d3.select("#savePng"));
+
+if (typeof InputData== "undefined") { 
+  d3.select("body").append("div").attr("class","msgBox").style("position", "absolute").style("top",0).style("border-radius", "5px").html(error+(error.length>0?"<br>":"")+ "Displaying the <a href=\"default\">demonstration</a> file") 
+  d3.text("default", function (err, d) {
+     forest.open(d)
+  })
+} else {
+  forest.open(InputData)
+}
+</script>
+</body>
+</html>

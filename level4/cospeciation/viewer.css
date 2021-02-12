@@ -1,0 +1,63 @@
+body {
+ text-align:center;
+ background-color:#FEFFF8;
+}
+
+#menubar {
+  position: absolute;
+  left: 0px;
+  width:40px;
+  display:inline;
+}
+#menubar a {
+ display:block;
+ padding:5px;
+ padding-right:33px;
+ margin:2px;
+ border:1px solid #ccc;
+ border-radius: 3px;
+ background-color:#E2E7D7;
+}
+#menubar a:hover {
+  background-color:#f2ffef;
+  border:1px solid #9a8;
+}
+#menubar img {
+ width:28px;
+ display:block;
+ height:20px;
+}
+#svgWindow {
+ margin-left:40px;
+ margin-right:40px;
+}
+#titleBox {
+  margin-top:40px;
+  margin-bottom:15px
+}
+  
+.msgBox {
+  width:60%;
+  margin:0 20%;
+  color:#2A5A11;
+  padding:2px;
+  
+  background-color:#D2D7C7;
+  border:1px solid #000;
+
+}
+.Pnode text {
+   display:none;   
+}
+.Pnode:hover text {
+   display:inline;
+}
+svg text { 
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor:default;
+}

@@ -1,0 +1,13 @@
+/* Data from: Nordlander, G., Z. Liu, and F. Ronquist. 1996. Phylogeny and historical
+/* biogeography of the cynipoid wasp family Ibaliidae (Hymenoptera). Systematic
+/* Entomology 21:151-166.
+/*
+/* This is the first published DIVA analysis
+
+
+tree shortest (1,((((2,3),4),(5,6)),((((((7,8),9),10),11),12),(13,((14,15),(16,(17,(18,19))))))));
+distribution e d d d d d d d d d b cd d abcd a a a a abcd;
+optimize;
+optimize maxareas=4;
+
+return;
