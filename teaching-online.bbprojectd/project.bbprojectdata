@@ -6,6 +6,7 @@
 	<array>
 		<string>AA01EADF-4784-4CA1-AD9B-A97CF0297D60</string>
 		<string>63465797-45D1-4D2F-AFD8-D04EC32683ED</string>
+		<string>D87231BF-65C0-4E3A-8DBA-F1FF91212A4E</string>
 		<string>D6A6EEEB-0C27-4DA9-B5C5-A6B205915243</string>
 		<string>30C058C6-9852-4240-8ABD-59E017C56FEC</string>
 	</array>
@@ -200,6 +201,54 @@
 			</dict>
 			<key>ItemName</key>
 			<string>level4</string>
+			<key>ItemType</key>
+			<string>FolderReference</string>
+			<key>UserOverrideItemName</key>
+			<true/>
+		</dict>
+		<key>D87231BF-65C0-4E3A-8DBA-F1FF91212A4E</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9va+QCAAAAAAQQMAAAAJsS2SEPB58PcF0CwXYm0wVT
+				36e9G4WL+xoKmUgxC2EO4AEAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAABQAA
+				AAEBAABTaXRlcwAAAA8AAAABAQAAdGVhY2hpbmctb25s
+				aW5lAAYAAAABAQAAbGV2ZWwyAAAUAAAAAQYAABAAAAAg
+				AAAAMAAAAEAAAABYAAAACAAAAAQDAAAQZwIAAAAAAAgA
+				AAAEAwAAhXQNAAAAAAAIAAAABAMAAARWTAAAAAAACAAA
+				AAQDAACGuwMFAwAAAAgAAAAEAwAA4hAJBgMAAAAUAAAA
+				AQYAAIQAAACUAAAApAAAALQAAADEAAAACAAAAAAEAABB
+				wutc7yKa1BgAAAABAgAAAgAAAAAAAAAPAAAAAAAAAAAA
+				AAAAAAAACAAAAAQDAAADAAAAAAAAAAQAAAADAwAA9QEA
+				AAgAAAABCQAAZmlsZTovLy8MAAAAAQEAAE1hY2ludG9z
+				aCBIRAgAAAAEAwAAAOAEA2kAAAAIAAAAAAQAAEG+3V1i
+				AAAAJAAAAAEBAAAyNUU0Mjg2RC03MTJDLTM4OTktQjQz
+				Ri01RDNGNkE4QkQxMjEYAAAAAQIAAIEAAAABAAAA7xMA
+				AAEAAAAAAAAAAAAAAAEAAAABAQAALwAAAAAAAAABBQAA
+				zAAAAP7///8BAAAAAAAAABAAAAAEEAAAaAAAAAAAAAAF
+				EAAA1AAAAAAAAAAQEAAAAAEAAAAAAABAEAAA8AAAAAAA
+				AAACIAAAzAEAAAAAAAAFIAAAPAEAAAAAAAAQIAAATAEA
+				AAAAAAARIAAAgAEAAAAAAAASIAAAYAEAAAAAAAATIAAA
+				cAEAAAAAAAAgIAAArAEAAAAAAAAwIAAA2AEAAAAAAAAB
+				wAAAIAEAAAAAAAARwAAAIAAAAAAAAAASwAAAMAEAAAAA
+				AAAQ0AAABAAAAAAAAAA=
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/rpage/Sites/teaching-online/level2/</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./level2</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>level2</string>
 			<key>ItemType</key>
 			<string>FolderReference</string>
 			<key>UserOverrideItemName</key>

@@ -7,13 +7,47 @@
 	<key>ExpandedEditorWidth:rpage:displays([(0, 0), (1440, 900)]:[(-1920, 0), (1920, 1080)])</key>
 	<integer>764</integer>
 	<key>ExpandedItems:rpage</key>
-	<array>
-		<string>D6A6EEEB-0C27-4DA9-B5C5-A6B205915243</string>
-	</array>
+	<array/>
 	<key>FileFilterMode:rpage</key>
 	<integer>0</integer>
 	<key>OpenDocuments:rpage</key>
 	<array>
+		<dict>
+			<key>BookmarkData</key>
+			<data>
+			Ym9vayQDAAAAAAQQMAAAAIdUF86S2W5RxQ7/LOO4kOJxpWiP58UQ
+			J+LYIupa8cTNFAIAAAQAAAADAwAAAAgAKAUAAAABAQAAVXNlcnMA
+			AAAFAAAAAQEAAHJwYWdlAAAABQAAAAEBAABTaXRlcwAAAA8AAAAB
+			AQAAdGVhY2hpbmctb25saW5lAAoAAAABAQAAaW5kZXguaHRtbAAA
+			FAAAAAEGAAAQAAAAIAAAADAAAABAAAAAWAAAAAgAAAAEAwAAEGcC
+			AAAAAAAIAAAABAMAAIV0DQAAAAAACAAAAAQDAAAEVkwAAAAAAAgA
+			AAAEAwAAhrsDBQMAAAAIAAAABAMAACTDAwUDAAAAFAAAAAEGAACI
+			AAAAmAAAAKgAAAC4AAAAyAAAAAgAAAAABAAAQcKW87ZgzasYAAAA
+			AQIAAAEAAAAAAAAADwAAAAAAAAAAAAAAAAAAAAgAAAAEAwAAAwAA
+			AAAAAAAEAAAAAwMAAPUBAAAIAAAAAQkAAGZpbGU6Ly8vDAAAAAEB
+			AABNYWNpbnRvc2ggSEQIAAAABAMAAADgBANpAAAACAAAAAAEAABB
+			vt1dYgAAACQAAAABAQAAMjVFNDI4NkQtNzEyQy0zODk5LUI0M0Yt
+			NUQzRjZBOEJEMTIxGAAAAAECAACBAAAAAQAAAO8TAAABAAAAAAAA
+			AAAAAAABAAAAAQEAAC8AAAAAAAAAAQUAABoAAAABAQAATlNVUkxE
+			b2N1bWVudElkZW50aWZpZXJLZXkAAAQAAAADAwAAbnoBANgAAAD+
+			////AQAAAAAAAAARAAAABBAAAGwAAAAAAAAABRAAANgAAAAAAAAA
+			EBAAAAQBAAAAAAAAQBAAAPQAAAAAAAAAAiAAANABAAAAAAAABSAA
+			AEABAAAAAAAAECAAAFABAAAAAAAAESAAAIQBAAAAAAAAEiAAAGQB
+			AAAAAAAAEyAAAHQBAAAAAAAAICAAALABAAAAAAAAMCAAANwBAAAA
+			AAAAAcAAACQBAAAAAAAAEcAAACAAAAAAAAAAEsAAADQBAAAAAAAA
+			ENAAAAQAAAAAAAAA5AEAgAgCAAAAAAAA
+			</data>
+			<key>FileURL</key>
+			<string>file:///Users/rpage/Sites/teaching-online/index.html</string>
+			<key>HasSecurityScope</key>
+			<true/>
+			<key>RelativePath</key>
+			<string>./index.html</string>
+			<key>TypeID</key>
+			<string>_CFileLocator</string>
+			<key>Version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>BookmarkData</key>
 			<data>
@@ -666,42 +700,6 @@
 		<dict>
 			<key>BookmarkData</key>
 			<data>
-			Ym9vayQDAAAAAAQQMAAAAIdUF86S2W5RxQ7/LOO4kOJxpWiP58UQ
-			J+LYIupa8cTNFAIAAAQAAAADAwAAAAgAKAUAAAABAQAAVXNlcnMA
-			AAAFAAAAAQEAAHJwYWdlAAAABQAAAAEBAABTaXRlcwAAAA8AAAAB
-			AQAAdGVhY2hpbmctb25saW5lAAoAAAABAQAAaW5kZXguaHRtbAAA
-			FAAAAAEGAAAQAAAAIAAAADAAAABAAAAAWAAAAAgAAAAEAwAAEGcC
-			AAAAAAAIAAAABAMAAIV0DQAAAAAACAAAAAQDAAAEVkwAAAAAAAgA
-			AAAEAwAAhrsDBQMAAAAIAAAABAMAACTDAwUDAAAAFAAAAAEGAACI
-			AAAAmAAAAKgAAAC4AAAAyAAAAAgAAAAABAAAQcKW87ZgzasYAAAA
-			AQIAAAEAAAAAAAAADwAAAAAAAAAAAAAAAAAAAAgAAAAEAwAAAwAA
-			AAAAAAAEAAAAAwMAAPUBAAAIAAAAAQkAAGZpbGU6Ly8vDAAAAAEB
-			AABNYWNpbnRvc2ggSEQIAAAABAMAAADgBANpAAAACAAAAAAEAABB
-			vt1dYgAAACQAAAABAQAAMjVFNDI4NkQtNzEyQy0zODk5LUI0M0Yt
-			NUQzRjZBOEJEMTIxGAAAAAECAACBAAAAAQAAAO8TAAABAAAAAAAA
-			AAAAAAABAAAAAQEAAC8AAAAAAAAAAQUAABoAAAABAQAATlNVUkxE
-			b2N1bWVudElkZW50aWZpZXJLZXkAAAQAAAADAwAAbnoBANgAAAD+
-			////AQAAAAAAAAARAAAABBAAAGwAAAAAAAAABRAAANgAAAAAAAAA
-			EBAAAAQBAAAAAAAAQBAAAPQAAAAAAAAAAiAAANABAAAAAAAABSAA
-			AEABAAAAAAAAECAAAFABAAAAAAAAESAAAIQBAAAAAAAAEiAAAGQB
-			AAAAAAAAEyAAAHQBAAAAAAAAICAAALABAAAAAAAAMCAAANwBAAAA
-			AAAAAcAAACQBAAAAAAAAEcAAACAAAAAAAAAAEsAAADQBAAAAAAAA
-			ENAAAAQAAAAAAAAA5AEAgAgCAAAAAAAA
-			</data>
-			<key>FileURL</key>
-			<string>file:///Users/rpage/Sites/teaching-online/index.html</string>
-			<key>HasSecurityScope</key>
-			<true/>
-			<key>RelativePath</key>
-			<string>./index.html</string>
-			<key>TypeID</key>
-			<string>_CFileLocator</string>
-			<key>Version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>BookmarkData</key>
-			<data>
 			Ym9va0wDAAAAAAQQMAAAACzG43Dj9WdApEjygfGvXIy2GMnkq5Tf
 			/HajYikzkz6PPAIAAAQAAAADAwAAAAgAKAUAAAABAQAAVXNlcnMA
 			AAAFAAAAAQEAAHJwYWdlAAAABQAAAAEBAABTaXRlcwAAAA8AAAAB
@@ -1013,7 +1011,7 @@
 	<array>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1062,7 +1060,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1108,7 +1106,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1152,7 +1150,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1199,7 +1197,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1244,7 +1242,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1289,7 +1287,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1334,7 +1332,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1380,7 +1378,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1426,7 +1424,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1472,7 +1470,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1518,7 +1516,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1564,7 +1562,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1610,7 +1608,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1655,7 +1653,7 @@
 		</dict>
 		<dict>
 			<key>Date</key>
-			<date>2021-02-12T13:27:53Z</date>
+			<date>2021-02-12T15:45:45Z</date>
 			<key>Location</key>
 			<dict>
 				<key>BookmarkData</key>
@@ -1708,6 +1706,6 @@
 	<key>ViewSplitterPosition:rpage</key>
 	<real>0.20992761850357056</real>
 	<key>WindowFrame:rpage:displays([(0, 0), (1440, 900)]:[(-1920, 0), (1920, 1080)])</key>
-	<string>rect(45,-1865,900,-898)</string>
+	<string>rect(168,-1066,1023,-99)</string>
 </dict>
 </plist>
