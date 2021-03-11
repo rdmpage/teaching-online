@@ -41,7 +41,7 @@ if ($url != '')
 	
 	$content = get($url, 'iphylo');
 	
-	echo $content;
+	//echo $content;
 	
 	// classify
 	
