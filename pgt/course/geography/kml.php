@@ -83,7 +83,7 @@ function points2kml($text)
 	{
 		$kml .= '<Placemark><styleUrl>#whiteBall</styleUrl>';
 		
-		$kml .= '<name>' . $count++ . '</name>';
+		$kml .= '<name>' . 'Point ' . $count . '</name>';
 		$kml .= '<description>' . format_decimal_latlon($pt[0],$pt[1]) . '</description>';
 		
 		$kml .= '<Point>';
@@ -92,6 +92,8 @@ function points2kml($text)
 		$kml .= '</Point>';
 		
 		$kml .= '</Placemark>';
+		
+		$count++;
 	}
 
 
@@ -134,11 +136,12 @@ else
 </head>
 <body>
 <h1>Make a KML file</h1>
-<p>Paste in some latitude and longitude coordinates, one pair per row</p>
+<p>Paste in some latitude and longitude coordinates, one pair per row.<br />Coordinates MUST be decimal
+numbers, and use -ve for W and S.</p>
 <form method="post" action="kml.php">
-	<textarea id="points" name="points" rows="30" cols="60"></textarea>
+	<textarea id="points" name="points" rows="10" cols="60"></textarea>
 	<br/>
-	<input type="submit" value="Go"></input>
+	<button style="font-size: 16px;background:blue;color:white;" type="submit" value="Submit">Make KML file</button>
 </form>
 
 
