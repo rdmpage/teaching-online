@@ -1,0 +1,228 @@
+<html>
+<head>
+	<title>Newick tree descriptions</title>
+
+	<script src="jquery.js"></script>
+    <script src="jquery-svgpan.js"></script>
+	<script src="treelib.js"></script>	
+</head>
+<body>
+<a href="index.html">Home</a>
+<h1>Understanding Newick tree descriptions</h1>
+
+<div style="text-align:center"><img src="treedescription.png"></div>
+
+<p>Trees can be described using a simple nested-parernthese format known as the <a href="http://en.wikipedia.org/wiki/Newick_format">Newick format</a>. Use the viewer below to experiment with this format.</p>
+
+<div class="example">
+	<p><b>Paste of type in a Newick format tree description. Pick a tree style, then press "Show"</b></p>
+	<p>If you don't get a tree, where are a few rules to check:
+	<ul>
+	<li>The tree has to end in a semi-colon ";"</li>
+	<li>The number of left ( and right ) parentheses must be the same</li>
+	</ul>
+	<div>
+	<textarea id="newick" rows="10" cols=60" style="font-size:14px;">(orang,(gorilla,(chimp,human)));</textarea>
+	<br/>
+	<select id="style">
+		<option value="cladogram">Cladogram</option>
+		<option value="rectanglecladogram">Rectangular cladogram</option>
+		<option value="phylogram">Phylogram</option>
+		<option value="circle">Circle tree</option>
+		<option value="circlephylogram">Circle phylogram</option>
+	</select>
+	<button onclick="showtree('newick')">Show</button>
+	</div>
+
+	<p><span id="message"></span></p>
+	<p><b>You can click and drag to move the tree around</b></p>
+	<div style="width:500px;height:500px;background-color:white;border:1px solid rgb(228,228,228);">
+	<svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" height="500" width="500">
+		<g id="viewport">
+		</g>
+	</svg>
+	</div>
+	
+	<h3>Some examples to try</h3>
+	<div>
+		<h4>Vertebrates</h4>
+		<p>(((EELA:0.150276,CONGERA:0.213019):0.230956,(EELB:0.263487,CONGERB:0.202633):0.246917):0.094785,((CAVEFISH:0.451027,(GOLDFISH:0.340495,ZEBRAFISH:0.390163):0.220565):0.067778,((((((NSAM:0.008113,NARG:0.014065):0.052991,SPUN:0.061003,(SMIC:0.027806,SDIA:0.015298,SXAN:0.046873):0.046977):0.009822,(NAUR:0.081298,(SSPI:0.023876,STIE:0.013652):0.058179):0.091775):0.073346,(MVIO:0.012271,MBER:0.039798):0.178835):0.147992,((BFNKILLIFISH:0.317455,(ONIL:0.029217,XCAU:0.084388):0.201166):0.055908,THORNYHEAD:0.252481):0.061905):0.157214,LAMPFISH:0.717196,((SCABBARDA:0.189684,SCABBARDB:0.362015):0.282263,((VIPERFISH:0.318217,BLACKDRAGON:0.109912):0.123642,LOOSEJAW:0.3971):0.287152):0.140663):0.206729):0.222485,(COELACANTH:0.558103,((CLAWEDFROG:0.441842,SALAMANDER:0.299607):0.135307,((CHAMELEON:0.771665,((PIGEON:0.150909,CHICKEN:0.172733):0.082163,ZEBRAFINCH:0.099172):0.272338):0.014055,((BOVINE:0.167569,DOLPHIN:0.15745):0.104783,ELEPHANT:0.166557):0.367205):0.050892):0.114731):0.295021);</p>
+		
+		<h4>Flytrap</h4>
+		<p>(((Strepsipte:0.188059,(Meloe:0.018443,Tenebrio:0.012183):0.006383):0.005577,((((Aedes:0.185008,Drosophila:0.006029):0.148335,Polistes:0.006348):0.006919,((Flea:0.008124,Scorpionfl:0.011345):0.008618,Sawfly:0.007643):0.000352):0.000381,(Lacewing:0.002145,Antlion:0.007330):0.011423):-1.840e-05):0.031824,(OUU06478:0.015625,PSU06480:0.008172):0);</p>
+		
+		<h4>Primates</h4>
+		<p>(((Gorilla_gorilla:11.0,(Homo_sapiens:8.6,(Pan_paniscus:2.5,Pan_troglodytes:2.5):6.1):2.4):7.4,Pongo_pygmaeus:18.4):3.2,(((((Hylobates_agilis:3.1,Hylobates_lar:3.1,Hylobates_moloch:3.1,Hylobates_muelleri:3.1,Hylobates_pileatus:3.1):1.2,Hylobates_klossii:4.3):2.4,Hylobates_hoolock:6.7):0.1,Hylobates_syndactylus:6.8):0.1,((Hylobates_concolor:2.8,Hylobates_leucogenys:2.8):3.7,Hylobates_gabriellae:6.5):0.4):14.7);</p>
+	</div>
+	
+	
+<script>
+
+// http://stackoverflow.com/questions/498970/how-do-i-trim-a-string-in-javascript
+if (!String.prototype.trim)
+{
+	String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+}
+
+function showtree(element_id)
+{
+    var t = new Tree();
+    var element = document.getElementById(element_id);
+    var newick = element.value;
+    newick = newick.trim(newick);
+	t.Parse(newick);
+
+	if (t.error != 0)
+	{
+		document.getElementById('message').innerHTML='Error parsing tree';
+	}
+	else
+	{
+		document.getElementById('message').innerHTML='Parsed OK';
+				
+		t.ComputeWeights(t.root);
+		
+		var td = null;
+		
+		var selectmenu = document.getElementById('style');
+		var drawing_type = (selectmenu.options[selectmenu.selectedIndex].value);
+		
+		switch (drawing_type)
+		{
+			case 'rectanglecladogram':
+				td = new RectangleTreeDrawer();
+				break;
+		
+			case 'phylogram':
+				if (t.has_edge_lengths)
+				{
+					td = new PhylogramTreeDrawer();
+				}
+				else
+				{
+					td = new RectangleTreeDrawer();
+				}
+				break;
+				
+			case 'circle':
+				td = new CircleTreeDrawer();
+				break;
+				
+			case 'circlephylogram':
+				if (t.has_edge_lengths)
+				{
+					td = new CirclePhylogramDrawer();
+				}
+				else
+				{
+					td = new CircleTreeDrawer();
+				}
+				break;
+				
+			case 'cladogram':
+			default:
+				td = new TreeDrawer();
+				break;
+		}
+		
+		// clear existing diagram, if any
+		var svg = document.getElementById('svg');
+		while (svg.hasChildNodes()) 
+		{
+			svg.removeChild(svg.lastChild);
+		}
+		
+		
+		var g = document.createElementNS('http://www.w3.org/2000/svg','g');
+		g.setAttribute('id','viewport');
+		svg.appendChild(g);
+		
+		
+		td.Init(t, {svg_id: 'viewport', width:500, height:500, fontHeight:10, root_length:0.1} );
+		
+		td.CalcCoordinates();
+		td.Draw();
+		
+		// font size
+		var cssStyle = document.createElementNS('http://www.w3.org/2000/svg','style');
+		cssStyle.setAttribute('type','text/css');
+		
+		var font_size = Math.floor(td.settings.height/t.num_leaves);
+		font_size = Math.max(font_size, 1);
+		
+		var style=document.createTextNode("text{font-size:" + font_size + "px;}");
+		cssStyle.appendChild(style);
+		
+		svg.appendChild(cssStyle);
+
+		// label leaves...
+		
+		
+		var n = new NodeIterator(t.root);
+		var q = n.Begin();
+		while (q != null)
+		{
+			if (q.IsLeaf())
+			{
+				switch (drawing_type)
+				{
+					case 'circle':
+					case 'circlephylogram':
+						var align = 'left';
+						var angle = q.angle * 180.0/Math.PI;
+						if ((q.angle > Math.PI/2.0) && (q.angle < 1.5 * Math.PI))
+						{
+							align = 'right';
+							angle += 180.0;
+						}
+						drawRotatedText('viewport', q.xy, q.label, angle, align)
+						break;
+				
+					case 'cladogram':
+					case 'rectanglecladogram':
+					case 'phylogram':
+					default:				
+						drawText('viewport', q.xy, q.label);
+						break;
+				}
+			}
+			q = n.Next();
+		}
+		
+				
+		// Scale to fit window
+		var bbox = svg.getBBox();
+		
+		var scale = Math.min(td.settings.width/bbox.width, td.settings.height/bbox.height);
+		
+		if ((drawing_type == 'circle') || (drawing_type == 'circlephylogram')) {
+			//scale *= 0.2;
+		} else {
+			scale *= 0.8;
+		}
+		
+		
+		// move drawing to centre of viewport
+		var viewport = document.getElementById('viewport');
+		viewport.setAttribute('transform', 'translate(0,20) scale(' + scale + ')');
+		//viewport.setAttribute('transform', 'translate(0,10) scale(1)');
+		
+		// centre
+		bbox = svg.getBBox();
+		if (bbox.x < 0)
+		{
+			viewport.setAttribute('transform', 'translate(' + -bbox.x + ' ' + -bbox.y + ') scale(' + scale + ')');
+		}
+		
+		
+		
+		// pan
+		$('svg').svgPan('viewport');
+	}
+	
+
+}
+
+</script>
+
+</body>
