@@ -16,10 +16,10 @@ function draw($counts, $max_count)
 	global $bases2num;
 	
 	$colours = array(
-		'A' => array ('white', 'green', 'red', 'green'),
-		'C' => array ('green', 'white', 'green', 'red'),
-		'G' => array ('red', 'green', 'white', 'green'),
-		'T' => array ('green', 'red', 'green', 'white')
+		'A' => array ('white', 'red', 'green', 'red'),
+		'C' => array ('red', 'white', 'red', 'green'),
+		'G' => array ('green', 'red', 'white', 'red'),
+		'T' => array ('red', 'green', 'red', 'white')
 	);	
 	
 	
