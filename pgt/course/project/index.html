@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Teaching Online - Biodiversity Informatics - Project ideas</title>
+	<style>
+		body {
+			padding:20px;
+			
+		}
+
+	</style>
+</head>
+<body>
+
+
+<a href="../..">Biodiversity Informatics</a>
+
+
+<h1>Projects</h1>
+
+<p>For some possible project ideas please the list below, or see <a href="projects/index.html">Possible project ideas</a> (these are intended for 4th year and/or Masters students).</p>
+
+<h2>Ideas</h2>
+
+<p>The ideas below are designed to give you some idea of the sort of projects that you could do. Feel free to suggest your own topic.</p>
+
+<h3>Data cleaning</h3>
+
+<h4>Getting data from a paper</h4>
+<p>One of the first steps in analysing data is to extract it from whatever format it is in. Can you find a dataset that would be useful but is not easy to access? For example, maybe there is a list of animal traits which is in a PDF and you want to convert it to a file for further analysis (maybe even make it available to others to use through, say, <a href="http://figshare.com">figshare</a>. Find a dataset, and use any available tools (e.g., <a href="http://iphylo.org/~rpage/phyloinformatics/course/datamining/index.html#tabula">Tabula</a>) to extract the data.</p>
+
+<h4>Cleaning a list of host names</h4>
+<p>GenBank has a lot of sequences with host information, but this if often recorded in an informal way. Can we clean these names and link them to external identifiers, such as EOL taxon ids? One approach would be to use Open Refine. If interested in this project, data will be provided.</p>
+
+<h3>Data mining</h3>
+
+<h4>Can we extract host-parasite associations from the titles of papers?</h4>
+<p>Using the <a href="http://www.jasondavies.com/wordtree/?source=e05c0fbecd924215cd9c4a0afedb10b1&phrase-line=1&prefix=from">wordtree example</a> as a starting point, can we extract a list of host parasite associations from paper titles? For example, can you write one or more regular expressions that extract the associations? You could use the <a href="http://iphylo.org/~rpage/phyloinformatics/course/datamining/index.html#regexp">regular expression tester</a> to try out various regular expressions. </p>
+
+<h4>Evaluate the performance of taxon name finding tools</h4>
+<p>There are several tools to automatically find taxonomic names in text, e.g., <a href="http://gnrd.globalnames.org">http://gnrd.globalnames.org</a> and <a href="http://www.ubio.org/tools/recognize.php">http://www.ubio.org/tools/recognize.php</a>. Test how effective they are by appling them to examples of scientific text. You could use, for example, articles in the journal <a href="http://www.pensoft.net/journals/zookeys/">Zookeys</a> which has names already identified for you.</p>
+
+<h3>Visualisation</h3>
+
+<h4>Navigating taxonomies on small screens</h4>
+<p>Find at least three smart phone apps (or webs sites designed for smart phones) that enable you to navigate through a taxonomic classification (e.g., <a href="https://itunes.apple.com/gb/app/field-guide-to-victorian-fauna/id423945031?mt=8">Field Guide to Victorian Fauna</a>). Comapre and contrast how easy it is to navigate using those apps.</p>
+
+
+<h3>Geophylogenies</h3>
+
+<h4>Construct a geophylogeny for a set of species</h4>
+<p>Can you create some geophylogenies (using, say the tools on this site, or <a href="http://kiwi.cs.dal.ca/GenGIS/Main_Page">GenGIS</a>) for a group of taxa? Can you use these tools to test a specific hypothesis of interest? Try alternative visualisations (e.g., Google Earth versus GenGIS), what are the strengths and weakness of each approach?</p>
+
+<h3>Taxonomy</h3>
+
+<h4>Reconciling taxonomic names</h4>
+<p>There are an increasing number of tools to clean lists of taxonomic names, can you evaluate how useful these are? For example, create a list of taxonomic names and compare how each tool peforms with those names.</p>
+
+<h4>Name changes and obsolete labels</h4>
+<p>How fast do taxonomic names change? What are the implications of this for people using these names? For example, for a public museum such as the Hunterian Zoology museum, how many names for the animals exhibited have changed since the labels were printed?</p>
+
+<h4>Linking bird names to literature</h4>
+<p>Avibase has a copy of Peter's checklist of birds of the world as an Excel spreadsheet, see
+<a href="http://avibase.bsc-eoc.org/peterschecklist.jsp">The Peters' Check-list of the Birds of the World Database</a> (local copy <a href="PETERS_DATABASE_version_1.xlsx">here</a>). 
+Can you parse the text and locate the references online?</p>
+
+<h3>Mapping</h3>
+
+<h4>Where are new species being found?</h4>
+<p>Find a list of recently described species (for example, follow a journal like <a href="https://twitter.com/zootaxa">Zootaxa</a> on Twitter, or <a href="https://species.wikimedia.org/wiki/Category:New_species_2014">Wikispecies</a>, and locate as many on a map. Compare this to the distribution of protected area on <a href="http://protectedplanet.net">http://protectedplanet.net</a>.</p>
+
+<h4>Extracting geographic data from papers</h4>
+<p>A lot of geographic information is locked up in scientific papers. Can you write a regular expression to extract latitude and longitudes from a paper? Can you add this information to Google Earth?</p>
+
+<h3>Conservation</h3>
+
+<h4>How useful is GBIF for conservation?</h4>
+<p>Take a number of species on the <a href="http://www.iucnredlist.org">IUCN Red List</a> and find them in <a href="http://www.gbif.org">GBIF</a>. Is there sufficient information in GBIF for you to assess the status of those species? You could investigate the use of <a href="http://geocat.kew.org">GeoCAT</a> using GBIF data. See also <a href="http://www.iucnredlistassessments.org">IUCN Red List assessments</a></p>
+
+<h3>Ecological associations</h3>
+
+<h4>Add data to Global Biotic Interactions (GloBI)</h4>
+<p>Find a data set for ecological interactions (e.g., host and parasites) and add it to <a href="http://www.globalbioticinteractions.org/">Global Biotic Interactions (GloBI)</a>.</p>
+
+<h3>Biodiversity knowledge</h3>
+
+<h4>What are the natural language questions people want answered about biodiversity?</h4>
+<p>Google knows the answer to "how many species are there?" (<a href="https://www.google.co.uk/?q=how%20many%20species%20are%20there">try it</a>). What are the other questions we could ask (Google can help tell us, see <a href="http://iphylo.blogspot.co.uk/2015/09/possible-project-natural-language.html">Possible project: natural language queries, or answering "how many species are there?"</a> ). Can we create a list of these questions, and can we work out how we could answer them. For example, could you answer these questions using <a href="http://www.gbif.org">GBIF</a>?</p>
+
+
+<h3>Metascience</h3>
+
+<h4>Diversity in taxonomy</h4>
+<p>Morgan Jackson wrote a blog post entitled <a href="http://www.biodiversityinfocus.com/blog/2015/05/07/gender-issues-in-taxonomy-more-than-just-latin/">Gender Issues in Taxonomy: more than just Latin</a>. He proposed a challenge:<blockquote>what proportion of authors in taxonomic papers are women, are they more likely to be first author, last author, or somewhere in the middle, and what proportion of taxa have been described by women?</blockquote>The project would be to tackle this challenge.</p>
+
+<h4>The population ecology and social behaviour of taxonomists</h4>
+<p>This project would be a reanalysis and extension of Joppa et al. "The population ecology and social behaviour of taxonomists" (<a href="http://dx.doi.org/10.1016/j.tree.2011.07.010">doi:10.1016/j.tree.2011.07.010</a>). They analysed a subset of taxa and suggested that taxonomy is far from being in decline, but do their conclusions hold across all taxa? They provide R scripts for their analyses (but not the data), but there are other sources of data such as <a href="http://bionames.org">BioNames</a>).</p>
+
+
+
+
+</body>
+</html>
