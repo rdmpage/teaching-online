@@ -98,7 +98,7 @@ All usage of these data must be in accordance with the GBIF Data Use Agreement -
  <Style id="gbifIcon13">
   <IconStyle>
    <Icon>
-    <hrefhttp://rdmpage-teaching.herokuapp.com/pgt/course/geography/images/whiteBall.png</href>
+    <href>http://rdmpage-teaching.herokuapp.com/pgt/course/geography/images/whiteBall.png</href>
    </Icon>
   </IconStyle>
  </Style>
