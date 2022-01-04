@@ -5,33 +5,60 @@
 	<link rel="stylesheet" type="text/css" href="../../style.css">	
 	<title>Teaching Online - Biodiversity Informatics - Phylogeny</title>
 	<style>
+	/*
 		.example {
 			padding:20px;
 			margin:10px;
 			background-color:#D4FB79;
 		}
+		*/
 	</style>
 </head>
 <body>
 
 <a href="../..">Biodiversity Informatics</a>
 
-<h1>Exercises</h1>
+<h1>Phylogeny</h1>
+
+<blockquote>
+<p>
+Biologists seem to seek “The One Tree” and appear not to be satisfied by a range of options. However, there is no logical difficulty with having a range of trees. There are 34,459,425 possible trees for 11 taxa (Penny et al. 1982), and to reduce this to the order of 10-50 trees is analogous to an accuracy of measurement of approximately one part in 10<sup>6</sup>.</p>
+<p>
+Many measurements in biology are only accurate to one or two significant figures and pale when compared to physical measurements that may be accurate to 10 significant figures. To be able to estimate an accuracy of one tree in 10<sup>6</sup> reflects the increasing sophistication of tree reconstruction methods. (Note that, on this argument, to identify an organism to a species is also analogous to a measurement with an accuracy of approximately one in 10<sup>6</sup>.)</p>
+
+Estimating the reliability of evolutionary trees. (1986). Molecular Biology and Evolution. doi:<a href="https://doi/org/10.1093/oxfordjournals.molbev.a040407">10.1093/oxfordjournals.molbev.a040407</a> 
+</blockquote>
+
+<p>Most courses on phylogenies focus on getting data and building a phylogeny. Here we are going to focus on the problem of finding an existing phylogeny for a group of organisms, or generating one quickly if we can't find one. The perenial topic of phylogeny visualisation will also be discussed.</p>
 
 
-<h2>Tree thinking quiz</h2>
+<h2>Resources</h2>
+
+<table>
+
+<tr><td><img src="images/61i4hmVkeGL._SL500_AA300_.jpg" width="100"/></td><td><a href="http://www.amazon.co.uk/Phylogenetic-Trees-Made-Easy-How-/dp/0878936068" target="_new">Phylogenetic Trees Made Easy: A How-To Manual</a></td></tr>
+
+<tr><td><img src="images/joe.png" height="100"/></td><td><a href="http://evolution.genetics.washington.edu/phylip/software.html" target="_new">Joe Felsenstein's list of phylogeny programs</a></td></tr>
+
+<tr><td><img src="images/tree_preview.png" height="100"/></td><td>Page, R. D. M. (2011). Space, time, form: viewing the Tree of Life. Trends in Ecology & Evolution. <a href="http://dx.doi.org/10.1016/j.tree.2011.12.002" target="_new">http://dx.doi.org/10.1016/j.tree.2011.12.002</a></td></tr>
+
+</table>
+
+<h2>Exercises</h2>
+
+<h3>Tree thinking quiz</h3>
 
 <a href="https://www.menti.com/xajvor1813">Menti quiz</a>
 
 
-<h2>Visual simulations of models of sequence evolution</h2>
+<h3>Visual simulations of models of sequence evolution</h3>
 <ul>
 <li><a href="jc.php">Jukes-Cantor</a></li>
 <li><a href="kp.php">Kimura 2P</a></li>
 <li><a href="hky.php">HKY85</a></li>
 </ul>
 
-<h2>Exercises</h2>
+<h3>making trees</h3>
 <ul>
 <li><a href="newick.html">Newick tree descriptions</a></li>
 <li><a href="maketree.html">Make a tree from some DNA sequences</a></li>
@@ -39,7 +66,7 @@
 <!-- <li><a href="lba.html">Build tree for "flytrap" dataset</a></li> -->
 </ul>
 
-<h2>Where does this taxon fit in the tree of life?</h2>
+<h3>Where does this taxon fit in the tree of life?</h3>
 
 <p><a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a> is a tool enables you to search for 
 similar DNA sequences, it also builds a tree. As an example, try BLASTing this sequence (JN313785):</p>
@@ -76,6 +103,163 @@ Did you find a tree for the taxa you are interested in?</p>
 
 <ul>
 <li><a href="http://paup.phylosolutions.com">PAUP*</a></li>
+</ul>
+
+
+
+<h2><a name="treebase"/>Where are the trees?</h2>
+
+<img src="images/treebase.png" width="400"/>
+
+<p>Given that phylogenies are fundamental to comparative biology you'd hope there was a dataabse that stored them, so that if you needed a phylogeny for, say, birds, you could retrieve the lastest tree and use it. Unfortunately we are some way from this goal. <a href="http://www.treebase.org" target="_new">TreeBASE</a> is a database of phylogenies, but it contains only a small fraction of published evolutionary trees.</p>
+
+<p>This diagram shows the disparity been the number of papers published on molecular phylogeny each year and the number of phylogenies deposited in TreeBASE:</p>
+<div>
+<img src="images/wos.png" width="400"/>
+</div>
+
+<p>Another problem with TreeBASE is that its search interface is not terribly intuitive (see <a href="http://iphylo.blogspot.com/2010/05/treebase-ii-makes-me-pull-my-hair-out.html" target="_new">TreeBASE II makes me pull my hair out</a> for some examples).</p>
+
+<div class="example">
+<b>Finding trees in TreeBASE</b>
+<p>Go to <a href="http://www.treebase.org" target="_new">TreeBASE</a> and search for the phylogeny of a group of organisms. Did you find a tree for the taxa you are interested in?</p>
+</div>
+
+
+
+<h3>Failed tree databases</h3>
+
+<p>There have been several attempts to come up with databases of trees, or better ways to interact with TreeBASE.</p>
+
+<ul>
+<li>PhyloCommons was at http://www.phylocommons.org but this is offline. Code is on <a href="https://github.com/bendmorris/phylocommons">github</a></li>
+<li>PhyLoTA was at http://phylota.net/ but has gone. It was described in <a href="http://dx.doi.org/10.1080/10635150802158688" target="_new">doi:10.1080/10635150802158688</a></li>
+<li>STBase: Phylogenetic species trees for comparative biology was at http://stbase.org/ (now dead). Unpublished description at <a href="https://web.archive.org/web/20140505195313/http://www.cs.iastate.edu/~akshayd/papers/STBase_SystBio_2013.pdf">http://www.cs.iastate.edu/~akshayd/papers/STBase_SystBio_2013.pdf</a>, local copy <a href="STBase_SystBio_2013.pdf">here</a> </li>
+</ul>
+
+
+<h3>birdtree.org</h3>
+
+<img src="images/BirdTreeSmall.png" /><br />
+<a href="http://birdtree.org/" target="_new">http://birdtree.org/</a> hosts a global phylogeny of birds, based on <a href="http://dx.doi.org/10.1038/nature11631" target="_new">doi:10.1038/nature11631</a>. The database stores multiple trees sampled from a Bayesian analysis, so you can download a set of trees for selected taxa. This enables you to see the effects of uncertainty on an analysis you make on those trees (in other words, how stable are your results across that set of trees?).
+
+
+<h3>Open Tree of Life</h3>
+
+The Open Tree of Life project is a large project to assemble a global tree of life. You can read about the project on <a href="http://blog.opentreeoflife.org">their blog</a>, view the <a href="https://github.com/OpenTreeOfLife">source code on github</a>, 
+and <a href="https://tree.opentreeoflife.org">view the tree.</a>.
+
+
+<a href="https://tree.opentreeoflife.org">Open Tree of Life</a> is a synthetic tree of all of life. Visit the site and search for a taxon you are interested in, or try one of the examples below.
+<ul>
+<li><a href="https://tree.opentreeoflife.org/opentree/otol.draft.22@3061961/Homo-sapiens"><i>Homo sapiens</i></li>
+<li><a href="https://tree.opentreeoflife.org/opentree/argus/ottol@534819/Aerodramus-genus-ncbi-46474-in-order-Apodiformes-"><i>Aerodramus</i></li>
+
+</ul>
+
+
+
+<h2><a name="time"/>Time</h2>
+<p>The rise of molecular methods, coupled with techniques for assigning dates to nodes based on fossils has resulted in numerous dated phylogenies being published. <a href="http://www.timetree.org" target="_new">TimeTree</a> is one syntheses a large number of tres to create a dated tree of life. Given two taxa you can query the database to retrieve estimates of when those taxa last shared a common ancestor.</p>
+
+<p>There isn't an open API for TimeTree, but there is an <a href="https://itunes.apple.com/gb/app/timetree/id372842500?mt=8" target="_new">iPhone app</a> which enables you to find the divergence dates for a pair of taxa.</p>
+<div>
+<img src="images/mzl.ziudrepg.320x480-75.jpg" />
+<img src="images/mzl.fjpefzkg.320x480-75.jpg" />
+</div>
+
+<h2><a name="visualisation"/>Visualising phylogeny</h2>
+
+<img src="images/wall.jpeg" width="400"/>
+
+<p>For a (somewhat biased) overview of phylogenetic visualisation see my talk at VIZBI (you should also check out the other VIZBI talks on Vimeo, see <a href="http://vimeo.com/vizbi" target="_new">http://vimeo.com/vizbi</a>).</p>
+
+<iframe src="http://player.vimeo.com/video/26210611?title=0&amp;byline=0&amp;portrait=0" width="398" height="224" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<!--
+<video width="400" controls="controls">
+  <source src="movies/ito.m4v" type="video/quicktime" />
+  Your browser does not support the video tag.
+</video>
+-->
+
+<h3>3D viewers</h3>
+
+<p>A number 3D phylogeny viewers have been developed, such as:</p>
+<ul>
+<li><a href="http://digitised.info/content/view/15/42/" target="_new">Phylo3D</a></li>
+<li><a href="http://loco.biosci.arizona.edu/paloverde/paloverde.html" target="_new">Paloverde</a></li>
+<li><a href="http://www.wellcometreeoflife.org/" target="_new">Wellcome Trust Tree of Life</a></li>
+</ul>
+<div>
+<video width="400" controls="controls">
+  <source src="movies/p.m4v" type="video/quicktime" />
+  Your browser does not support the video tag.
+</video>
+</div>
+<div>
+<video width="400" controls="controls">
+  <source src="movies/wellcome.mov" type="video/quicktime" />
+  Your browser does not support the video tag.
+</video>
+</div>
+
+<p>I'm skeptical about the utility 3D viewers, see for example <a href="http://iphylo.blogspot.com/2011/02/why-3d-phylogeny-viewers-don-work.html" target="_new">Why 3D phylogeny viewers don't work</a>. Matt Yoder has mounted a vigorous defense, see <a href="http://cyphy.blogspot.com/2011/02/you-are-in-maze-of-twisty-little.html" target="_new">You are in a maze of twisty little passages, all alike</a>).
+
+
+<h3>Future trends in viualisation</h3>
+
+<p>Viewing very large trees remains one of the great challenges in phylogeny visualisation. One direction that seems promising is the "tile and zoom" interface familiar to anyone using Google Maps. A naive approach is to zoom in and out of trees in the same way as a map, but this doesn't take into account the shape of the tree.</p>
+
+<div>
+<iframe src="http://player.vimeo.com/video/20379533?title=0&amp;byline=0&amp;portrait=0" width="398" height="363" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+</div>
+
+<p>If we constrain the way the tree is zoomed we get a better effect:</p>
+
+<div>
+<iframe src="http://player.vimeo.com/video/20477986?title=0&amp;byline=0&amp;portrait=0" width="398" height="491" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+</div>
+
+<p>Another promising direction is the use of touchscreen interfaces. Previously confined to research labs, the advent of the iPad and iPhone has made this technology ubiquitous.</p>
+<div>
+<video width="400" controls="controls">
+  <source src="movies/CollaborativeTreeComparison1.mp4" type="video/quicktime" />
+  Your browser does not support the video tag.
+</video>
+</div>
+
+<p><a href="http://www.onezoom.org" target="_new">OneZoom</a> is a fractal-based interactive tree viewer that runs in a web browser. It has a "wow" factor, although <a href="http://iphylo.blogspot.co.uk/2012/10/onezoom.html"  target="_new">I'm a bit sceptical</a> about the utility of the a viewer that radically distorts the viewing space.
+
+<div>
+<iframe width="560" height="315" src="http://www.youtube.com/embed/ngt0XLFgN28?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<h2><a name="next"/>Where next?</h2>
+
+<p>We badly need a comprehensive, easy to use database of evolutionary trees.</p>
+
+<p>One strength of TreeBASE is that it makes its data avialble via an API. This means that people can write programs in their own favourite language. For example, if R is your thing, then this a package for TreeBASE (see the <a href="http://www.r-bloggers.com/treebase-in-r-a-first-tutorial/" target="_new">tutorial</a>, and you can get the package from <a href="http://cran.r-project.org/web/packages/treebase/" target="_new"> CRAN</a>).</p>
+
+<p>It is difficult to find the answers to very basic phylogenetic questions, such as "what is the phylogeny of taxon <i>x</i>?", or "where are the gaps in our phylogenetic knowledge?".</p>
+
+<p>Relatively few phylogenies end up in public databases. Why is this, and what can we do about it?</p>
+
+<p>Visualisation of phylogenies on the web is still unsatisfactory. There is also an opportunity to develop interactive displays of phylogenies within journal articles. Many trees are now too big to print on a single article page. Computer screens (in most cases) aren't any bigger, but the ability to zoom in and out of a tree, or distort the space in which it is drawn should enable us to explore the whole tree. The trick is to find a way of doing this that doesn't confuse more than it helps.</p>
+
+<h2>Reading</h2>
+
+<ul>
+<li>
+Sanderson, M., Boss, D., Chen, D., Cranston, K., & Wehe, A. (2008). The PhyLoTA Browser: Processing GenBank for Molecular Phylogenetics Research. Systematic Biology, 57(3), 335–346. <a href="http://dx.doi.org/10.1080/10635150802158688" target="_new">doi:10.1080/10635150802158688</a>
+</li>
+<li>
+Jetz, W., Thomas, G. H., Joy, J. B., Hartmann, K., & Mooers, A. O. (2012). The global diversity of birds in space and time. Nature, 491(7424), 444–448. <a href="http://dx.doi.org/10.1038/nature11631" target="_new">doi:10.1038/nature11631</a>
+</li>
+<li>
+Rosindell, J., & Harmon, L. J. (2012). OneZoom: A Fractal Explorer for the Tree of Life. PLoS Biology, 10(10), e1001406. <a href="http://dx.doi.org/10.1371/journal.pbio.1001406.g004" target="_new">doi:10.1371/journal.pbio.1001406.g004</a>
+</li>
 </ul>
 
 
