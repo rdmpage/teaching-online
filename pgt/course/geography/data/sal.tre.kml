@@ -1,7 +1,7 @@
 <?xml version ="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.1">
 <Document>
-<Style id="treeLine"><LineStyle><color>7fffffff</color><width>2</width></LineStyle></Style>	<Style id="whiteBall">	        <IconStyle>	            <Icon>	                <href>http://bioguid.info/images/whiteBall.png</href>	            </Icon>	        </IconStyle>	        <LineStyle>	            <width>2</width>	        </LineStyle>	    </Style><Folder>
+<Style id="treeLine"><LineStyle><color>7fffffff</color><width>2</width></LineStyle></Style>	<Style id="whiteBall">	        <IconStyle>	            <Icon>	                <href>http://rdmpage-teaching.herokuapp.com/pgt/course/geography/images/whiteBall.png</href>	            </Icon>	        </IconStyle>	        <LineStyle>	            <width>2</width>	        </LineStyle>	    </Style><Folder>
 <name>Tree</name>
 <Placemark>
 <styleUrl>#treeLine</styleUrl>
