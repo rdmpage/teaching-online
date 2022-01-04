@@ -5,14 +5,10 @@
 	<link rel="stylesheet" type="text/css" href="../../style.css">	
 	<title>Teaching Online - Biodiversity Informatics - Datamining and linking</title>
 	<style>
-		.example {
-			padding:20px;
-			margin:10px;
-			background-color:#D4FB79;
-		}
-		
+	
+
 		/* styles for regular expression tester */
-			a.noUnderline {text-decoration:none}
+			 a.noUnderline {text-decoration:none}
 			.selected {background-color:blue;color:white;font-family:Lucida Console,Courier New,serif}
 			.notSelected {background-color:#e0e0e0;color:blue;font-family:Lucida Console,Courier New,serif}
 			.output {padding:5px;background-color:#e0e0e0}
@@ -20,14 +16,25 @@
 			.valign {vertical-align:middle}
 			.floating {float:left}
 			.afterfloat {clear:left}
-			.invisible {visibility:hidden;vertical-align:middle}		
+			.invisible {visibility:hidden;vertical-align:middle}	
+			
+			
+		.thumbnail {
+			float:right;
+			padding:1em;
+		}	
+		
+		.fitcontent {
+			display: block;
+			overflow: auto;
+		}
 	</style>
 </head>
 <body>
 
 <a href="../..">Biodiversity Informatics</a>
 
-<h1>Exercises</h1>
+<h1>Datamining and linking</h1>
 
 
 <h2><a name="regexp"/>Regular expressions</h2>
@@ -381,16 +388,20 @@ function Go()
 
 //-->
 			</SCRIPT>
-
 <div style="clear:both;"></div>
 
-<div style="float:right;"><img src="images/tabula.png" width="64"/></div>
 <h2><a name="tabula"/>Extracting data from PDFs</h2>
-<p>There are an increasing number of tools for extracting data from PDFs, such as <a href="http://tabula.nerdpower.org">Tabula</a>. Once you've downloaded and installed Tabula, point your web browser at <a href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> and follow the instructions.</p>
+<div class="fitcontent">
+<div class="thumbnail"><img src="images/tabula.png" width="64"/></div>
+
+<p>There are an increasing number of tools for extracting data from PDFs, such as <a href="https://tabula.technology">Tabula</a>. Once you've downloaded and installed Tabula, point your web browser at <a href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> and follow the instructions.</p>
+
+</div>
 
 
-<div style="float:right;"><img src="images/refine.png" width="64"/></div>
 <h2><a name="cleaning"/>Taxonomic name cleaning using OpenRefine</h2>
+<div class="fitcontent">
+<div class="thumbnail"><img src="images/refine.png" width="64"/></div>
 <p><a href="http://openrefine.org" target="_new">OpenRefine</a> is an elegant tool for data cleaning. One of its most powerful features is the ability to call "Reconciliation Services" to help clean data, for example by matching names to external identifiers.</p>
 
 <p>For this course I've implemented the following service:</p>
@@ -399,6 +410,8 @@ function Go()
 </ul>
 
 <p>To use these you need to add the URLs above to Open Refine (see example below).</p>
+
+</div>
 
 <div class="example">
 <b>How to use reconciliation services</b>
@@ -453,10 +466,9 @@ Hyperiidae
 
 
 
-
-
-<div style="float:right;"><img src="images/3f9f1d2a-ad5c-11dd-8dc1-000255111976.gif"/></div>
-<h2><a name="wordtrees" />Wordtrees</h2>
+<h2><a name="wordtrees"/>Wordtrees</h2>
+<div class="fitcontent">
+<div class="thumbnail"><img src="images/3f9f1d2a-ad5c-11dd-8dc1-000255111976.gif" width="64"/></div>
 
 <p>In the lecture we saw an example of article titles which contain information about host-parasite relationships:</p>
 <ul>
@@ -467,10 +479,11 @@ Hyperiidae
 
 <p>These titles have a similar structure, which suggests were could develop a tool to parse these titles and extract the host-parasite associations. To explore this further we can use a tool like Many Eyes Wordtrees.</p>
 
+</div>
 
-<p>IBM's <a href="http://www-958.ibm.com/" target="_new">Many Eyes</a> contains tools for creating visualisation (login required, you will also need Java). We will use the Wordtree visualisation to explore the structure of the following sentences:</p>
+<p>IBM used to have a tool called "Many Eyes" for creating interesting visualiations but it is now offline. <!--<a href="http://www-958.ibm.com/" target="_new">Many Eyes</a> --> Instead will use the Wordtree visualisation to explore the structure of the following sentences:</p>
 
-<pre>
+<pre style="overflow:auto;">
 Eimeria azul sp. n. (Protozoa: Eimeriidae) from the eastern cottontail, Sylvilagus floridanus, in Pennsylvania
 Mirandula parva gen. et sp. nov. (Cestoda, Dilepididae) from the long-nosed Bandicoot (Perameles nasuta Geoff.)
 Hysterothylacium carutti n. sp. (Nematoda: Anisakidae) from the marine fish Johnius carutta Bloch of Bay of Bengal (Visakhapatnam)
@@ -690,6 +703,7 @@ limit 100
 <li>
 Fontaine, B., Perrard, A., & Bouchet, P. (2012). 21 years of shelf life between discovery and description of new species. Current Biology, 22(22), R943–R944. <a href="http://dx.doi.org/10.1016/j.cub.2012.10.029" target="_new">doi:10.1016/j.cub.2012.10.029</a>
 </li>
+<li>
 Muñoz, G., Kissling, W. D., & van Loon, E. E. (2019). Biodiversity Observations Miner: A web application to unlock primary biodiversity data from published literature. Biodiversity Data Journal, 7. <a href="https://doi.org/10.3897/bdj.7.e28737" target="_new">doi:10.3897/bdj.7.e28737</a></li>
 </ul>
 

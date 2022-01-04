@@ -25,3 +25,9 @@ blockquote {
 	padding:20px;
 	border-left:4px solid red;
 }
+
+.example {
+	padding:1em;
+	background-color:#EBEBEB;
+}
+		
