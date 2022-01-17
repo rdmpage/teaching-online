@@ -1,0 +1,112 @@
+#NEXUS
+
+[!Brown et al. (1982) mitochondrial DNA for hominoids]
+
+begin taxa;
+	dimensions ntax=5;
+	taxlabels human chimp gorilla orang gibbon;
+endblock;
+
+begin characters;
+	dimensions nchar=896;
+	format datatype=dna matchchar=. interleave missing=-;
+	matrix
+[                              2                    4                    6					  8                    ]
+[         1                    1                    1                    1					  1                    ]
+human     aagcttcaccggcgcagtca ttctcataatcgcccacggR cttacatcctcattactatt ctgcctagcaaactcaaact acgaacgcactcacagtcgc  
+chimp     ................a.t. .c.................a ...............t.... ..................t. .t........c.........
+gorilla   ..................tg ....t.....t........a ........a......t.... .................... .......a..c.....c...
+orang     ................ac.. cc.....g..t.....t..a ..c........cc....g.. .................... .......a..c.....c...
+gibbon    ......t..a..t...ac.g .c.................a ..a..c..t..cc.g..... ......t............. .......a........c...
+
+[         1                    1                    1                    1 				  1                    ]
+[         0                    2                    4                    6					  8                    ]
+[         1                    1                    1                    1					  1                    ]
+human     atcataatcctctctcaagg acttcaaactctactcccac taatagctttttgatgactt ctagcaagcctcgctaacct cgccttaccccccactatta
+chimp     ........t.....c..... .................... .......c...........c .................... ....c.......t..c....
+gorilla   ........t........... ...c.....c.......... .......cc........... ..g...........c..... ...............c....
+orang     .................... c.................c. .......cc.c......... ............a....... t...c....a.....c..c.
+gibbon	...........a....g... g..c...g.ct......... .g.....c..c........c gc.................. ....c...............
+
+[         2                    2                    2                    2 				  2                    ]
+[         0                    2                    4                    6					  8                    ][         1                    1                    1                    1					  1                    ]
+human     acctactgggagaactctct gtgctagtaaccacgttctc ctgatcaaatatcactctcc tacttacaggactcaacata ctagtcacagccctatactc
+chimp     .t..c..a..g........c ............t.a..... ...........c........ ....c......t........ ...a..........g.....
+gorilla   .......a.....g.....c ..a...........a..... .........c.c...c..tt ...........tct...... ...a.t........g.....
+orang	....t..a...........c ..a...a..g...ta..... t.....t..c.....ca... ....a............... ...a.....a..........
+gibbon	....c..a..t.......tc ..a...a.gg..t.c..... ...gg....c.ct...a.ta c...c..c..g......g.. ...a....g...........
+
+[         3                    3                    3                    3 				  3                    ]
+[         0                    2                    4                    6					  8                    ]
+[         1                    1                    1                    1					  1                    ]
+human     cctctacatatttaccacaa cacaatggggctcactcacc caccacattaacaacataaa accctcattcacacgagaaa acaccctcatgttcatacac
+chimp     .........g.......... .......a............ ...........t........ g................... .t..t.....a..tt.....
+gorilla   ...t..t............. .......a...c.......a ........c.c......... .........t.......... ...t......a.....g...
+orang     t.....t.....c....... .....c.a..ta...c...a ........c........... ...t..t........c.... .t.........c........
+gibbon    ...t..........t..t.. .....c.a...a....t..a ...........a........ .......c............ ...tat.a..ac.t..g...
+
+[         4                    4                    4                    4 				  4                    ]
+[         0                    2                    4                    6					  8                    ]
+[         1                    1                    1                    1					  1                    ]
+human     ctatcccccattctcctcct atccctcaaccccgacatca ttaccgggttttcctcttgt aaatatagtttaaccaaaac atcagattgtgaatctgaca
+chimp     ...........c.....t.. .........t..t..t.... .c..t..a..ca....c... .................... ....................
+gorilla   ...........c........ ...............t..t. .c........ca....c... .................... ..................t.
+orang     ...........c......t. .............ag..... .cg.t.....cg...ac... .................... ..t.............a.t.
+gibbon    ..c.t....c.c........ .a..........ta...... ....t..c...a.tc.c... ...c.........t...... ..t.............a...
+
+[         5                    5                    5                    5 				  5                    ]
+[         0                    2                    4                    6					  8                    ]
+[         1                    1                    1                    1					  1                    ]
+human     acagaggcttacgacccctt atttaccgagaaagctcaca agaactgctaactcatgccc ccatgtctRacaacatggct ttctcaacttttaaaggata
+chimp     .........c.......... ................t.t. ...........t....at.. .....c.............. ....................
+gorilla   .........c..a....... .................gt. ...g............a... ..g..ct............. ....................
+orang     .t..g.c.cc..a....... .................... ..............tca.t- ......g............. ......g.............
+gibbon    .t.......cgaa...t... gc.............c.... ...............ctat. ......a............. ....................
+
+[         6                    6                    6                    6					  6                    ]
+[         0                    2                    4                    6					  8                    ]
+[         1                    1                    1                    1					  1                    ]
+human     acagctatccattggtctta ggccccaaaaattttggtgc aactccaaataaaagtaata accatgcacactactataac caccctaaccctgacttccc
+chimp     .....c....g......... .................... .................... ......t.t.....c..... ....t.......a...c..t
+gorilla   .................... ..a................. .................... ..t...t..g....c..... ....t..g....a......t
+orang     ..........c......... ..at................ ..................c. g.....ttt..c..c..... tg....c...t.a.......
+gibbon    .................... ..a................. .................... g.a...t....c..c...g. ..tt.....g..a..c....
+
+[         7                    7                    7                    7 				      7                    ]
+[         0                    2                    4                    6					  8                    ]
+[         1                    1                    1                    1					  1                    ]
+human     taattccccccatccttacc accctcgttaaccctaacaa aaaaaactcatacccccatt atgtaaaatccattgtcgca tccacctttattatcagtct
+chimp     ......t.........c... ......a............. ............t....... ....g.........a....g ...........c..t..c..
+gorilla   ..........t......... ...t..a.c..t........ .....g.............. .c........t..c...... ...........c.....c..
+orang     ....c........taccg.t ......a.......c..... .......c..........c. ........a.ggcca..... ...g......c......c..
+gibbon    .............tacag.. .....ta.......c..t.. ...g....t......g..c. .c......atg.cca.t..c ..t........a.....c..
+
+[         8                    8                    8                    8					  8              8     ]
+[         0                    2                    4                    6					  8              9     ]
+[         1                    1                    1                    1					  1              6     ]
+human     cttccccacaacaatattca tgtgcctagaccaagaagtt attatctcgaactgacactg agccacaacccaaacaaccc agctctccctaagctt
+chimp     t................... .a................c. ........a.....g..... ...a................ ................
+gorilla   ..................tc .a................c. ........a.g......... ...a.............tt. .a..............
+orang     ta....a...........t. .c.......ga......acc ..cg..a.a......tg... .a.a..c.....g...cta. .a.....a........
+gibbon    a..t.......t........ ....ac...........acc .....t..a........... .a.tg..........gctag .a..............
+	;
+endblock;
+
+begin assumptions;
+	usertype a = 4		[weights transversions 10 times transitions]
+		a  c  g  t
+	[a]	.  10  1  10
+	[c] 10  .  10  1
+	[g]	1  10  .  10
+	[t]	10  1  10  .
+		;
+	typeset user_a = a: all;
+endblock;
+
+begin paup;
+	outgroup gibbon;
+	constraints hc = ((human,chimp));
+	constraints cg = ((chimp,gorilla));
+	constraints cgh = ((human,chimp,gorilla));
+	constraints oh = ((human,orang));
+endblock;

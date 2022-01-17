@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="../../../style.css">	
+	<title>Teaching Online - PAUP</title>
+</head>
+<body>
+
+
+
+<body>
+
+<a href="../">Phylogeny</a>
+
+<h1>Building trees using PAUP*</h1>
+
+
+<p>These short exercises are designed to give you quick introduction to phylogenetic analysis using PAUP*. Work through these exercises. They introduce building trees using different methods, how to view those trees, and get some idea of their robustness.</p>
+
+
+<h2>Starting PAUP*</h2>
+
+<p>Download PAUP* from <a href="http://paup.phylosolutions.com/">http://paup.phylosolutions.com/</a>.PAUP* is started by clicking on program icon:</p>
+
+<img src="icon.png" width="48">
+
+<p>Go to the file menu and open a data file. Once the data is read you can enter commands in the command line (Mac, Windows and Unix), or using the menus (Mac). </p>
+
+
+<img src="command.png" width="400">
+
+<p>All your results appear in the Display window.</p>
+
+ 
+<h3>How do I get help?</h3>
+
+<p>To get a quick summary of commands type <code>help</code>. To get detailed help for a particular command type the name of the command followed by <code>?</code></p>
+
+<h3>How do I get a tree?</h3>
+
+<p>One quick way is to do a heuristic search. Type the command <code>hs</code> or go to the <b>Analysis</b> menu and choose <b>Heuristic Search</b>. Accept the default settings and click on the Search button.</p>
+
+<h3>How do I get a neighbour-joining tree?</h3>
+
+<p>Type the command <code>nj</code> or choose <b>Neighbor Joining/UPGMA</b> from the Analysis menu.
+
+<h3>How do I change the optimality criterion?</h3>
+
+<p>Use the set criterion command. For example:
+
+<pre>
+set criterion = parsimony
+
+set criterion = likelihood
+</pre>
+
+or choose the corresponding option from the <b>Analysis</b> menu:</p>
+
+ <img src="analysis.png" width="400">
+
+<h3>How do I show my trees?</h3>
+
+<p>The best tree (or trees) can be shown in the Display window issuing the command
+
+<code>showtrees</code>.
+
+
+ 
+<h3>How do I print my trees?</h3>
+
+ 
+<p>On a Mac you can go to the <b>Trees</b> menu and choose <b>Print tree</b>  or <b> Print NJ Tree…</b> (if you computed a neighbor joining tree. You will see a dialog box like this:</p>
+
+ <img src="print.png" width="400">
+
+<p>PAUP can print the tree in a variety of styles. For now, just choose the <b>Plot type Phylogram</b> and click <b>Preview</b>. You will see something like this:</p>
+
+  <img src="preview.png" width="400">
+
+<p>If you like what you see, click on the Done button. You will be taken back to the <b>Print NJ tree</b> dialog box shown above. Click <b>Print</b> and your tree will be printed.</p>
+
+   
+<p>If you’re not using a Macintosh then you need to save the trees and print them using a tree viewing program such as Figtree. To do this</p>
+
+<ul>
+<li>Enter the command <code>savetrees</code> (or <code>savetrees brlens=yes</code> if you want branch lengths)</li>
+<li>PAUP* saves the tree file</li>
+<li>Open this file in Figtree  (e.g., by double clicking on it). You can print the tree (or trees).</li>
+</ul>
+
+<h2>Part 1: Building trees</h2>
+
+<p>Open the data file <a href="Hominoid mtDNA.nex">Hominoid mtDNA.nex</a> in PAUP*. Build a parsimony tree using a heuristic search. View it in the display window (<code>showtrees</code>). If you wish, save it to a file (<code>savetrees</code>) then view that file in Figtree (or print it from within PAUP).</p>
+
+<p>For small numbers of sequences you can compute the parsimony score for all possible trees. Use the command <code>alltrees</code> to do this.</p>
+
+<p>Q: What does the plot of tree lengths tell you? How confident are you that the shortest tree is the true tree?</p>
+
+
+<p>Change the optimality criterion to likelihood (<code>set criterion = likelihood</code>). Find the maximum likelihood tree (<code>hs</code>). Is it the same as the parsimony tree?</p>
+
+<p>Compute likelihood scores for all possible trees (alltrees). How does this compare to the results for parsimony?</p>
+
+
+
+
+
+<h3>Comparing likelihood and parsimony scores</h3>
+
+<p>The plot below was constructed by outputting likelihood and parsimony scores for the same tree (using the command <code>alltrees scorefile=&lt;filename&gt;</code>). What does this plot tell you about the two methods?</p>
+
+ <img src="plot.png" width="400">
+ 
+<p>As a final exercise in this section, compute a neighbour-joining tree (nj). How does it compare to the parsimony and likelihood trees?</p>
+
+
+ 
+<h2>Part 2: Trees with confidence</h2>
+
+<p>The bootstrap is a commonly used way of assessing how robust a tree is.</p> 
+
+<p>Set the optimality criterion to parsimony and run a bootstrap analysis (bootstrap). What do the numbers on the branches mean?  What can you say about the three alternative hypotheses concerning relationships among the African apes?</p> 
+
+
+<p>Change the optimality criterion to likelihood, and redo the bootstrap. How do the results compare to parsimony?</p>
+
+
+
+</body>
+</html>
