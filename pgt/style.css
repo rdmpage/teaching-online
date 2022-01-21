@@ -26,6 +26,11 @@ blockquote {
 	border-left:4px solid red;
 }
 
+td {
+	border: 1px solid black;
+	padding:1em;
+}
+
 .example {
 	padding:1em;
 	background-color:#EBEBEB;
