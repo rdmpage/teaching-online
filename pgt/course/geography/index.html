@@ -144,14 +144,14 @@ In 2020 I noticed that the distribution of <i>Paroecanthus</i> seemed odd. I wro
 
 <h3>Spatial browsing</h3>
 
-<iframe width="560" height="315" src="//www.youtube.com/embed/ZTMyDtHZXIc?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZTMyDtHZXIc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 <p>An obvious use of a map is to display the spatial distribution of some data, for example the occurrences of a particular taxon. But we can also use a map to explore data. For example, if we wanted to find taxonomic papers related to Australian species, we could do a Google search that included the term "Australia". Alternatively, if we had a database of taxonomic descriptions, and these where geotagged (for example, if a paper mentions the latitude and longitude of a locality), then we could do a spatial query. For example, we could define the "bounding box" of Australia as the rectangle that encloses that continent. We could then search our database for papers with localities inside that bounding box. For an example of this see <a href="https://biostor.org/map.php" target="_new">https://biostor.org/map.php</a>.
 </p>
 
 <p>The part of the map being displayed automatically defines a bounding box, so we could implement a simple spatial browser that shows us the taxonomic papers (or species, or whatever object is of interest) for just that region.</p>
 
-<iframe src="http://player.vimeo.com/video/35581912?title=0&amp;byline=0&amp;portrait=0" width="398" height="249" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+<iframe src="//player.vimeo.com/video/35581912?title=0&amp;byline=0&amp;portrait=0" width="398" height="249" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 
 
 <h3>Timelines and maps</h3>
@@ -170,6 +170,9 @@ In 2020 I noticed that the distribution of <i>Paroecanthus</i> seemed odd. I wro
 <p>For spatial analysis we often want to compare measures (e.g., diversity) in different areas. If those areas
 are of different sizes (e.g., countries) then comparisons become problematic. Another approach is to divide the surface of the planet into
 equally sized areas so each unit is comparable.</p>
+
+<p>Examples of this approach include Uber <a href="https://www.uber.com/en-GB/blog/h3/">H3</a> and <a href="https://location.foursquare.com/resources/blog/news/introducing-hex-tiles-our-next-gen-tiling-system/">Foursquare</a>.
+</p>
 
 <img src="images/grid.png">
 
