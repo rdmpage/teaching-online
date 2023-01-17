@@ -125,6 +125,31 @@ or choose the corresponding option from the <b>Analysis</b> menu:</p>
 
 <p>Change the optimality criterion to likelihood, and redo the bootstrap. How do the results compare to parsimony?</p>
 
+<h2>Part 3: Other datasets</h2>
+
+<p>A distance matrix <a href="../data/Lutzomyia.nex">Lutzomyia.nex</a>. PAUP can build trees from distance matrices. </p>
+
+<p>Long branch attraction dataset <a href="../data/carmen770.nex">carmen770.nex</a>.
+
+Do a parsimony analysis then a likelihood analysis and compare the results.
+
+<h3>Parsimony</h3>
+
+<pre>
+set criterion=parsimony;
+hs;
+</pre>
+
+<h3>Likelihood</h3>
+
+<pre>
+set criterion=likelihood;
+lset rates=gamma;
+lset shape=estimate;
+hs;
+</pre>
+
+</p>
 
 
 </body>
