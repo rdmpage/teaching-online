@@ -7,6 +7,6 @@
         }
     ],
     "require": {
-        "ext-mbstring": "^8.1"
+        "ext-mbstring": "*"
      }
 }

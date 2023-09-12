@@ -96,6 +96,22 @@ A global overview of the distribution of museums and herbaria, the distribution 
 
 Most of the data for this study would come from <a href="https://www.wikidata.org">Wikidata</a>. There is likely to be a lot of missing data, so this would need to be added. Wikidata has a powerful query language that cna be used to find museums, plot maps, etc.
 
+<h2>Why can't we use species names as unique identifiers?</h2>
+
+[Needs more details]
+
+<h3>Questions</h3>
+<ol>
+<li>Given a list of all taxonomic names, how many are not unique? How many are not unique if we distinguish between plans and animals?</li>
+<li>Is there an easy way to make names unique?</li>
+<li>Can we come up with a simple URL for every species?</li>
+<li>How would be include taxonomic classification in this?</li>
+</ol>
+
+<h3>Outcomes</h3>
+
+<h3>Skills</h3>
+
 
 <h2>Where are the new species being found?</h2>
 
@@ -123,7 +139,32 @@ A survey of the new species found in 2023, their geographic and taxonomic distri
 
 <h3>Skills</h3>
 
-The data will be provided, will need to be analysed with some standard techniques (spreadsheets and/or R).
+<p>The data will be provided, will need to be analysed with some standard techniques (spreadsheets and/or R).</p>
+
+<p>Here are some notes made for last year's version of this project:</p>
+
+<p>The BioRSS project is described here: <a href="https://github.com/rdmpage/biorss">https://github.com/rdmpage/biorss</a> There is also a blog post about it here: <a href="https://iphylo.blogspot.com/2021/11/revisiting-rss-to-monitor-latests.html">https://iphylo.blogspot.com/2021/11/revisiting-rss-to-monitor-latests.html</a> </p>
+
+<p>BioRSS regularly harvests papers from journals that publish new species descriptions, as well as Google Scholar searches for terms such as “new species” and “n. sp.”. To harvest from journals it uses RSS feeds (see https://en.wikipedia.org/wiki/RSS ) which is a common way for journals to make lists of new articles available to tools such as blog post readers.</p>
+
+<p>BioRSS was inspired by uBioRSS. Unlike uBioRSS it also has the ability to “geolocate” papers based on their titles and abstract using the “Glasgow geoparser”, see https://github.com/rdmpage/glasgow-geoparser It also uses a tool to find taxonomic names in text, and then maps those to taxonomic names in GBIF (https://www.gbif.org) . Hence for each paper we can (ideally) place it on a map and say what taxa it is about.</p>
+
+<p>For this project data was collected for the year 2022, and this data can be filtered by country mentioned by the paper (e.g., “China”), or taxonomic group (e.g., “Aves”). </p>
+
+<p>To understand more about the origins of the publications for 2022 we can use web services that take the DOI for an article and extract additional information. CrossRef.org has detailed metadata for articles with DOIs, and can include things such as the ORCID id for one or more authors, and a DOI for the funding agency that supported the work. For each DOI software retrieved the metadata from CrossRef, for example http://api.crossref.org/works/10.1515/pjen-2017-0018 (need a better DOI to use here, one from the data files I sent might be a better example). </p>
+
+<p>If ORCIDs were found the web site https://orcid.org was queried for information on the author, specifically the country in which the author was based. This is not available for all authors, so only a subset of the data could be used for this. For those authors that had country information, it was possible to compare the country the paper was about with the country the researchers were based in. Might be a good idea to show an ORCID record as an example (one of the files I sent will have lots of these).</p>
+
+<p>For funders, CrossRef.org often has a DOI for the funding agency. This DOI was used to look up information on the funder in Wikidata, such as the country where the funder was based. This enables a comparison between the geography of the paper, the authors, and the funders.</p>
+
+<p>A lot of scientific literature is behind a paywall, and hence not readily accessible to readers who aren’t associated with a major institution such as a university. You could mention SciHub here as one attempt to open all science up, see for example https://doi.org/10.7554/eLife.32822 </p>
+
+<p>The Unpaywall project tries to find a legally free to read version of a paper to read. For an Open Access journal this may be from the publisher website, for others it might be in a repository. To determine whether a paper was open access the Unpaywall service queried for each DOI. The number of accessible versus non-accessible papers was counted, and compared across countries.</p>
+
+<p>Lots of things to think about, such as the requirement that papers be online, ideally in a journal that has a RSS feed or can be searched by Google Scholar, otherwise the papers won’t be found. Some of the papers included will be for new fossil species, not living ones, and not all papers will be on new species. There can also be errors in geolocating papers. For example, if a paper mentions “India” it will be geolocated to that country, but if it mentioned “Indian” then it won’t.</p>
+
+<p>Patrick R. Leary, David P. Remsen, Catherine N. Norton, David J. Patterson, Indra Neil Sarkar, uBioRSS: Tracking taxonomic literature using RSS, Bioinformatics, Volume 23, Issue 11, June 2007, Pages 1434–1436, https://doi.org/10.1093/bioinformatics/btm109</p>
+
 
 
 
