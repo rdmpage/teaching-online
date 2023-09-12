@@ -192,9 +192,9 @@
                     }
 
                     if (evt.preventDefault) {
-                        evt.preventDefault();
-                    }
-
+                        evt.preventDefault();                       
+                    }                   
+ 
                     evt.returnValue = false;
                     recentOffset = $root.offset();
 

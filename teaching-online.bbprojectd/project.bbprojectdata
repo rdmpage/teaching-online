@@ -11,6 +11,7 @@
 		<string>D6A6EEEB-0C27-4DA9-B5C5-A6B205915243</string>
 		<string>332267EC-F79E-4499-9AF6-8490DB899BD8</string>
 		<string>70C4F2AB-988B-48D4-A061-EE87DF832C52</string>
+		<string>F0942310-B618-4653-8278-57568A484560</string>
 	</array>
 	<key>ProjectItems</key>
 	<dict>
@@ -347,6 +348,54 @@
 			</dict>
 			<key>ItemName</key>
 			<string>level2</string>
+			<key>ItemType</key>
+			<string>FolderReference</string>
+			<key>UserOverrideItemName</key>
+			<true/>
+		</dict>
+		<key>F0942310-B618-4653-8278-57568A484560</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9va+QCAAAAAAQQMAAAAMP721uEXq9TDV/YCEQkfiDv
+				sjm7qnzu0dPbSxQWvzRy4AEAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAABQAA
+				AAEBAABTaXRlcwAAAA8AAAABAQAAdGVhY2hpbmctb25s
+				aW5lAAgAAAABAQAAcHJvamVjdHMUAAAAAQYAABAAAAAg
+				AAAAMAAAAEAAAABYAAAACAAAAAQDAACEXAAAAAAAAAgA
+				AAAEAwAAlsYDAAAAAAAIAAAABAMAAEDoHgAAAAAACAAA
+				AAQDAAAamcwBAAAAAAgAAAAEAwAAElqhBgAAAAAUAAAA
+				AQYAAIQAAACUAAAApAAAALQAAADEAAAACAAAAAAEAABB
+				xVhNtQoTmxgAAAABAgAAAgAAAAAAAAAPAAAAAAAAAAAA
+				AAAAAAAACAAAAAQDAAADAAAAAAAAAAQAAAADAwAA9QEA
+				AAgAAAABCQAAZmlsZTovLy8MAAAAAQEAAE1hY2ludG9z
+				aCBIRAgAAAAEAwAAAJCClucAAAAIAAAAAAQAAEHFB3qg
+				AAAAJAAAAAEBAABFRURCQzQ5NS1ERjUyLTQ1NkEtQjQz
+				MS1GQjYwN0JGMDRBRDEYAAAAAQIAAIEAAAABAAAA7xMA
+				AAEAAAAAAAAAAAAAAAEAAAABAQAALwAAAAAAAAABBQAA
+				zAAAAP7///8BAAAAAAAAABAAAAAEEAAAaAAAAAAAAAAF
+				EAAA1AAAAAAAAAAQEAAAAAEAAAAAAABAEAAA8AAAAAAA
+				AAACIAAAzAEAAAAAAAAFIAAAPAEAAAAAAAAQIAAATAEA
+				AAAAAAARIAAAgAEAAAAAAAASIAAAYAEAAAAAAAATIAAA
+				cAEAAAAAAAAgIAAArAEAAAAAAAAwIAAA2AEAAAAAAAAB
+				wAAAIAEAAAAAAAARwAAAIAAAAAAAAAASwAAAMAEAAAAA
+				AAAQ0AAABAAAAAAAAAA=
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/rpage/Sites/teaching-online/projects/</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./projects</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>projects</string>
 			<key>ItemType</key>
 			<string>FolderReference</string>
 			<key>UserOverrideItemName</key>

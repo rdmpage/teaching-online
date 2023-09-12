@@ -1,0 +1,38 @@
+body {
+	padding:30px;
+	margin:30px;
+	font-family:serif;
+	background:white;
+	color: #212121;
+	line-height:1.3em;
+	font-size:1em;
+}
+
+h1, h2 {
+	color:black;
+	font-family: sans-serif;
+}
+
+h2 {
+	border-top:1px solid #424242;
+	padding-top:1em;
+}
+
+blockquote {
+	font-size:1.0em;
+	line-height:1.3em;
+	background:#EBEBEB;
+	padding:20px;
+	border-left:4px solid red;
+}
+
+td {
+	border: 1px solid black;
+	padding:1em;
+}
+
+.example {
+	padding:1em;
+	background-color:#EBEBEB;
+}
+		
