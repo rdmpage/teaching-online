@@ -105,6 +105,8 @@ class SVGPort extends Port
 		$text_node = $this->document->createElement('text');
 		$text_node->setAttribute('x', $pt['x']);
 		$text_node->setAttribute('y', $pt['y']);
+		
+		$align = 'left';
 	
 		switch ($align)
 		{

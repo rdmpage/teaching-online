@@ -125,7 +125,7 @@ class Tree
 			switch ($state)
 			{
 				case 0: // getname
-					if (ctype_alnum($token[$i]{0}))
+					if (ctype_alnum($token[$i][0]))
 					{
 						$this->num_leaves++;
 						
@@ -149,7 +149,7 @@ class Tree
 					}
 					else 
 					{
-						if ($token[$i]{0} == "'")
+						if ($token[$i][0] == "'")
 						{
 							$label = $token[$i];
 							$label = preg_replace("/^'/", "", $label);
@@ -294,7 +294,7 @@ class Tree
 					break;
 				
 				case 3: // finishchildren
-					if (ctype_alnum($token[$i]{0}))
+					if (ctype_alnum($token[$i][0]))
 					{
 						$curnode->SetLabel($token[$i]);
 						$this->label_to_node_map[$token[$i]] = $curnode;

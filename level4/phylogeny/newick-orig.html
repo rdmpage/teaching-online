@@ -3,7 +3,7 @@
 	<title>Newick tree descriptions</title>
 
 	<script src="jquery.js"></script>
-    <script src="js/svg-pan-zoom.js"></script>
+    <script src="jquery-svgpan.js"></script>
 	<script src="treelib.js"></script>	
 </head>
 <body>
@@ -36,12 +36,11 @@
 
 	<p><span id="message"></span></p>
 	<p><b>You can click and drag to move the tree around</b></p>
-	<div id="container" style="width:500px;height:500px;background-color:white;border:1px solid rgb(228,228,228);">
-	<!-- <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" height="500" width="500">
+	<div style="width:500px;height:500px;background-color:white;border:1px solid rgb(228,228,228);">
+	<svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" height="500" width="500">
 		<g id="viewport">
 		</g>
 	</svg>
-	-->
 	</div>
 	
 	<h3>Some examples to try</h3>
@@ -80,12 +79,9 @@ function showtree(element_id)
 	else
 	{
 		document.getElementById('message').innerHTML='Parsed OK';
-		
-		document.getElementById('container').innerHTML = '<svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" height="500" width="500"><g id="viewport"></g></svg>';
 				
 		t.ComputeWeights(t.root);
 		
-				
 		var td = null;
 		
 		var selectmenu = document.getElementById('style');
@@ -131,23 +127,17 @@ function showtree(element_id)
 		
 		// clear existing diagram, if any
 		var svg = document.getElementById('svg');
-		
-		
-		
-		/*
 		while (svg.hasChildNodes()) 
 		{
 			svg.removeChild(svg.lastChild);
 		}
-		*/
-				
-		/*
+		
+		
 		var g = document.createElementNS('http://www.w3.org/2000/svg','g');
 		g.setAttribute('id','viewport');
-		//g.setAttribute('class','svg-pan-zoom_viewport');
 		svg.appendChild(g);
-		*/
-				
+		
+		
 		td.Init(t, {svg_id: 'viewport', width:500, height:500, fontHeight:10, root_length:0.1} );
 		
 		td.CalcCoordinates();
@@ -199,9 +189,6 @@ function showtree(element_id)
 			q = n.Next();
 		}
 		
-		var tzoom = svgPanZoom('#svg');
-		
-		/*
 				
 		// Scale to fit window
 		var bbox = svg.getBBox();
@@ -231,7 +218,6 @@ function showtree(element_id)
 		
 		// pan
 		$('svg').svgPan('viewport');
-		*/
 	}
 	
 
