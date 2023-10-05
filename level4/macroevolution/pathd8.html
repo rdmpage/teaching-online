@@ -344,7 +344,7 @@ function date_tree() {
 	if (input.dates.length == 0) {
 		alert("Please add some dates!")
 	} else {
-		$.getJSON('http://direct.bionames.org/~rpage/pathd8/pathd8.php?input=' + encodeURIComponent(JSON.stringify(input)) + "&callback=?",
+		$.getJSON('http://bionames.org/pathd8/pathd8.php?input=' + encodeURIComponent(JSON.stringify(input)) + "&callback=?",
 			function(data){
 			//alert('hi')
 				//var newick = JSON.stringify(data);

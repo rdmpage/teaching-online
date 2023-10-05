@@ -3,7 +3,8 @@
 	<title>Lineages through time</title>
 	<script src="jquery.js"></script>
  	<script src="treelib.js"></script>	
- 	<script src="jquery-svgpan.js"></script>
+ 	<!-- <script src="jquery-svgpan.js"></script> -->
+    <script src="js/svg-pan-zoom.js"></script>
  	
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     
@@ -60,7 +61,7 @@ parrots
 	
 	<h3>Your input tree</h3>
 
-	<div style="width:600px;height:600px;background-color:white;border:1px solid rgb(228,228,228);padding:20px;">
+	<div id="container" style="width:600px;height:600px;background-color:white;border:1px solid rgb(228,228,228);padding:20px;">
 	<svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" height="600" width="600">
 		<g id="viewport">
 		</g>
@@ -148,6 +149,9 @@ function showtree(element_id)
 	{
 		document.getElementById('message').innerHTML='Parsed OK';
 		
+		document.getElementById('container').innerHTML = '<svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" height="500" width="500"><g id="viewport"></g></svg>';
+		
+		
 		document.getElementById('chart').innerHTML='';
 				
 		t.ComputeWeights(t.root);
@@ -159,6 +163,7 @@ function showtree(element_id)
 		
 		// clear existing diagram, if any
 		var svg = document.getElementById('svg');
+		/*
 		while (svg.hasChildNodes()) 
 		{
 			svg.removeChild(svg.lastChild);
@@ -168,6 +173,7 @@ function showtree(element_id)
 		var g = document.createElementNS('http://www.w3.org/2000/svg','g');
 		g.setAttribute('id','viewport');
 		svg.appendChild(g);
+		*/
 		
 		
 		td.Init(t, {svg_id: 'viewport', width:500, height:500, fontHeight:10, root_length:0.1} );
@@ -199,8 +205,11 @@ function showtree(element_id)
 			q = n.Next();
 		}
 		
+		var tzoom = svgPanZoom('#svg');
+
+		
 						// pan
-		$('svg').svgPan('viewport');
+		//$('svg').svgPan('viewport');
 
 		
 		// get slices
