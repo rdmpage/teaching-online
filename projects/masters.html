@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<title>Teaching Online - Masters Projects</title>
+</head>
+<body>
+
+<a href="../">Teaching Online</a>
+
+<h1>Masters project ideas</h1>
+
+<p>This is where I will collect project ideas. My main research interests are exploring and visualising information on biodiversity. I am interested in maps, evolutionary trees, DNA barcoding, taxonomy, museum collections, digital libraries, artificial intelligence, etc.</p>
+
+
+<h2>DNA barcoding</h2>
+
+<p>DNA barcoding is a popular technique for identifying species, and for animals is typically a 600-700 base pair sequence of the COX1 gene. There are millions of such sequences publicly available in the <a href="http://www.boldsystems.org">Barcode of Life Data System</a> (BOLD). However we lack simple tools to explore this data. Specifically, we don't have a simple tool that takes a sequence and returns a tree for a set of similar sequences (e.g., like BLAST), nor do we have a global alignment for all the sequences (hence people have to align sequences every time the want to analyse the data.</p>
+
+<p>These two topics (alignment-free sequence search and global sequence alignment) could be treated as separate projects, or as different aspects of the same project, depending on time and resources.</p>
+
+
+<h3>Project (a) Alignment-free sequence search and tree construction</h3>
+
+<p>Given a DNA barcode sequence it would be useful to be able to quickly query the database of barcodes for similar sequences, and to construct a tree for those sequences. At present we can query GenBank using BLAST, or BOLD using the <a href="http://www.boldsystems.org/index.php/IDS_OpenIdEngine">Identification Engine</a>, but these tools are slow and don't display a phylogeny (at least not straight away).</p>
+
+<p>Can we develop a quick way to explore DNA barcodes, for example using alignment-free methods? I have experiment with this approach using Elastic search to store a limited number of sequences and searching them using "n-grams" (i.e., <i>k</i>-mers), see 
+<a href="https://iphylo.blogspot.com/2020/07/dna-barcode-browser.html">DNA barcode browser</a>. However, this approach does not seem to scale well. Recent developments in AI have lead to a lot of interest in <b>vector databases</b>, and given that <i>k</i>-mers define a vector for a sequence (i.e., the frequencies of each <i>k</i>-mer), perhaps we can use vector databases to speed up sequence search? I describe some experiments in the blog post <a href="https://iphylo.blogspot.com/2023/07/sub-second-searching-of-millions-of-dna.html">Sub-second searching of millions of DNA barcodes using a vector database</a>. Those experiments use the Postgresql database which can support vectors. More recently I have experimented with Elasticsearch, which also supports vector searching.</p>
+
+<h4>Tools</h4>
+
+<p>Managing the data will require <b>basic scripting skills</b> to read and process large CSV and FASTA files, hence the ability to use a language such as PHP, Python, or Perl would be very useful. Sequence alignment will require familiarity with using <b>command line tools build phylogenies</b>. The project also requires the ability to install use databases such as Postgresql and Elasticsearch, and/or the ability to use online vector databases. For Postgresql and Elasticsearch, experience with Docker would be useful.</p>
+
+
+<h4>Output</h4>
+
+<p>The key question is whether vector databases can support simple sequence queries, whether they return results consistent with other approaches, and whether they offer any perfomance advantage of existing methods.</p>
+
+<h4>Extras</h4>
+
+<p>I have some preliminary code for a web site that can provide an interface to a sequence search engine (written in PHP and Javacsript), so that could be the starting point for a web interface to the results.</p>
+
+
+<h4>Reading</h4>
+
+<ul>
+<li> Baena-Bejarano N, Reina C, Martínez-Revelo DE, Medina CA, Tovar E, Uribe-Soto S, et al. (2023) Taxonomic identification accuracy from BOLD and GenBank databases using over a thousand insect DNA barcodes from Colombia. PLoS ONE 18(4): e0277379. <a href="https://doi.org/10.1371/journal.pone.0277379">https://doi.org/10.1371/journal.pone.0277379</a></li>
+
+<li><a href="https://iphylo.blogspot.com/2023/07/sub-second-searching-of-millions-of-dna.html">Sub-second searching of millions of DNA barcodes using a vector database</a></li>
+
+<li><a href="https://iphylo.blogspot.com/2020/07/dna-barcode-browser.html">DNA barcode browser</a></li>
+
+</ul>
+
+
+
+<h3>Project (b) A global alignment of all DNA barcodes</h3>
+
+<p>Regardless of the potential of alignment-free methods, many analytical tools still require aligned sequences. Typically a user of BOLD will download sequences align them, and do an analysis. The more users that do this, the more the same costly step (sequence alignment) will be repeated, wasting effort. Can we avoid this by providing a single, global alignment of DNA barcodes?</p>
+
+<p>There are two problems to tackle here. The first is how can we align millions of sequences? The second is how do we update that alignment as new sequences are added? One approach to building the alignment is divide and conqueror. For example, split the sequences into taxonomic groups, choose one or more representative sequences for each group (for example, sequences from complete mitochondrial genomes), construct a local alignment, then assemble larger alignments from the smaller alignments (e.g., using profile alignments). A complementary approach might be to first assemble an alignment of representative sequences (e.g., one per family) and use that to align the remaining sequences.</p>
+
+<h4>Tools and skills</h4>
+
+<p>Managing the data will require <b>basic scripting skills</b> to read and process large CSV and FASTA files, hence the ability to use a language such as PHP, Python, or Perl would be very useful. Sequence alignment will require familiarity with using <b>command line tools to align sequences</b>. That tool will need to be able to align protein coding sequences, and ideally would support "profile" alignments.</p>
+
+
+
+<h4>Output</h4>
+
+<p>The key output would be the alignment, which could be published in a data repository such as <a href="https://zenodo.org">Zenodo</a>. It would also be useful to think about developing a tool that could return an alignment for a set of taxa. This could be implemented as a simple web site.</p>
+
+<p>Given the number of sequences involved, it may be prudent to aim for an alignment of a subset of sequences as a proof of concept.</p>
+
+<h4>Extras</h4>
+
+<p>Depending on the speed with which the alignment can be assembled, it might be interesting to cluster the sequences to see if they support the BINs found by <a href="https://doi/org/10.1371/journal.pone.0066213">A DNA-Based Registry for All Animal Species: The Barcode Index Number (BIN) System</a>.</p>
+
+<h4>Reading</h4>
+
+<ul>
+<li>Ratnasingham S, Hebert PDN (2013) A DNA-Based Registry for All Animal Species: The Barcode Index Number (BIN) System. PLoS ONE 8(7): e66213. <a href="https://doi/org/10.1371/journal.pone.0066213">https://doi.org/10.1371/journal.pone.0066213</a></li>
+
+</ul>
+
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://teaching-online.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</body>
+</html>
