@@ -15,9 +15,6 @@
 
     <div id="map" style="width: 100%; height: 500px"></div>
 
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-
     <script>
     	/* Much of this based on https://gis.stackexchange.com/questions/158885/georss-in-leaflet */
         //var lat = 39;
@@ -48,44 +45,65 @@
       function show() {    
     
   		 var url = 'proxy.php?url=' + document.getElementById('feed').value;
-  		 
-     
-        
 
         // fire and handle the result
-        $.get(url).done(function(xml){
-            var output = {}; // restructure the xml as an object
-            $(xml).find('entry').each(function() {
-                var nodes = $(this).children();
-                $.each(nodes, function(i,node){
-                    var name = node.tagName;
-                    var value = node.textContent;
-                    output[name] = value;
-                });
-                // build markers from the output and add to the map
-                console.log(JSON.stringify(output, null, 2));
-                
-                if (output['GEO:LAT']) {
-                var marker = L.marker([output['GEO:LAT'], output['GEO:LONG']]);
-                var popupContent = output.CONTENT; 
-                marker.bindPopup(popupContent)
-                marker.addTo(map);
-                }
-                /*
-                
-                if (output['georss:point']) {
-                alert(output['georss:point']);
-                var coords = output['GEORSS:POINT'].split(" ");
-                //alert(JSON.stringify(coords));
-                var marker = L.marker([coords[0], coords[1]]);
-                var popupContent = output.CONTENT; 
-                marker.bindPopup(popupContent)
-                marker.addTo(map);
-                }
-                */
-                
-            });
-        })
+fetch(url)
+  .then(response => response.text())
+  .then(str => {
+    // Parse XML string into a document
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(str, "application/xml");
+
+    // Get all <entry> elements
+    const entries = xml.querySelectorAll("entry");
+
+    entries.forEach(entry => {
+      let output = {};
+
+      // Loop through child nodes of each <entry>
+      const nodes = entry.children;
+
+      Array.from(nodes).forEach(node => {
+        const name = node.tagName;
+        const value = node.textContent;
+        output[name] = value;
+      });
+
+      // Log output
+      console.log(JSON.stringify(output, null, 2));
+
+      // Create marker if GEO:LAT exists
+      if (output['GEO:LAT']) {
+        const lat = parseFloat(output['GEO:LAT']);
+        const lng = parseFloat(output['GEO:LONG']);
+
+        const marker = L.marker([lat, lng]);
+        const popupContent = output.CONTENT;
+
+        marker.bindPopup(popupContent);
+        marker.addTo(map);
+      }
+
+     
+      // Alternative georss:point handling
+      if (output['georss:point']) {
+        const coords = output['georss:point'].split(" ");
+        const lat = parseFloat(coords[0]);
+        const lng = parseFloat(coords[1]);
+
+        const marker = L.marker([lat, lng]);
+        const popupContent = output.content;
+
+        marker.bindPopup(popupContent);
+        marker.addTo(map);
+      }
+     
+    });
+  })
+  .catch(error => {
+    console.error("Error fetching or parsing XML:", error);
+  });
+
         }
 
     </script>
