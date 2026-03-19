@@ -1,6 +1,7 @@
 <html>
 <head>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<link rel="stylesheet" href="js/leaflet-0.7.3/leaflet.css" />
+<script src="js/leaflet-0.7.3/leaflet.js" type="text/javascript"></script>
 </head>
 <body>
   	<div style="font-size:24px;height:20%;padding:10px;">
@@ -70,6 +71,19 @@
                 marker.bindPopup(popupContent)
                 marker.addTo(map);
                 }
+                /*
+                
+                if (output['georss:point']) {
+                alert(output['georss:point']);
+                var coords = output['GEORSS:POINT'].split(" ");
+                //alert(JSON.stringify(coords));
+                var marker = L.marker([coords[0], coords[1]]);
+                var popupContent = output.CONTENT; 
+                marker.bindPopup(popupContent)
+                marker.addTo(map);
+                }
+                */
+                
             });
         })
         }
