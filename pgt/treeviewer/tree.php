@@ -313,7 +313,7 @@ class Tree
 
 		$state = 0;
 		$stack = array();
-		$n = count($tokens);
+		$n = count($token);
 		
 		$i = 1;
 		while ($state != 99)
@@ -321,7 +321,7 @@ class Tree
 			switch ($state)
 			{
 				case 0: // getname
-					if (ctype_alnum($token[$i]{0}))
+					if (ctype_alnum($token[$i][0]))
 					{
 						$this->num_leaves++;
 						
@@ -344,7 +344,7 @@ class Tree
 					}
 					else 
 					{
-						if ($token[$i]{0} == "'")
+						if ($token[$i][0] == "'")
 						{
 							$label = $token[$i];
 							$label = preg_replace("/^'/", "", $label);
@@ -489,7 +489,7 @@ class Tree
 					break;
 				
 				case 3: // finishchildren
-					if (ctype_alnum($token[$i]{0}))
+					if (ctype_alnum($token[$i][0]))
 					{
 						$curnode->SetLabel($token[$i]);
 						$i++;

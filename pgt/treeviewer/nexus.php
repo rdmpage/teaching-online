@@ -2,8 +2,8 @@
 
 // Very basic NEXUS parser
 
-define(NEXUSPunctuation, "()[]{}/\\,;:=*'\"`+-");
-define(NEXUSWhiteSpace, "\n\r\t ");
+define('NEXUSPunctuation', "()[]{}/\\,;:=*'\"`+-");
+define('NEXUSWhiteSpace', "\n\r\t ");
 
 //--------------------------------------------------------------------------------------------------
 class TokenTypes
@@ -86,21 +86,21 @@ class Scanner
 		$this->token = TokenTypes::None;
 		while (($this->token == TokenTypes::None) && ($this->pos < strlen($this->str)))
 		{
-			//echo "+" . $this->str{$this->pos} . "\n";
-			if (strchr(NEXUSWhiteSpace, $this->str{$this->pos}))
+			//echo "+" . $this->str[$this->pos] . "\n";
+			if (strchr(NEXUSWhiteSpace, $this->str[$this->pos]))
 			{
-				if ($returnspace && ($this->str{$this->pos} == ' '))
+				if ($returnspace && ($this->str[$this->pos] == ' '))
 				{
 					$this->token = TokenTypes::Space;
 				}
 			}
 			else
 			{
-				if (strchr (NEXUSPunctuation, $this->str{$this->pos}))
+				if (strchr (NEXUSPunctuation, $this->str[$this->pos]))
 				{
-					$this->buffer = $this->str{$this->pos};
-					//echo "-" . $this->str{$this->pos} . "\n";
- 					switch ($this->str{$this->pos})
+					$this->buffer = $this->str[$this->pos];
+					//echo "-" . $this->str[$this->pos] . "\n";
+ 					switch ($this->str[$this->pos])
  					{
  						case '[':
  							$this->ParseComment();
@@ -152,18 +152,18 @@ class Scanner
 				}
 				else
 				{
-					if ($this->str{$this->pos} == '#')
+					if ($this->str[$this->pos] == '#')
 					{
 						$this->token = TokenTypes::Hash;
 
 					}
-					else if ($this->str{$this->pos} == '.')
+					else if ($this->str[$this->pos] == '.')
 					{
 						$this->token = TokenTypes::Period;
 					}
 					else
 					{
-						if (is_numeric($this->str{$this->pos}))
+						if (is_numeric($this->str[$this->pos]))
 						{
 							if ($this->ParseNumber())
 							{
@@ -200,12 +200,12 @@ class Scanner
 	{
 		$this->buffer = '';
 		
-		while (($this->str{$this->pos} != ']') && ($this->pos < strlen($this->str)))
+		while (($this->str[$this->pos] != ']') && ($this->pos < strlen($this->str)))
 		{
-			$this->buffer .= $this->str{$this->pos};
+			$this->buffer .= $this->str[$this->pos];
 			$this->pos++;
 		}
-		$this->buffer .= $this->str{$this->pos};
+		$this->buffer .= $this->str[$this->pos];
 	}
 
 	//----------------------------------------------------------------------------------------------
@@ -216,14 +216,14 @@ class Scanner
 		
 		while (
 			($this->pos < strlen($this->str))
-			&& (!strchr (NEXUSWhiteSpace, $this->str{$this->pos}))
-			&& (!strchr (NEXUSPunctuation, $this->str{$this->pos}))
-			&& ($this->str{$this->pos} != '-')
+			&& (!strchr (NEXUSWhiteSpace, $this->str[$this->pos]))
+			&& (!strchr (NEXUSPunctuation, $this->str[$this->pos]))
+			&& ($this->str[$this->pos] != '-')
 			&& ($state != NumberTokens::bad)
 			&& ($state != NumberTokens::done)
 			)
 		{
-			if (is_numeric($this->str{$this->pos}))
+			if (is_numeric($this->str[$this->pos]))
 			{
 				switch ($state)
 				{
@@ -239,7 +239,7 @@ class Scanner
 						break;
 				}
 			}
-			else if (($this->str{$this->pos} == '-') && ($this->str{$this->pos} == '+'))
+			else if (($this->str[$this->pos] == '-') && ($this->str[$this->pos] == '+'))
 			{
 				switch ($state)
 				{
@@ -257,11 +257,11 @@ class Scanner
 						break;
 				}
 			}
-			else if (($this->str{$this->pos} == '.') && ($state == NumberTokens::digit))
+			else if (($this->str[$this->pos] == '.') && ($state == NumberTokens::digit))
 			{
 				$state = NumberTokens::fraction;
 			}
-			else if ((($this->str{$this->pos} == 'E') || ($this->str{$this->pos} == 'e')) && (($state == NumberTokens::digit) || ($state == NumberTokens::fraction)))			
+			else if ((($this->str[$this->pos] == 'E') || ($this->str[$this->pos] == 'e')) && (($state == NumberTokens::digit) || ($state == NumberTokens::fraction)))			
 			{
 				$state = NumberTokens::expsymbol;
 			}
@@ -272,7 +272,7 @@ class Scanner
 			
 			if (($state != NumberTokens::bad) && ($state != NumberTokens::done))
 			{
-				$this->buffer .= $this->str{$this->pos};
+				$this->buffer .= $this->str[$this->pos];
 				$this->pos++;
 			}
 		}
@@ -291,25 +291,25 @@ class Scanner
 		$state = StringTokens::ok;
 		while ($state != StringTokens::done)
 		{
-			//echo "--" . $this->str{$this->pos} . "\n";
+			//echo "--" . $this->str[$this->pos] . "\n";
 			
 			switch ($state)
 			{
 				case StringTokens::ok:
-					if ($this->str{$this->pos} == "'")
+					if ($this->str[$this->pos] == "'")
 					{
 						$state = StringTokens::quote;
 					}
 					else
 					{
-						$this->buffer .= $this->str{$this->pos};
+						$this->buffer .= $this->str[$this->pos];
 					}
 					break;
 					
 				case StringTokens::quote:
-					if ($this->str{$this->pos} == "'")
+					if ($this->str[$this->pos] == "'")
 					{
-						$this->buffer .= $this->str{$this->pos};
+						$this->buffer .= $this->str[$this->pos];
 						$state = StringTokens::ok;
 					}
 					else
@@ -336,11 +336,11 @@ class Scanner
 		
 		while (
 			($this->pos < strlen($this->str))
-			&& (!strchr (NEXUSWhiteSpace, $this->str{$this->pos}))
-			&& (!strchr (NEXUSPunctuation, $this->str{$this->pos}))
+			&& (!strchr (NEXUSWhiteSpace, $this->str[$this->pos]))
+			&& (!strchr (NEXUSPunctuation, $this->str[$this->pos]))
 			)
 		{
-			$this->buffer .= $this->str{$this->pos};
+			$this->buffer .= $this->str[$this->pos];
 			$this->pos++;
 		}
 		$this->pos--;
